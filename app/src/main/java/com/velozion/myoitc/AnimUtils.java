@@ -24,7 +24,7 @@ public class AnimUtils {
 
         animatorSet.playTogether(objectAnimator);
 
-        animatorSet.start();
+        animatorSet.start();//TEST
 
     }
 }
