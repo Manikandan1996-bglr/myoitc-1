@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_140sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="#F6F6F8"
+    android:layout_marginLeft="@dimen/_1sdp"
+    android:layout_marginRight="@dimen/_1sdp"
+    android:layout_marginTop="@dimen/_3sdp"
+    android:layout_marginBottom="@dimen/_3sdp"
+    app:cardCornerRadius="@dimen/_5sdp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+
+        <com.velozion.myoitc.utilities.RoundedImageView
+            android:layout_width="@dimen/_50sdp"
+            android:id="@+id/cat_pic"
+            android:padding="@dimen/_5sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:src="@drawable/baby" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:text="hello"
+            android:padding="@dimen/_5sdp"
+            android:id="@+id/cat_name"
+            android:textColor="#323234"
+            android:textSize="@dimen/_13sdp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

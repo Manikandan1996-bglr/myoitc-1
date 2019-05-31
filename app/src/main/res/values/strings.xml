@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">Myoitc</string>
+    <string name="Username">Email Id</string>
+    <string name="Password">Password</string>
+    <string name="login">Login</string>
+
+    <string name="google_key">AIzaSyAWSNJ2-Kdk2aNtM1aqJpaLGhtL3ZZpCMk</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="checkin">CHECKIN</string>
+    <string name="checkout">CHECKOUT</string>
+    <string name="map">Map</string>
+    <string name="history">History</string>
+    <string name="nodatafound">No Data Found</string>
+    <string name="CheckinLoc">Checkin Location</string>
+    <string name="CheckOutLoc">Checkout Location</string>
+    <string name="Checkintime">Checkin Time</string>
+    <string name="Checkouttime">Checkout Time</string>
+    <string name="logintoaccount">Login to your account</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_book">Book appointment</string>
+    <string name="viewprofile">View Profile</string>
+    <string name="bookappointment">Book Appointment</string>
+    <string name="selectdate">Date</string>
+    <string name="selecttime">Time</string>
+    <string name="booknow">Book Now</string>
+    <string name="searchconcern">Search by Health Concern</string>
+    <string name="ConsulationFee">Consulting Fee :</string>
+    <string name="doctornumber">Mobile :</string>
+    <string name="hint">Ex: Docters</string>
+    <string name="appointmentconfirm">Appointment Confirmed</string>
+    <string name="goback">Go Back</string>
+    <string name="doctordetails">Doctor Details</string>
+    <string name="morning">Morning</string>
+    <string name="afternoon">Afternoon</string>
+    <string name="evening">Evening</string>
+    <string name="night">Night</string>
+    <string name="fees">₹ %s /-</string>
+    <string name="quali">%s \u2022 %s</string>
+    <string name="bookingid">Booking Id: %s</string>
+
+
+    <string name="font_bold">JosefinSans-Bold.ttf</string>
+    <string name="font_semibold">JosefinSans-SemiBold.ttf</string>
+    <string name="font_regular">JosefinSans-Regular.ttf</string>
+    <string name="font_light">JosefinSans-Light.ttf</string>
+    <string name="font_thin">JosefinSans-Thin.ttf</string>
+
+    <string name="font_exo_bold">Exo-Bold.ttf</string>
+    <string name="font_exo_semibold">Exo-SemiBold.ttf</string>
+    <string name="font_exo_medium">Exo-Medium.ttf</string>
+    <string name="font_exo_regular">Exo-Regular.ttf</string>
+    <string name="rating">Rating</string>
+    <string name="fes_title">Fees</string>
+    <string name="about">About</string>
+    <string name="availabletoday">Available Today</string>
+    <string name="availabletimgs">Available Timings</string>
+    <string name="date">Select Date</string>
+    <string name="time">Select Time</string>
+    <string name="Name">Name</string>
+
+</resources>

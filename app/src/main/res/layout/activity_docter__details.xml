@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".Activities.Docter_Details">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:layout_margin="@dimen/_7sdp"
+                android:layout_height="wrap_content">
+
+
+                <com.velozion.myoitc.utilities.RoundedImageView
+                    android:id="@+id/docter_image"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_gravity="center"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_5sdp">
+
+                    <TextView
+                        android:id="@+id/docter_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="jaggi"
+                        android:textColor="@color/colorAccent"
+                        android:gravity="center"
+                        android:textSize="@dimen/_16sdp" />
+
+                    <TextView
+                        android:id="@+id/docter_education"
+                        android:layout_width="match_parent"
+                        android:text="mmbs"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@color/lightblack"
+                        android:textSize="@dimen/_12sdp" />
+
+
+                    <TextView
+                        android:id="@+id/docter_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_1sdp"
+                        android:gravity="center"
+                        android:text="Number"
+                        android:textColor="@color/lightblack"
+                        android:textSize="@dimen/_14sdp" />
+
+                    <TextView
+                        android:id="@+id/docter_specilist"
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/_1sdp"
+                        android:layout_height="wrap_content"
+                        android:text="Cardiology"
+                        android:textColor="@color/lightblack"
+                        android:textSize="@dimen/_14sdp" />
+
+
+
+                    <RatingBar
+                        android:id="@+id/docter_rating"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_1sdp"
+                        android:layout_gravity="center" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:layout_margin="@dimen/_7sdp"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="@string/bookappointment"
+                    android:textColor="@color/white"
+                    android:padding="@dimen/_4sdp"
+                    android:gravity="center"
+                    android:background="@color/colorPrimary"
+                    android:textSize="@dimen/_14sdp"
+                    android:layout_height="wrap_content" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_margin="@dimen/_2sdp"
+                    android:padding="@dimen/_2sdp"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="@dimen/_100sdp"
+                        android:orientation="vertical"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:id="@+id/docter_date_ll"
+                        android:background="@drawable/design_3"
+                        android:layout_height="@dimen/_100sdp">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/_2sdp"
+                            android:padding="@dimen/_2sdp"
+                            android:gravity="center"
+                            android:text="@string/selectdate"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/_14sdp" />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+
+                            android:textSize="@dimen/_14sdp"
+                            android:gravity="center"
+                            android:id="@+id/docter_app_date"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/_1sdp"
+                            android:layout_height="match_parent" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="@dimen/_100sdp"
+                        android:orientation="vertical"
+                        android:id="@+id/docter_time_ll"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:background="@drawable/design_3"
+                        android:layout_height="@dimen/_100sdp">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/_2sdp"
+                            android:padding="@dimen/_2sdp"
+                            android:gravity="center"
+                            android:text="@string/selecttime"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/_14sdp" />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:textSize="@dimen/_14sdp"
+                            android:id="@+id/docter_app_time"
+                            android:gravity="center"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/_1sdp"
+                            android:layout_height="match_parent" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:text="@string/booknow"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/docter_booknow"
+        android:textSize="@dimen/_12sdp"
+        android:padding="@dimen/_4sdp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@drawable/button4"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
