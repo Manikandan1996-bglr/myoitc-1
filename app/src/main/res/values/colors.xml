@@ -11,7 +11,7 @@
     <color name="statusbar_light">#60C3CE</color>
 
     <color name="white">#fff</color>
-    <color name="black">#06155A</color>
+    <color name="black">#000</color>
     <color name="lightblack">#3D3A3A</color>
     <color name="greyblack">#747171</color>
     <color name="title_color">#131212</color>

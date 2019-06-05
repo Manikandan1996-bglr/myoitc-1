@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,7 +13,9 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -166,12 +169,10 @@ public class BaseActivity extends AppCompatActivity {
             toolbar.setTitle(toolbarTitle);
             toolbar.setTitleTextAppearance(this, R.style.ToolBarText);
             int color_combo=getRandomColor();
-            toolbar.setTitleTextColor(color_combo);
+            toolbar.setBackgroundColor(color_combo);
             setSupportActionBar(toolbar);
 
-            changeStatusbar(color_combo);
-
-
+           changeStatusbar(color_combo);
 
 
                 if (getSupportActionBar() != null){
@@ -187,8 +188,6 @@ public class BaseActivity extends AppCompatActivity {
 
 
                 }
-
-
 
 
 
@@ -225,5 +224,49 @@ public class BaseActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.left_in, R.anim.right_out);
     }
 
+
+  /*  @Override
+    public Resources.Theme getTheme() {
+        Resources.Theme theme = super.getTheme();
+
+        switch (getRandomNumber())
+        {
+            case 1:
+                theme.applyStyle(R.style.CustomeTheme1, true);
+                break;
+
+            case 2:
+                theme.applyStyle(R.style.CustomeTheme2, true);
+                break;
+
+            case 3:
+                theme.applyStyle(R.style.CustomeTheme3, true);
+                break;
+
+        }
+
+
+        // you could also use a switch if you have many themes that could apply
+        return theme;
+    }*/
+
+
+    private int getRandomNumber()
+    {
+        Random random=new Random();
+       return random.nextInt(3);
+
+    }
+
+    public Toolbar getToolbar()
+    {
+
+        if (toolbar!=null)
+        {
+            return toolbar;
+        }
+
+        return null;
+    }
 
 }

@@ -2,23 +2,21 @@ package com.velozion.myoitc.Activities;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
 import com.velozion.myoitc.Adapter.TimeSlotAdapter;
 import com.velozion.myoitc.BaseActivity;
-import com.velozion.myoitc.db.BookingResponse;
-import com.velozion.myoitc.databinding.ActivityBookAppointmentBinding;
-import com.velozion.myoitc.db.DoctorProfileData;
 import com.velozion.myoitc.R;
 import com.velozion.myoitc.Utils;
+import com.velozion.myoitc.databinding.ActivityBookAppointmentBinding;
+import com.velozion.myoitc.db.BookingResponse;
+import com.velozion.myoitc.db.DoctorProfileData;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,10 +30,7 @@ import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 
 public class BookAppointment extends BaseActivity {
 
-
-
     RecyclerView time_recyclerview;
-
     String selected_date = null, selected_time = null;
 
     ArrayList<String> timing_slots = new ArrayList<>();
@@ -52,25 +47,17 @@ public class BookAppointment extends BaseActivity {
         setToolbarTitle(getResources().getString(R.string.activity_book_app));
         bookAppointmentBinding = DataBindingUtil.setContentView(this, R.layout.activity_book__appointment);
 
-
-
-
         doctorProfileData = (DoctorProfileData) getIntent().getExtras().getParcelable("data");
-            bookAppointmentBinding.setDoctorProfile(doctorProfileData);
-
-
-
+        bookAppointmentBinding.setDoctorProfile(doctorProfileData);
 
         time_recyclerview = (RecyclerView) findViewById(R.id.bn_timingrecyclerview);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 4);
         time_recyclerview.setLayoutManager(gridLayoutManager);
 
-
         bookAppointmentBinding.bnBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
                 selected_time = timeSlotAdapter.getSelectedTimeSlot();
 
@@ -113,6 +100,18 @@ public class BookAppointment extends BaseActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+
+        bookAppointmentBinding.bnPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(), DisplayFullImage.class);
+                intent.putExtra("profile_name",doctorProfileData.getName());
+                intent.putExtra("profile_pic",doctorProfileData.getPic());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
 
     }
 

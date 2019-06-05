@@ -21,6 +21,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.velozion.myoitc.Activities.BookAppointment;
+import com.velozion.myoitc.Activities.DisplayFullImage;
 import com.velozion.myoitc.Activities.DocterDetails;
 import com.velozion.myoitc.AnimUtils;
 import com.velozion.myoitc.R;
@@ -91,7 +92,13 @@ public class DoctorsAdapter extends RecyclerView.Adapter<DoctorsAdapter.DoctorsV
             @Override
             public void onClick(View v) {
 
-                Utils.displayFullImage(context,data.get(position).getPic());
+              //  Utils.displayFullImage(context,data.get(position).getPic());
+
+                Intent intent=new Intent(context, DisplayFullImage.class);
+                intent.putExtra("profile_name",data.get(position).getName());
+                intent.putExtra("profile_pic",data.get(position).getPic());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
 
             }
         });

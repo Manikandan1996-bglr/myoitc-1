@@ -25,7 +25,7 @@ public class DocterDetails extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         profileLayoutBinding = DataBindingUtil.setContentView(this, R.layout.doctor_profile_layout);
-        
+
         doctorProfileData = getIntent().getExtras().getParcelable("data");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -42,6 +42,17 @@ public class DocterDetails extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), BookAppointment.class);
                 intent.putExtra("data", doctorProfileData);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+
+        profileLayoutBinding.pdPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(), DisplayFullImage.class);
+                intent.putExtra("profile_name",doctorProfileData.getName());
+                intent.putExtra("profile_pic",doctorProfileData.getPic());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
