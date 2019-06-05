@@ -10,7 +10,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,8 +18,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.velozion.myoitc.Fragments.History_Frag;
-import com.velozion.myoitc.Fragments.Map_Frag;
+import com.velozion.myoitc.BaseActivity;
+import com.velozion.myoitc.Fragments.HistoryFrag;
+import com.velozion.myoitc.Fragments.MapFrag;
 import com.velozion.myoitc.PreferenceUtil;
 import com.velozion.myoitc.R;
 
@@ -36,7 +36,6 @@ public class DashBoard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
 
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
 
@@ -47,7 +46,7 @@ public class DashBoard extends AppCompatActivity {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.framelayout, new Map_Frag());
+        fragmentTransaction.add(R.id.framelayout, new MapFrag());
         fragmentTransaction.commit();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -57,12 +56,12 @@ public class DashBoard extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
 
                     case R.id.bnv_map:
-                        loadFragment(new Map_Frag());
+                        loadFragment(new MapFrag());
                         menuItem.setChecked(true);
                         break;
 
                     case R.id.bnv_history:
-                        loadFragment(new History_Frag());
+                        loadFragment(new HistoryFrag());
                         menuItem.setChecked(true);
                         break;
                 }

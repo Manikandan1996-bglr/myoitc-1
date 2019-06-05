@@ -2,11 +2,8 @@ package com.velozion.myoitc.Activities;
 
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -36,7 +33,6 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 
 public class HistoryDetails extends BaseActivity {
 
@@ -48,15 +44,11 @@ public class HistoryDetails extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setToolbarRequired(true);
+        setToolbarTitle(getResources().getString(R.string.activity_historydetails));
         historyDetailsBinding=DataBindingUtil.setContentView(this,R.layout.activity_history_details);
 
         historyData= getIntent().getExtras().getParcelable("data");
-
-
-
-       BaseActivity.setActionBarTitle("History Details");
-       BaseActivity.enableHomeUpButton(true);
 
 
         supportMapFragment= (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);

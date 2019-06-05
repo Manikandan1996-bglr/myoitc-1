@@ -11,7 +11,6 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,7 +23,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,11 +46,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.velozion.myoitc.Activities.DashBoard;
-import com.velozion.myoitc.Activities.LoginActivity;
 import com.velozion.myoitc.CustomRequest;
 import com.velozion.myoitc.PreferenceUtil;
 import com.velozion.myoitc.R;
@@ -68,7 +63,7 @@ import java.util.Locale;
 import java.util.Map;
 
 
-public class Map_Frag extends Fragment {
+public class MapFrag extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -98,12 +93,12 @@ public class Map_Frag extends Fragment {
     TextView info_text;
 
 
-    public Map_Frag() {
+    public MapFrag() {
         // Required empty public constructor
     }
 
-    public static Map_Frag newInstance(String param1, String param2) {
-        Map_Frag fragment = new Map_Frag();
+    public static MapFrag newInstance(String param1, String param2) {
+        MapFrag fragment = new MapFrag();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

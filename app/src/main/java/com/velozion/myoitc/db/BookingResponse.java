@@ -6,10 +6,10 @@ import android.os.Parcelable;
 public class BookingResponse implements Parcelable {
 
 
-   String booking_id;
-   String personanme;
-   String date;
-   String time;
+   private String booking_id;
+   private String personanme;
+   private String date;
+   private String time;
 
 
     public BookingResponse(String booking_id, String personanme, String date, String time) {

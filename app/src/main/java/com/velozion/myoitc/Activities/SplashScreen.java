@@ -25,7 +25,7 @@ public class SplashScreen extends BaseActivity {
 
                if (sharedPreferences.contains("userid"))
                {
-                   startActivity(new Intent(getApplicationContext(),DashBoard.class));
+                   startActivity(new Intent(getApplicationContext(),HomeActivity.class));
                    finish();
                }else {
                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));

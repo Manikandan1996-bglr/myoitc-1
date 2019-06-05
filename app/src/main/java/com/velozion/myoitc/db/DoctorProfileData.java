@@ -5,6 +5,7 @@ import android.databinding.BindingAdapter;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 
 import com.velozion.myoitc.Utils;
 
@@ -188,6 +189,19 @@ public class DoctorProfileData implements Parcelable {
     public static void loadImage(ImageView view, String imageUrl) {
         Utils.LoadImage(imageUrl,view);
 
+    }
+
+    @BindingAdapter("android:rating")
+    public static void setRating(RatingBar view, String rating) {
+
+        if (view!=null)
+        {
+
+            float rate= Float.parseFloat(rating);
+
+            view.setRating(rate);
+
+        }
     }
 
     @Override

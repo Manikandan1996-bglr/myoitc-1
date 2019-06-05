@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigating"
+    app:startDestination="@id/bnv_map">
+
+    <fragment
+        android:id="@+id/bnv_map"
+        android:name="com.velozion.myoitc.Fragments.MapFrag"
+        android:label="fragment_map_"
+        tools:layout="@layout/fragment_map_" >
+
+    </fragment>
+    <fragment
+        android:id="@+id/bnv_history"
+        android:name="com.velozion.myoitc.Fragments.HistoryFrag"
+        android:label="fragment_history_"
+        tools:layout="@layout/fragment_history_" />
+</navigation>

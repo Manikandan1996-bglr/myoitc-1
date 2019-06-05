@@ -17,6 +17,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.velozion.myoitc.BaseActivity;
 import com.velozion.myoitc.CustomRequest;
 import com.velozion.myoitc.PreferenceUtil;
 import com.velozion.myoitc.R;
@@ -28,7 +29,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     EditText email,password;
     Button login;
@@ -120,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                                     PreferenceUtil.saveData("fullname",object.getString("fullname"),getApplicationContext());
 
 
-                                    startActivity(new Intent(getApplicationContext(),DashBoard.class));
+                                    startActivity(new Intent(getApplicationContext(),HomeActivity.class));
                                     finish();
 
 

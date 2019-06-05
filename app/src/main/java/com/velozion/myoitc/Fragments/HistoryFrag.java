@@ -3,52 +3,35 @@ package com.velozion.myoitc.Fragments;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
 import com.velozion.myoitc.Adapter.HistoryAdapter;
-import com.velozion.myoitc.CustomRequest;
-import com.velozion.myoitc.PreferenceUtil;
+import com.velozion.myoitc.Adapter.HistoryBindingAdapter;
 import com.velozion.myoitc.R;
-import com.velozion.myoitc.Utils;
 import com.velozion.myoitc.ViewModel.MyViewModel;
 import com.velozion.myoitc.db.HistoryData;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * to handle interaction events.
- * Use the {@link History_Frag#newInstance} factory method to
+ * Use the {@link HistoryFrag#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class History_Frag extends Fragment {
+public class HistoryFrag extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -64,18 +47,20 @@ public class History_Frag extends Fragment {
     LinearLayout nodata;
     TextView textView;
     ArrayList<HashMap<String,String>> Data=new ArrayList<>();
-    HistoryAdapter historyAdapter;
+   // HistoryAdapter historyAdapter;
 
     Context context;
     MyViewModel myViewModel;
 
-    public History_Frag() {
+    HistoryBindingAdapter historyBindingAdapter;
+
+    public HistoryFrag() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static History_Frag newInstance(String param1, String param2) {
-        History_Frag fragment = new History_Frag();
+    public static HistoryFrag newInstance(String param1, String param2) {
+        HistoryFrag fragment = new HistoryFrag();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -128,8 +113,9 @@ public class History_Frag extends Fragment {
 
                 if (historyData.size()>0)
                 {
-                    historyAdapter=new HistoryAdapter(getActivity(),historyData);
-                    recyclerView.setAdapter(historyAdapter);
+                    //historyAdapter=new HistoryAdapter(getActivity(),historyData);
+                    historyBindingAdapter=new HistoryBindingAdapter(getActivity(),historyData);
+                    recyclerView.setAdapter(historyBindingAdapter);
 
                     TriggerUI(true);
 

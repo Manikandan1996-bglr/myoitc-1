@@ -4,7 +4,6 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,10 +35,10 @@ public class DoctorsList_Activity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setToolbarRequired(true);
+        setToolbarTitle(getResources().getString(R.string.activity_doctors_list));
         setContentView(R.layout.activity_appointment_);
 
-       BaseActivity.setActionBarTitle("Doctors List");
-       BaseActivity.enableHomeUpButton(true);
 
         myViewModel=ViewModelProviders.of(this).get(MyViewModel.class);
 
@@ -64,7 +63,7 @@ public class DoctorsList_Activity extends BaseActivity {
 
                 if (doctorProfileData.size()>0)
                 {
-                    doctorsAdapter=new DoctorsAdapter(getApplicationContext(),doctorProfileData);
+                    doctorsAdapter=new DoctorsAdapter(DoctorsList_Activity.this,doctorProfileData);
                     recyclerView.setAdapter(doctorsAdapter);
 
                     TriggerUI(true);

@@ -22,18 +22,20 @@ import com.velozion.myoitc.R;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class DocterCatAdapter extends RecyclerView.Adapter <DocterCatAdapter.DoctorsCatViewHolder>{
+public class DocterCatAdapter extends RecyclerView.Adapter<DocterCatAdapter.DoctorsCatViewHolder> {
 
     Context context;
-    ArrayList<HashMap<String,String>> data;
-    int pos=0;
+    ArrayList<HashMap<String, String>> data;
+    int images[];
+    int pos = 0;
 
     DisplayImageOptions options;
     ImageLoaderConfiguration imgconfig;
 
-    public DocterCatAdapter(Context context, ArrayList<HashMap<String, String>> data) {
+    public DocterCatAdapter(Context context, ArrayList<HashMap<String, String>> data, int[] imgs) {
         this.context = context;
         this.data = data;
+        images = imgs;
 
         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.icon_user)
@@ -56,8 +58,8 @@ public class DocterCatAdapter extends RecyclerView.Adapter <DocterCatAdapter.Doc
     @Override
     public DoctorsCatViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        View view= LayoutInflater.from(context).inflate(R.layout.item_doc_cate,viewGroup,false);
-       DoctorsCatViewHolder doctorsCatViewHolder=new DoctorsCatViewHolder(view);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_doc_cate, viewGroup, false);
+        DoctorsCatViewHolder doctorsCatViewHolder = new DoctorsCatViewHolder(view);
         return doctorsCatViewHolder;
     }
 
@@ -70,16 +72,16 @@ public class DocterCatAdapter extends RecyclerView.Adapter <DocterCatAdapter.Doc
             hashMap.put("pic","");
          */
 
-        holder.name.setText(""+data.get(position).get("name"));
+        holder.name.setText("" + data.get(position).get("name"));
 
 
-       // ImageLoader.getInstance().displayImage(data.get(position).get("pic"),holder.pic,options);
+        holder.pic.setImageResource(images[position]);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, DoctorsList_Activity.class);
-                intent.putExtra("id",data.get(position).get("id"));
+                Intent intent = new Intent(context, DoctorsList_Activity.class);
+                intent.putExtra("id", data.get(position).get("id"));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 
@@ -87,16 +89,14 @@ public class DocterCatAdapter extends RecyclerView.Adapter <DocterCatAdapter.Doc
         });
 
 
+        if (position > pos) {
 
-        if(position>pos)
-        {
-
-            AnimUtils.animate(holder.itemView,true);
-        }else {
-            AnimUtils.animate(holder.itemView,false);
+            AnimUtils.animate(holder.itemView, true);
+        } else {
+            AnimUtils.animate(holder.itemView, false);
 
         }
-        pos=position;
+        pos = position;
 
     }
 
@@ -105,15 +105,16 @@ public class DocterCatAdapter extends RecyclerView.Adapter <DocterCatAdapter.Doc
         return data.size();
     }
 
-    class DoctorsCatViewHolder extends RecyclerView.ViewHolder{
+    class DoctorsCatViewHolder extends RecyclerView.ViewHolder {
 
         TextView name;
         ImageView pic;
+
         public DoctorsCatViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            name=(TextView)itemView.findViewById(R.id.cat_name);
-            pic=(ImageView)itemView.findViewById(R.id.cat_pic);
+            name = (TextView) itemView.findViewById(R.id.cat_name);
+            pic = (ImageView) itemView.findViewById(R.id.cat_pic);
         }
     }
 }

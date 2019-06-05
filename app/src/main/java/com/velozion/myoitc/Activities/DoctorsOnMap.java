@@ -6,10 +6,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -20,7 +20,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -44,6 +43,8 @@ public class DoctorsOnMap extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setToolbarRequired(true);
+        setToolbarTitle(getResources().getString(R.string.activity_doctors_list));
         setContentView(R.layout.activity_doctors_on_map);
 
         myViewModel=ViewModelProviders.of(this).get(MyViewModel.class);
@@ -67,8 +68,8 @@ public class DoctorsOnMap extends BaseActivity {
             }
         });
 
-        BaseActivity.setActionBarTitle("Doctors List");
-        BaseActivity.enableHomeUpButton(true);
+        setToolbarRequired(true);
+        setToolbarTitle(getResources().getString(R.string.activity_doctors_list));
 
     }
 
@@ -145,6 +146,16 @@ public class DoctorsOnMap extends BaseActivity {
         public View getInfoWindow(Marker marker) {
 
 
+
+
+
+            return null;
+        }
+
+        @Override
+        public View getInfoContents(Marker marker) {
+
+
             LayoutInflater layoutInflater= (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view=layoutInflater.inflate(R.layout.item_infowindow,null);
 
@@ -185,16 +196,7 @@ public class DoctorsOnMap extends BaseActivity {
                 }
             }
 
-
-
             return view;
-        }
-
-        @Override
-        public View getInfoContents(Marker marker) {
-
-
-            return null;
         }
 
 

@@ -10,25 +10,29 @@
     tools:context=".Activities.DashBoard">
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <FrameLayout
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:id="@+id/framelayout"
-            android:layout_above="@id/bottomnavigationview"
             android:layout_height="match_parent">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:id="@+id/framelayout"
+                android:layout_above="@id/bottomnavigationview"
+                android:layout_height="match_parent">
 
-        </FrameLayout>
+            </FrameLayout>
 
-        <android.support.design.widget.BottomNavigationView
-            android:layout_width="match_parent"
-            android:id="@+id/bottomnavigationview"
-            app:menu="@menu/navigation_menus"
-            style="@style/BottomNavigation"
-            android:layout_alignParentBottom="true"
-            android:layout_height="wrap_content"/>
-    </RelativeLayout>
+            <android.support.design.widget.BottomNavigationView
+                android:layout_width="match_parent"
+                android:id="@+id/bottomnavigationview"
+                app:menu="@menu/navigation_menus"
+                style="@style/BottomNavigation"
+                android:layout_alignParentBottom="true"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+
+
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

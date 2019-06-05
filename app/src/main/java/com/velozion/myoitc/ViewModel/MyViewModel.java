@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -34,8 +35,9 @@ public class MyViewModel extends ViewModel {
    public MutableLiveData<String> jsonError=new MutableLiveData<>();
    public MutableLiveData<String> volleyError=new MutableLiveData<>();
 
-   public MutableLiveData<ArrayList<HistoryData>> HistoryList;
+    public MutableLiveData<ArrayList<HistoryData>> HistoryList;
     public MutableLiveData<ArrayList<DoctorProfileData>> DoctersData;
+    public MutableLiveData<HashMap<String,String>> Profile;
 
 
 
@@ -272,6 +274,93 @@ public class MyViewModel extends ViewModel {
         return DoctersData;
     }
 
+    public LiveData<HashMap<String,String>> getProfile(final Context context){
+
+        if (Profile==null)
+        {
+            Profile=new MutableLiveData<>();
+
+            Map<String,String> headers = new HashMap<>();
+            String credentials = PreferenceUtil.getData("username",context)+":"+PreferenceUtil.getData("password",context);
+            String auth = "Basic "+ Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+            headers.put("Authorization", auth);
+
+            Map<String, String> jsonParams = new HashMap<String, String>();
+            jsonParams.put("userid",PreferenceUtil.getData("userid",context));
+
+
+            Log.d( "RespondedData",jsonParams.toString()+" headers: \n"+headers);
+
+            RequestQueue requestQueue = Volley.newRequestQueue(context);
+
+            CustomRequest customRequest = new CustomRequest( Request.Method.POST,Utils.ProfileApi, jsonParams,headers,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Log.d( "ResponseS",response.toString() );
+                            try {
+                                if (response.getString("success").equalsIgnoreCase("true")){
+
+
+
+                                    if (response.getJSONObject("data")!=null)//sucess
+                                    {
+
+                                        JSONObject object=response.getJSONObject("data");
+
+                                        HashMap<String,String> data=new HashMap<>();
+                                        data.put("id",object.getString("id"));
+                                        data.put("name",object.getString("name"));
+                                        data.put("username",object.getString("username"));
+                                        data.put("email",object.getString("email"));
+
+
+                                        Profile.setValue(data);
+
+                                    }else {
+
+                                        String msg=response.getJSONObject("messages").getJSONArray("error").get(0).toString();
+                                        Toast.makeText(context, ""+msg, Toast.LENGTH_SHORT).show();
+                                        Failuremessage.setValue(msg);
+                                    }
+
+
+
+
+                                }
+                                else{
+
+                                    String msg=response.getString("message");
+                                   Failuremessage.setValue(msg);
+                                    Toast.makeText(context, ""+msg, Toast.LENGTH_SHORT).show();
+
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+
+                                Toast.makeText(context, "Json Error:\n"+e.getMessage(), Toast.LENGTH_LONG).show();
+                                jsonError.setValue(e.getMessage());
+                            }
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d( "ResponseE",error.toString() );
+
+
+                            Toast.makeText(context, "Volley Error:\n"+error.getMessage(), Toast.LENGTH_LONG).show();
+                            volleyError.setValue(error.getMessage());
+
+                        }
+                    } );
+            requestQueue.add(customRequest);
+
+        }
+
+        return Profile;
+    }
 
 
 

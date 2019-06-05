@@ -18,6 +18,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.velozion.myoitc.BaseActivity;
 import com.velozion.myoitc.CustomRequest;
 import com.velozion.myoitc.PreferenceUtil;
 import com.velozion.myoitc.R;
@@ -29,7 +30,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Profile_Activity extends AppCompatActivity {
+public class Profile_Activity extends BaseActivity {
 
     ImageView back,pic;
     TextView name,desc;
@@ -41,7 +42,7 @@ public class Profile_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_);
+        setContentView(R.layout.activity_profile_layout);
 
 
         back=(ImageView)findViewById(R.id.profile_back);

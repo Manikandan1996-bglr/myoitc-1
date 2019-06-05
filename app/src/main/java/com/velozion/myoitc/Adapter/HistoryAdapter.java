@@ -15,7 +15,6 @@ import com.velozion.myoitc.R;
 import com.velozion.myoitc.db.HistoryData;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class HistoryAdapter extends RecyclerView.Adapter <HistoryAdapter.HistoryViewHolder>{
 

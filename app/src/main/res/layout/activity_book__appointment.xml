@@ -14,267 +14,298 @@
 
     </data>
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/_5sdp"
-    android:background="@color/white"
-    tools:context=".Activities.Book_Appointment">
-
-    <ScrollView
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_above="@id/bn_book"
-        android:layout_height="match_parent">
-        <LinearLayout
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context="com.education.EnquiryActivity">
+
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_marginBottom="@dimen/_20sdp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar" />
 
-            <com.chootdev.typefaced.TypeFacedTextView
-                android:layout_width="wrap_content"
-                android:textSize="@dimen/_13sdp"
-                app:textView_font="@string/font_exo_semibold"
-                android:text="@string/doctordetails"
-                android:padding="@dimen/_5sdp"
-                android:layout_margin="@dimen/_3sdp"
-                android:gravity="center_vertical"
-                android:textColor="@color/greyblack"
-                android:layout_height="wrap_content" />
+        </android.support.design.widget.AppBarLayout>
 
-            <LinearLayout
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_5sdp"
+            android:layout_marginTop="?actionBarSize"
+            android:background="@color/white"
+            tools:context=".Activities.BookAppointment">
+
+            <ScrollView
                 android:layout_width="match_parent"
-                android:padding="@dimen/_2sdp"
-                android:layout_margin="@dimen/_3sdp"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_weight="5"
-                    android:layout_height="wrap_content">
-
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="3.5"
-                        android:orientation="vertical"
-                        android:layout_height="wrap_content">
-
-                        <com.velozion.myoitc.utilities.RoundedImageView
-                            android:layout_width="@dimen/_80sdp"
-                            android:id="@+id/bn_pic"
-                            android:profileImage="@{DoctorProfile.pic}"
-                            android:scaleType="centerCrop"
-                            android:layout_height="@dimen/_80sdp" />
-
-                        <com.chootdev.typefaced.TypeFacedTextView
-                            android:layout_width="wrap_content"
-                            android:text="@{DoctorProfile.name}"
-                            android:textSize="@dimen/_13sdp"
-                            app:textView_font="@string/font_exo_bold"
-                            android:textStyle="bold"
-                            android:id="@+id/bn_doctname"
-                            android:padding="@dimen/_4sdp"
-                            android:layout_marginTop="@dimen/_3sdp"
-                            android:textColor="@color/black"
-                            android:layout_height="wrap_content" />
-
-                    </LinearLayout>
-
-                    <com.chootdev.typefaced.TypeFacedTextView
-                        android:id="@+id/bn_fees"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1.5"
-                        android:gravity="center"
-                        android:text="@{String.format(@string/fees, DoctorProfile.fees)}"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/_22sdp"
-                        app:textView_font="@string/font_exo_bold"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-            </LinearLayout>
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:layout_marginBottom="@dimen/_3sdp"
-                android:background="@color/view_bg2"
-                android:layout_height="@dimen/_1sdp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_margin="@dimen/_1sdp"
-                android:layout_height="wrap_content">
-
-                <com.chootdev.typefaced.TypeFacedTextView
-                    android:layout_width="wrap_content"
-                    android:textSize="@dimen/_13sdp"
-                    android:text="@string/availabletimgs"
-                    android:drawableLeft="@drawable/icon_time"
-                    android:padding="@dimen/_2sdp"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:layout_margin="@dimen/_3sdp"
-                    android:gravity="center_vertical"
-                    app:textView_font="@string/font_exo_regular"
-                    android:textColor="@color/nontitle_color"
-                    android:layout_height="wrap_content" />
-
-                <com.chootdev.typefaced.TypeFacedTextView
-                    android:layout_width="wrap_content"
-                    android:text="@{DoctorProfile.avaliable_timings}"
-                    android:textSize="@dimen/_13sdp"
-                    app:textView_font="@string/font_exo_regular"
-                    android:textStyle="bold"
-                    android:id="@+id/bn_docttimings"
-                    android:padding="@dimen/_4sdp"
-                    android:layout_marginLeft="@dimen/_5sdp"
-                    android:textColor="@color/black"
-                    android:layout_height="wrap_content" />
-
-
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:layout_marginBottom="@dimen/_3sdp"
-                android:background="@color/view_bg2"
-                android:layout_height="@dimen/_1sdp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_margin="@dimen/_1sdp"
-                android:layout_height="wrap_content">
-
-                <com.chootdev.typefaced.TypeFacedTextView
-                    android:layout_width="wrap_content"
-                    android:textSize="@dimen/_13sdp"
-                    android:text="@string/date"
-                    android:drawableLeft="@drawable/icon_date"
-                    android:padding="@dimen/_2sdp"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:layout_margin="@dimen/_3sdp"
-                    android:gravity="center_vertical"
-                    app:textView_font="@string/font_exo_regular"
-                    android:textColor="@color/nontitle_color"
-                    android:layout_height="wrap_content" />
-
-                <devs.mulham.horizontalcalendar.HorizontalCalendarView
-                    android:id="@+id/calendarView"
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:layout_marginBottom="@dimen/_2sdp"
-                    android:layout_marginLeft="@dimen/_7sdp"
-                    android:layout_height="wrap_content"
-                    app:textColorSelected="@color/colorPrimary"
-                    app:textColorNormal="#807D7D"
-                    app:selectorColor="#B64A4A"
-                   />
-
-            </LinearLayout>
-
-
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:layout_marginBottom="@dimen/_3sdp"
-                android:background="@color/view_bg2"
-                android:layout_height="@dimen/_1sdp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/_1sdp"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
-                <com.chootdev.typefaced.TypeFacedTextView
-                    android:layout_width="wrap_content"
-                    android:textSize="@dimen/_13sdp"
-                    android:text="@string/time"
-                    android:drawableLeft="@drawable/icon_time"
-                    android:padding="@dimen/_2sdp"
-                    app:textView_font="@string/font_exo_regular"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:layout_margin="@dimen/_3sdp"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/nontitle_color"
-                    android:layout_height="wrap_content" />
-
+                android:layout_above="@id/cardview"
+                android:layout_height="match_parent">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:orientation="vertical"
-                    android:layout_marginLeft="@dimen/_8sdp"
-                    android:layout_marginTop="@dimen/_3sdp"
-                    android:layout_marginBottom="@dimen/_3sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
                     android:layout_height="wrap_content">
 
 
-                    <android.support.v7.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:id="@+id/bn_timingrecyclerview"
-                        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+                    <com.chootdev.typefaced.TypeFacedTextView
+                        android:layout_width="wrap_content"
+                        android:textSize="@dimen/_13sdp"
+                        app:textView_font="@string/font_exo_regular"
+                        android:text="@string/doctordetails"
+                        android:padding="@dimen/_2sdp"
+                        android:layout_margin="@dimen/_3sdp"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/nontitle_color"
+                        android:layout_height="wrap_content" />
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:padding="@dimen/_2sdp"
+                        android:layout_margin="@dimen/_3sdp"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_weight="5"
+                            android:layout_height="wrap_content">
+
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="3.5"
+                                android:orientation="vertical"
+                                android:layout_height="wrap_content">
+
+                                <com.velozion.myoitc.utilities.RoundedImageView
+                                    android:layout_width="@dimen/_80sdp"
+                                    android:id="@+id/bn_pic"
+                                    android:profileImage="@{DoctorProfile.pic}"
+                                    android:scaleType="centerCrop"
+                                    android:layout_height="@dimen/_80sdp" />
+
+                                <com.chootdev.typefaced.TypeFacedTextView
+                                    android:layout_width="wrap_content"
+                                    android:text="@{DoctorProfile.name}"
+                                    android:textSize="@dimen/_13sdp"
+                                    app:textView_font="@string/font_exo_regular"
+                                    android:textStyle="bold"
+                                    android:id="@+id/bn_doctname"
+                                    android:padding="@dimen/_2sdp"
+                                    android:layout_marginTop="@dimen/_3sdp"
+                                    android:textColor="@color/title_color"
+                                    android:layout_height="wrap_content" />
+
+                            </LinearLayout>
+
+                            <com.chootdev.typefaced.TypeFacedTextView
+                                android:id="@+id/bn_fees"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1.5"
+                                android:padding="@dimen/_2sdp"
+                                android:gravity="center"
+                                android:text="@{String.format(@string/fees, DoctorProfile.fees)}"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="@dimen/_18sdp"
+                                app:textView_font="@string/font_exo_bold"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:layout_marginBottom="@dimen/_3sdp"
+                        android:background="@color/view_bg2"
+                        android:layout_height="@dimen/_1sdp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_margin="@dimen/_1sdp"
+                        android:layout_height="wrap_content">
+
+                        <com.chootdev.typefaced.TypeFacedTextView
+                            android:layout_width="wrap_content"
+                            android:textSize="@dimen/_14sdp"
+                            android:text="@string/availabletimgs"
+                            android:drawableLeft="@drawable/icon_time"
+                            android:padding="@dimen/_2sdp"
+                            android:drawablePadding="@dimen/_2sdp"
+                            android:layout_margin="@dimen/_3sdp"
+                            android:gravity="center_vertical"
+                            app:textView_font="@string/font_exo_regular"
+                            android:textColor="@color/nontitle_color"
+                            android:layout_height="wrap_content" />
+
+                        <com.chootdev.typefaced.TypeFacedTextView
+                            android:layout_width="wrap_content"
+                            android:text="@{DoctorProfile.avaliable_timings}"
+                            android:textSize="@dimen/_12sdp"
+                            app:textView_font="@string/font_exo_regular"
+                            android:textStyle="bold"
+                            android:id="@+id/bn_docttimings"
+                            android:padding="@dimen/_2sdp"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:textColor="@color/title_color"
+                            android:layout_height="wrap_content" />
+
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:layout_marginBottom="@dimen/_3sdp"
+                        android:background="@color/view_bg2"
+                        android:layout_height="@dimen/_1sdp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_margin="@dimen/_1sdp"
+                        android:layout_height="wrap_content">
+
+                        <com.chootdev.typefaced.TypeFacedTextView
+                            android:layout_width="wrap_content"
+                            android:textSize="@dimen/_14sdp"
+                            android:text="@string/date"
+                            android:drawableLeft="@drawable/icon_date"
+                            android:padding="@dimen/_2sdp"
+                            android:drawablePadding="@dimen/_2sdp"
+                            android:layout_margin="@dimen/_3sdp"
+                            android:gravity="center_vertical"
+                            app:textView_font="@string/font_exo_regular"
+                            android:textColor="@color/nontitle_color"
+                            android:layout_height="wrap_content" />
+
+                        <devs.mulham.horizontalcalendar.HorizontalCalendarView
+                            android:id="@+id/calendarView"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:layout_marginBottom="@dimen/_2sdp"
+                            android:layout_marginLeft="@dimen/_7sdp"
+                            android:layout_height="wrap_content"
+                            app:textColorSelected="@color/colorPrimary"
+                            app:textColorNormal="#807D7D"
+                            app:selectorColor="#B64A4A"
+                            />
+
+                    </LinearLayout>
+
+
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:layout_marginBottom="@dimen/_3sdp"
+                        android:background="@color/view_bg2"
+                        android:layout_height="@dimen/_1sdp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="@dimen/_1sdp"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <com.chootdev.typefaced.TypeFacedTextView
+                            android:layout_width="wrap_content"
+                            android:textSize="@dimen/_14sdp"
+                            android:text="@string/time"
+                            android:drawableLeft="@drawable/icon_time"
+                            android:padding="@dimen/_2sdp"
+                            app:textView_font="@string/font_exo_regular"
+                            android:drawablePadding="@dimen/_2sdp"
+                            android:layout_margin="@dimen/_3sdp"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/nontitle_color"
+                            android:layout_height="wrap_content" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="vertical"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:layout_marginBottom="@dimen/_3sdp"
+                            android:layout_height="wrap_content">
+
+
+                            <android.support.v7.widget.RecyclerView
+                                android:layout_width="match_parent"
+                                android:id="@+id/bn_timingrecyclerview"
+                                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+
+
+
+                        </LinearLayout>
+
+
+
+
+                    </LinearLayout>
+
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:layout_marginBottom="@dimen/_3sdp"
+                        android:background="#F1EDED"
+                        android:layout_height="@dimen/_1sdp"/>
 
 
 
                 </LinearLayout>
+            </ScrollView>
 
 
 
-
-            </LinearLayout>
-
-
-
-            <View
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:layout_marginBottom="@dimen/_3sdp"
-                android:background="#F1EDED"
-                android:layout_height="@dimen/_1sdp"/>
+                android:layout_alignParentBottom="true"
+                app:cardElevation="@dimen/_2sdp"
+                android:id="@+id/cardview"
+                android:layout_height="wrap_content">
 
+                <Button
+                    android:id="@+id/bn_book"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_full_"
+                    android:gravity="center"
+                    android:padding="@dimen/_8sdp"
+                    android:text="@string/booknow"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp" />
 
-
-        </LinearLayout>
-    </ScrollView>
-
-
-
-
-    <Button
-        android:id="@+id/bn_book"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/_5sdp"
-        android:background="@drawable/bg_full_"
-        android:gravity="center"
-        android:padding="@dimen/_8sdp"
-        android:text="@string/booknow"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_12sdp" />
+            </android.support.v7.widget.CardView>
 
 
 
 
-</RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+
 </layout>

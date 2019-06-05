@@ -17,6 +17,7 @@
 
     </data>
 
+
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -48,7 +49,8 @@
                 <com.chootdev.typefaced.TypeFacedTextView
                     android:layout_width="wrap_content"
                     android:gravity="center"
-                    app:textView_font="@string/font_exo_bold"
+                    android:padding="@dimen/_2sdp"
+                    app:textView_font="@string/font_exo_regular"
                     android:layout_gravity="center"
                     android:textSize="@dimen/_14sdp"
                     android:textColor="@color/white"
@@ -80,8 +82,9 @@
                         android:layout_width="wrap_content"
                         android:text="@{String.format(@string/bookingid, BookingResponse.booking_id)}"
                         android:id="@+id/bs_bookid"
-                        app:textView_font="@string/font_exo_bold"
-                        android:textSize="@dimen/_15sdp"
+                        android:padding="@dimen/_2sdp"
+                        app:textView_font="@string/font_exo_regular"
+                        android:textSize="@dimen/_14sdp"
                         android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content" />
 
@@ -114,11 +117,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@{DoctorProfile.name}"
-                                app:textView_font="@string/font_exo_semibold"
+                                app:textView_font="@string/font_exo_regular"
                                 android:textStyle="bold"
-                                android:layout_marginTop="@dimen/_2sdp"
-                                android:layout_marginBottom="@dimen/_2sdp"
-                                android:padding="@dimen/_1sdp"
+                                android:padding="@dimen/_2sdp"
                                 android:textColor="@color/title_color"
                                 android:gravity="center_vertical"
                                 android:textSize="@dimen/_14sdp" />
@@ -132,10 +133,8 @@
                                 android:layout_width="match_parent"
                                 android:gravity="center_vertical"
                                 app:textView_font="@string/font_exo_regular"
-                                android:padding="@dimen/_1sdp"
+                                android:padding="@dimen/_2sdp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_2sdp"
-                                android:layout_marginBottom="@dimen/_2sdp"
                                 android:text="@{DoctorProfile.specialist}"
                                 android:textColor="@color/nontitle_color"
                                 android:textSize="@dimen/_12sdp" />
@@ -144,11 +143,8 @@
                                 android:id="@+id/bs_docter_fees"
                                 android:layout_width="match_parent"
                                 android:text="@{String.format(@string/fees, DoctorProfile.fees)}"
-
-                                android:layout_marginTop="@dimen/_2sdp"
-                                android:layout_marginBottom="@dimen/_2sdp"
-                                android:padding="@dimen/_1sdp"
-                                app:textView_font="@string/font_exo_bold"
+                                android:padding="@dimen/_2sdp"
+                                app:textView_font="@string/font_exo_regular"
                                 android:layout_height="wrap_content"
                                 android:gravity="center_vertical"
                                 android:textColor="@color/title_color"
@@ -183,10 +179,10 @@
                             android:layout_weight="1"
                             android:textSize="@dimen/_12sdp"
                             android:text="@string/Name"
-                            app:textView_font="@string/font_exo_semibold"
+                            app:textView_font="@string/font_exo_regular"
                             android:padding="@dimen/_2sdp"
                             android:gravity="center_vertical"
-                            android:textColor="@color/greyblack"
+                            android:textColor="@color/nontitle_color"
                             android:layout_height="wrap_content" />
 
                         <com.chootdev.typefaced.TypeFacedTextView
@@ -197,7 +193,7 @@
                             android:id="@+id/bs_personame"
                             android:layout_gravity="center_vertical"
                             android:padding="@dimen/_2sdp"
-                            app:textView_font="@string/font_exo_medium"
+                            app:textView_font="@string/font_exo_regular"
                             android:textColor="@color/title_color"
                             android:gravity="center_vertical"
                             android:layout_height="wrap_content" />
@@ -216,23 +212,23 @@
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:textSize="@dimen/_12sdp"
-                            app:textView_font="@string/font_exo_semibold"
+                            app:textView_font="@string/font_exo_regular"
                             android:text="@string/selectdate"
                             android:padding="@dimen/_2sdp"
                             android:gravity="center_vertical"
-                            android:textColor="@color/greyblack"
+                            android:textColor="@color/nontitle_color"
                             android:layout_height="wrap_content" />
 
                         <com.chootdev.typefaced.TypeFacedTextView
                             android:layout_width="0dp"
                             android:layout_weight="1"
-                            android:textSize="@dimen/_13sdp"
+                            android:textSize="@dimen/_12sdp"
                             android:text="@{BookingResponse.date}"
                             android:id="@+id/bs_date"
                             android:layout_gravity="center_vertical"
                             android:padding="@dimen/_2sdp"
                             android:gravity="center_vertical"
-                            app:textView_font="@string/font_exo_medium"
+                            app:textView_font="@string/font_exo_regular"
                             android:textColor="@color/title_color"
                             android:layout_height="wrap_content" />
 
@@ -251,10 +247,10 @@
                             android:layout_weight="1"
                             android:textSize="@dimen/_12sdp"
                             android:text="@string/selecttime"
-                            app:textView_font="@string/font_exo_semibold"
+                            app:textView_font="@string/font_exo_regular"
                             android:padding="@dimen/_2sdp"
                             android:gravity="center_vertical"
-                            android:textColor="@color/greyblack"
+                            android:textColor="@color/nontitle_color"
                             android:layout_height="wrap_content" />
 
                         <com.chootdev.typefaced.TypeFacedTextView
@@ -266,7 +262,7 @@
                             android:layout_gravity="center_vertical"
                             android:padding="@dimen/_2sdp"
                             android:gravity="center_vertical"
-                            app:textView_font="@string/font_exo_medium"
+                            app:textView_font="@string/font_exo_regular"
                             android:textColor="@color/title_color"
                             android:layout_height="wrap_content" />
 
@@ -279,17 +275,26 @@
             </android.support.v7.widget.CardView>
 
 
-            <TextView
-                android:layout_width="@dimen/_100sdp"
-                android:text="@string/goback"
-                android:background="@drawable/gradient_1"
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:id="@+id/bn_back"
+                app:cardElevation="@dimen/_2sdp"
                 android:layout_margin="@dimen/_10sdp"
-                android:textColor="@color/white"
-                android:padding="@dimen/_7sdp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="@dimen/_100sdp"
+                    android:text="@string/goback"
+                    android:background="@drawable/gradient_1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:id="@+id/bn_back"
+                    android:textColor="@color/white"
+                    android:padding="@dimen/_7sdp"
+                    android:layout_height="wrap_content" />
+
+            </android.support.v7.widget.CardView>
+
 
 
         </LinearLayout>

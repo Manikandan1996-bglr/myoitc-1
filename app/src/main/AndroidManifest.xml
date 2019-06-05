@@ -18,17 +18,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.DoctorsOnMap"></activity>
-        <activity android:name=".Activities.Book_Appointment" />
+        <activity
+            android:name=".Activities.HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Activities.DoctorsOnMap" />
+        <activity android:name=".Activities.BookAppointment" />
         <activity android:name=".Activities.BookingStatus" />
         <activity android:name=".Activities.DoctorsCategory" />
-        <activity android:name=".Activities.Docter_Details" />
+        <activity android:name=".Activities.DocterDetails" />
         <activity android:name=".Activities.DoctorsList_Activity" />
         <activity
             android:name=".Activities.Profile_Activity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".Activities.HistoryDetails" />
-        <activity android:name=".Activities.DashBoard" />
+        <activity
+            android:name=".Activities.DashBoard"
+            android:theme="@style/AppTheme2" />
         <activity
             android:name=".Activities.LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

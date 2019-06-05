@@ -2,7 +2,6 @@ package com.velozion.myoitc.Activities;
 
 import android.databinding.DataBindingUtil;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -18,9 +17,6 @@ import com.velozion.myoitc.databinding.ActivityBookingStatusBinding;
 public class BookingStatus extends BaseActivity {
 
 
-
-    TextView back;
-
     ActivityBookingStatusBinding bookingStatusBinding;
 
     @Override
@@ -29,7 +25,7 @@ public class BookingStatus extends BaseActivity {
 
         bookingStatusBinding=DataBindingUtil.setContentView(this,R.layout.activity_booking_status);
 
-        BaseActivity.disableActionBar();
+       setToolbarRequired(true);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -45,14 +41,15 @@ public class BookingStatus extends BaseActivity {
         bookingStatusBinding.setBookingResponse(bookingResponse);
 
 
-        back=(TextView) findViewById(R.id.bn_back);
-
-        back.setOnClickListener(new View.OnClickListener() {
+        bookingStatusBinding.bnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+                activateSlideRight();
             }
         });
+
+
 
 
     }

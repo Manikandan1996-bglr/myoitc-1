@@ -46,7 +46,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        app:textView_font="@string/font_exo_bold"
+                        app:textView_font="@string/font_exo_regular"
                         android:id="@+id/pd_name"
                         android:padding="@dimen/_2sdp"
                         android:gravity="center"
@@ -118,7 +118,7 @@
                                 android:gravity="center"
                                 android:textSize="@dimen/_12sdp"
                                 android:layout_gravity="center"
-                                app:textView_font="@string/font_semibold"
+                                app:textView_font="@string/font_exo_regular"
                                 android:textColor="@color/nontitle_color"
                                 android:layout_height="wrap_content" />
 
@@ -127,10 +127,11 @@
                                 style="?android:attr/ratingBarStyleSmall"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:rating="@{DoctorProfile.rating}"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/_2sdp"
                                 android:layout_marginBottom="@dimen/_2sdp"
-                                android:padding="@dimen/_1sdp"
+                                android:padding="@dimen/_2sdp"
                                 />
 
 
@@ -159,7 +160,7 @@
                                 android:textSize="@dimen/_12sdp"
                                 android:gravity="center"
                                 android:layout_gravity="center"
-                                app:textView_font="@string/font_semibold"
+                                app:textView_font="@string/font_exo_regular"
                                 android:textColor="@color/nontitle_color"
                                 android:layout_height="wrap_content" />
 
@@ -168,12 +169,12 @@
                                 android:text="@{String.format(@string/fees, DoctorProfile.fees)}"
                                 android:padding="@dimen/_2sdp"
                                 android:gravity="center"
-                                app:textView_font="@string/font_exo_semibold"
+                                app:textView_font="@string/font_exo_regular"
                                 android:textStyle="bold"
                                 android:textSize="@dimen/_12sdp"
                                 android:id="@+id/pd_fees"
                                 android:layout_gravity="center"
-                                android:textColor="@color/black"
+                                android:textColor="@color/title_color"
                                 android:layout_height="wrap_content" />
 
 
@@ -204,9 +205,9 @@
 
                         <com.chootdev.typefaced.TypeFacedTextView
                             android:layout_width="wrap_content"
-                            android:textSize="@dimen/_12sdp"
+                            android:textSize="@dimen/_14sdp"
                             android:text="@string/about"
-                            app:textView_font="@string/font_exo_semibold"
+                            app:textView_font="@string/font_exo_regular"
                             android:padding="@dimen/_2sdp"
                             android:gravity="center"
                             android:layout_gravity="center_vertical"
@@ -218,11 +219,11 @@
                             android:textSize="@dimen/_12sdp"
                             android:text="@{DoctorProfile.about}"
                             android:padding="@dimen/_2sdp"
-                            app:textView_font="@string/font_exo_medium"
+                            app:textView_font="@string/font_exo_regular"
                             android:gravity="center_vertical"
                             android:id="@+id/pd_about"
                             android:layout_gravity="center_vertical"
-                            android:textColor="@color/black"
+                            android:textColor="@color/title_color"
                             android:layout_height="wrap_content" />
 
                     </LinearLayout>
@@ -263,11 +264,11 @@
 
                         <com.chootdev.typefaced.TypeFacedTextView
                             android:layout_width="wrap_content"
-                            android:textSize="@dimen/_13sdp"
+                            android:textSize="@dimen/_12sdp"
                             android:text="@{DoctorProfile.hospital_name}"
                             android:padding="@dimen/_2sdp"
                             android:id="@+id/hospital_name"
-                            app:textView_font="@string/font_exo_semibold"
+                            app:textView_font="@string/font_exo_regular"
                             android:gravity="center_vertical"
                             android:layout_gravity="center_vertical"
                             android:textColor="@color/title_color"
@@ -276,13 +277,13 @@
                         <com.chootdev.typefaced.TypeFacedTextView
                             android:layout_width="wrap_content"
                             android:textSize="@dimen/_12sdp"
-                            app:textView_font="@string/font_exo_medium"
+                            app:textView_font="@string/font_exo_regular"
                             android:text="@{DoctorProfile.area}"
                             android:padding="@dimen/_2sdp"
                             android:gravity="center_vertical"
                             android:id="@+id/pd_hospitaladdress"
                             android:layout_gravity="center_vertical"
-                            android:textColor="@color/black"
+                            android:textColor="@color/nontitle_color"
                             android:layout_height="wrap_content" />
 
                         <ImageView
@@ -330,8 +331,8 @@
 
                         <com.chootdev.typefaced.TypeFacedTextView
                             android:layout_width="wrap_content"
-                            android:textSize="@dimen/_13sdp"
-                            app:textView_font="@string/font_exo_semibold"
+                            android:textSize="@dimen/_14sdp"
+                            app:textView_font="@string/font_exo_regular"
                             android:text="@string/availabletoday"
                             android:padding="@dimen/_2sdp"
                             android:gravity="center_vertical"
@@ -342,13 +343,13 @@
                         <com.chootdev.typefaced.TypeFacedTextView
                             android:layout_width="wrap_content"
                             android:textSize="@dimen/_12sdp"
-                            app:textView_font="@string/font_exo_medium"
+                            app:textView_font="@string/font_exo_regular"
                             android:text="@{DoctorProfile.avaliable_timings}"
                             android:padding="@dimen/_2sdp"
                             android:gravity="center_vertical"
                             android:id="@+id/pd_availabletimg"
                             android:layout_gravity="center_vertical"
-                            android:textColor="@color/black"
+                            android:textColor="@color/title_color"
                             android:layout_height="wrap_content" />
 
 
@@ -367,18 +368,27 @@
                     android:background="@color/view_bg2"
                     android:layout_height="@dimen/_1sdp"/>
 
-                <TextView
-                    android:id="@+id/pd_bookappointment"
+                <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:layout_margin="@dimen/_5sdp"
-                    android:background="@drawable/bg_full_"
-                    android:gravity="center"
-                    android:padding="@dimen/_10sdp"
-                    android:text="@string/bookappointment"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp" />
+                    app:cardElevation="@dimen/_2sdp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/pd_bookappointment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+
+                        android:background="@drawable/bg_full_"
+                        android:gravity="center"
+                        android:padding="@dimen/_10sdp"
+                        android:text="@string/bookappointment"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12sdp" />
+                </android.support.v7.widget.CardView>
+
+
 
             </LinearLayout>
 

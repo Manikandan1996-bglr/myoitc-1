@@ -4,25 +4,58 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+
+import java.util.Random;
 
 public class BaseActivity extends AppCompatActivity {
     Snackbar snackbar;
     BroadcastReceiver receiver;
 
-    static ActionBar actionBar;
+
+    public Toolbar toolbar;
+    private boolean isToolbarRequired;
+    private String toolbarTitle;
+    private boolean isHomeMenuRequired;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        actionBar=getSupportActionBar();
+        overridePendingTransition(R.anim.right_in, R.anim.left_out);
+
+
+        if (!InternetConnection.checkConnection(getApplicationContext()))
+        {
+            snackbar= Snackbar.make(getWindow().getDecorView().getRootView(),"No Internet Connection", Snackbar.LENGTH_INDEFINITE);
+            snackbar.setAction("RETRY", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (InternetConnection.checkConnection(getApplicationContext()))
+                    {
+                        snackbar.dismiss();
+                    }else {
+                        snackbar.show();
+                    }
+                }
+            }).show();
+
+
+        }
 
 
          receiver=new BroadcastReceiver() {
@@ -74,29 +107,123 @@ public class BaseActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    public static void setActionBarTitle(String s)
-    {
-        actionBar.setTitle(s);
-    }
 
-    public static void enableHomeUpButton(boolean value)
-    {
-        actionBar.setDisplayHomeAsUpEnabled(value);
-    }
-
-    public static void disableActionBar()
-    {
-        actionBar.hide();
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+
+                overridePendingTransition(R.anim.left_in, R.anim.right_out);
+
                 break;
         }
         return true;
     }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        overridePendingTransition(R.anim.left_in, R.anim.right_out);
+    }
+
+
+
+    public boolean isToolbarRequired() {
+        return isToolbarRequired;
+    }
+
+
+    public void setToolbarRequired(boolean toolbarRequired) {
+        isToolbarRequired = toolbarRequired;
+    }
+
+    public String getToolbarTitle() {
+        return toolbarTitle;
+    }
+
+    protected void setToolbarTitle(String toolbarTitle) {
+        this.toolbarTitle = toolbarTitle;
+    }
+
+
+    public void setHomeMenuRequired(boolean homeMenuRequired) {
+        isHomeMenuRequired = homeMenuRequired;
+    }
+
+    @Override
+    public void setContentView(@LayoutRes int layoutResID) {
+
+        if (isToolbarRequired) {
+            View view = getLayoutInflater().inflate(layoutResID, null);
+
+            View v = view.findViewById(R.id.toolbar);
+            toolbar = v.findViewById(R.id.toolbar);
+
+            toolbar.setTitle(toolbarTitle);
+            toolbar.setTitleTextAppearance(this, R.style.ToolBarText);
+            int color_combo=getRandomColor();
+            toolbar.setTitleTextColor(color_combo);
+            setSupportActionBar(toolbar);
+
+            changeStatusbar(color_combo);
+
+
+
+
+                if (getSupportActionBar() != null){
+
+                    if (isHomeMenuRequired)
+                    {
+                        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
+                    }else {
+                        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                        getSupportActionBar().setDisplayShowHomeEnabled(true);
+                    }
+
+
+                }
+
+
+
+
+
+
+            super.setContentView(view);
+        } else {
+            super.setContentView(layoutResID);
+        }
+    }
+
+    void changeStatusbar(int color)
+    {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(color);
+        }
+    }
+
+    public int getRandomColor(){
+        Random rnd = new Random();
+        return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+    }
+
+
+    public void activateSlideLeft()
+    {
+        overridePendingTransition(R.anim.right_in, R.anim.left_out);
+    }
+
+    public void activateSlideRight()
+    {
+        overridePendingTransition(R.anim.left_in, R.anim.right_out);
+    }
+
 
 }
