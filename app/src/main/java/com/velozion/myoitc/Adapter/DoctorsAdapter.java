@@ -1,31 +1,20 @@
 package com.velozion.myoitc.Adapter;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.databinding.DataBindingUtil;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.RatingBar;
-import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.velozion.myoitc.Activities.BookAppointment;
 import com.velozion.myoitc.Activities.DisplayFullImage;
 import com.velozion.myoitc.Activities.DocterDetails;
 import com.velozion.myoitc.AnimUtils;
 import com.velozion.myoitc.R;
-import com.velozion.myoitc.Utils;
 import com.velozion.myoitc.databinding.ItemDoctersBinding;
 import com.velozion.myoitc.db.DoctorProfileData;
 

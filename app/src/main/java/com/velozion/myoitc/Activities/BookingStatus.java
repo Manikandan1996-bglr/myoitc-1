@@ -1,12 +1,11 @@
 package com.velozion.myoitc.Activities;
 
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.TextView;
 
 import com.velozion.myoitc.BaseActivity;
 import com.velozion.myoitc.db.BookingResponse;

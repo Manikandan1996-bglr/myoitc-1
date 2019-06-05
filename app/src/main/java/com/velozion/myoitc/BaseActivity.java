@@ -4,18 +4,17 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.ContextThemeWrapper;
-import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.Nullable;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.widget.Toolbar;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -167,7 +166,9 @@ public class BaseActivity extends AppCompatActivity {
             toolbar = v.findViewById(R.id.toolbar);
 
             toolbar.setTitle(toolbarTitle);
+
             toolbar.setTitleTextAppearance(this, R.style.ToolBarText);
+
             int color_combo=getRandomColor();
             toolbar.setBackgroundColor(color_combo);
             setSupportActionBar(toolbar);

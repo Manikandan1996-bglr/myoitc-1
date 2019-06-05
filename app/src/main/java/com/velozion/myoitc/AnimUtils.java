@@ -2,9 +2,7 @@ package com.velozion.myoitc;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.animation.AnimationSet;
 
 /**
  * Created by JAGADISH on 10/9/2018.

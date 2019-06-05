@@ -1,21 +1,18 @@
 package com.velozion.myoitc.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.velozion.myoitc.Activities.HistoryDetails;
-import com.velozion.myoitc.AnimUtils;
 import com.velozion.myoitc.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class TimeSlotAdapter extends RecyclerView.Adapter <TimeSlotAdapter.TimeSlotViewHolder>{
 

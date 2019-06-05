@@ -1,7 +1,7 @@
 package com.velozion.myoitc.Activities;
 
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -24,7 +24,7 @@ public class DocterDetails extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        profileLayoutBinding = DataBindingUtil.setContentView(this, R.layout.doctor_profile_layout);
+        profileLayoutBinding=DataBindingUtil.setContentView(this, R.layout.doctor_profile_layout);
 
         doctorProfileData = getIntent().getExtras().getParcelable("data");
 

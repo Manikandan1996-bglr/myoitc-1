@@ -1,11 +1,8 @@
 package com.velozion.myoitc.Activities;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.Window;
-import android.view.WindowManager;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.velozion.myoitc.Adapter.DocterCatAdapter;
 import com.velozion.myoitc.BaseActivity;

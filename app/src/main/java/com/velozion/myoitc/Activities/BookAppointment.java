@@ -1,12 +1,12 @@
 package com.velozion.myoitc.Activities;
 
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
@@ -45,6 +45,7 @@ public class BookAppointment extends BaseActivity {
         super.onCreate(savedInstanceState);
         setToolbarRequired(true);
         setToolbarTitle(getResources().getString(R.string.activity_book_app));
+
         bookAppointmentBinding = DataBindingUtil.setContentView(this, R.layout.activity_book__appointment);
 
         doctorProfileData = (DoctorProfileData) getIntent().getExtras().getParcelable("data");

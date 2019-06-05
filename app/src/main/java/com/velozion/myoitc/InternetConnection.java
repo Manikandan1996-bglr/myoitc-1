@@ -2,7 +2,7 @@ package com.velozion.myoitc;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * Created by JAGADISH on 7/21/2018.
