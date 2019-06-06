@@ -164,7 +164,7 @@ public class DisplayFullImage extends BaseActivity {
 
         isClosing = true;
         ObjectAnimator positionAnimator = ObjectAnimator.ofFloat(imageView, "y", currentPosition, -imageView.getHeight());
-        positionAnimator.setDuration(2000);
+        positionAnimator.setDuration(500);
         positionAnimator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
@@ -174,6 +174,8 @@ public class DisplayFullImage extends BaseActivity {
             @Override
             public void onAnimationEnd(Animator animation) {
                 finish();
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+
             }
 
             @Override
@@ -199,7 +201,7 @@ public class DisplayFullImage extends BaseActivity {
         display.getSize(size);
         int screenHeight = size.y;
         ObjectAnimator positionAnimator = ObjectAnimator.ofFloat(imageView, "y", currentPosition, screenHeight + imageView.getHeight());
-        positionAnimator.setDuration(2000);
+        positionAnimator.setDuration(500);
         positionAnimator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
@@ -209,6 +211,8 @@ public class DisplayFullImage extends BaseActivity {
             @Override
             public void onAnimationEnd(Animator animation) {
                 finish();
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+
             }
 
             @Override

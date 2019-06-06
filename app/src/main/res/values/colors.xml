@@ -44,4 +44,7 @@
     <color name="colorNevyBlue">#243FA3</color>
     <color name="colorNevyBlueT">#4961B8</color>
 
+    <color name="colorNightMode">#2E2E30</color>
+    <color name="colorNightModeT">#555555</color>
+
 </resources>

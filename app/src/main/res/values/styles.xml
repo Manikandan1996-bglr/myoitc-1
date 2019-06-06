@@ -79,8 +79,8 @@
         <item name="colorPrimary">?themeColorPrimary</item>
         <item name="colorPrimaryDark">?themeColorPrimaryDark</item>
         <item name="colorAccent">?themeColorPrimary</item>
-        <item name="themeColorPrimary">@color/colorYellow</item>
-        <item name="themeColorPrimaryDark">@color/colorYellowT</item>
+        <item name="themeColorPrimary">@color/colorNightMode</item>
+        <item name="themeColorPrimaryDark">@color/colorNightModeT</item>
     </style>
 
 

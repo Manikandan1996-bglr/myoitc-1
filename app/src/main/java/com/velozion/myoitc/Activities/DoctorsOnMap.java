@@ -41,7 +41,7 @@ public class DoctorsOnMap extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.CustomeTheme4);
+        //setTheme(R.style.CustomeTheme4);
         super.onCreate(savedInstanceState);
         setToolbarRequired(true);
         setToolbarTitle(getResources().getString(R.string.activity_doctors_list));

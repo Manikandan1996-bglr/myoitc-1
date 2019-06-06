@@ -20,6 +20,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.Calendar;
 import java.util.Random;
 
 public class BaseActivity extends AppCompatActivity {
@@ -35,7 +36,8 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        HandleThemes();
+       // HandleThemes();
+        ThemeBasedOnTime();
         super.onCreate(savedInstanceState);
 
         overridePendingTransition(R.anim.right_in, R.anim.left_out);
@@ -289,6 +291,26 @@ public class BaseActivity extends AppCompatActivity {
         }
 
         return null;
+    }
+
+    void ThemeBasedOnTime()
+    {
+
+        Calendar c = Calendar.getInstance();
+        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+
+        if(timeOfDay >= 0 && timeOfDay < 12){
+            setTheme(R.style.CustomeTheme1);
+        }else if(timeOfDay >= 12 && timeOfDay < 16){
+            setTheme(R.style.CustomeTheme2);
+        }else if(timeOfDay >= 16 && timeOfDay < 21){
+            setTheme(R.style.CustomeTheme3);
+        }else if(timeOfDay >= 21 && timeOfDay < 24){
+            setTheme(R.style.CustomeTheme4);
+        }else {
+            setTheme(R.style.CustomeTheme5);
+        }
+
     }
 
 }

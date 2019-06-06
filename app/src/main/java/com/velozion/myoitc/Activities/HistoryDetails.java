@@ -45,7 +45,7 @@ public class HistoryDetails extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.CustomeTheme5);
+        //setTheme(R.style.CustomeTheme5);
         super.onCreate(savedInstanceState);
         setToolbarRequired(true);
         setToolbarTitle(getResources().getString(R.string.activity_historydetails));

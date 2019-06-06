@@ -43,7 +43,7 @@ public class BookAppointment extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.CustomeTheme3);
+       // setTheme(R.style.CustomeTheme3);
         super.onCreate(savedInstanceState);
         setToolbarRequired(true);
         setToolbarTitle(getResources().getString(R.string.activity_book_app));
@@ -178,6 +178,14 @@ public class BookAppointment extends BaseActivity {
                 .range(startDate, endDate)
                 .datesNumberOnScreen(8)
                 .build();
+
+
+
+        int day = startDate.get(Calendar.DATE) + 1;
+        if (day == 32) {
+            day = 1;
+        }
+        selected_date = (day + "/" + (startDate.get(Calendar.MONTH) + 1) + "/" + startDate.get(Calendar.YEAR));
 
 
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
