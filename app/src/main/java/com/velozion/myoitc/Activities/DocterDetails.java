@@ -1,13 +1,12 @@
 package com.velozion.myoitc.Activities;
 
 import android.content.Intent;
-import androidx.databinding.DataBindingUtil;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
+
+import androidx.databinding.DataBindingUtil;
+
 import com.velozion.myoitc.BaseActivity;
 import com.velozion.myoitc.R;
 import com.velozion.myoitc.Utils;
@@ -22,17 +21,12 @@ public class DocterDetails extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.CustomeTheme1);
         super.onCreate(savedInstanceState);
 
-        profileLayoutBinding=DataBindingUtil.setContentView(this, R.layout.doctor_profile_layout);
+        profileLayoutBinding = DataBindingUtil.setContentView(this, R.layout.doctor_profile_layout);
 
         doctorProfileData = getIntent().getExtras().getParcelable("data");
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(getResources().getColor(R.color.statusbar_light));
-        }
 
         profileLayoutBinding.setDoctorProfile(doctorProfileData);
         staticmap = (ImageView) findViewById(R.id.pd_hospotal_loc_pic);
@@ -50,9 +44,9 @@ public class DocterDetails extends BaseActivity {
         profileLayoutBinding.pdPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(), DisplayFullImage.class);
-                intent.putExtra("profile_name",doctorProfileData.getName());
-                intent.putExtra("profile_pic",doctorProfileData.getPic());
+                Intent intent = new Intent(getApplicationContext(), DisplayFullImage.class);
+                intent.putExtra("profile_name", doctorProfileData.getName());
+                intent.putExtra("profile_pic", doctorProfileData.getPic());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }

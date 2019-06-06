@@ -3,10 +3,6 @@
     <color name="colorPrimary">#009FAF</color>
     <color name="colorPrimaryDark">#247F88</color>
     <color name="colorAccent">#D81B60</color>
-
-
-
-
     <color name="transparent">#80FFFFFF</color>
     <color name="transparent2">#80000000</color>
     <color name="background">#E9E3E3</color>
@@ -26,8 +22,26 @@
     <color name="view_bg2">#E4DDDD</color>
 
     <color name="bacground">#c5c5c5</color>
-    <color name="colorPurple">#983CFF</color>
-    <color name="colorPurpleT">#64983cff</color>
+
+    <color name="colorPurple">#6133B1</color>
+    <color name="colorPurpleT">#648753C2</color>
+
     <color name="colorBlue">#2FB4FF</color>
-    <color name="colorBlueT">#642fb4ff</color>
+    <color name="colorBlueT">#6475B7DF</color>
+
+    <color name="colorPink">#B257C2</color>
+    <color name="colorPinkT">#B87AC2</color>
+
+    <color name="colorGreen">#40B845</color>
+    <color name="colorGreenT">#77CA7A</color>
+
+    <color name="colorOrange">#FF5722</color>
+    <color name="colorOrangeT">#DB8469</color>
+
+    <color name="colorYellow">#8B9622</color>
+    <color name="colorYellowT">#BFC486</color>
+
+    <color name="colorNevyBlue">#243FA3</color>
+    <color name="colorNevyBlueT">#4961B8</color>
+
 </resources>

@@ -7,18 +7,18 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.Nullable;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.appcompat.widget.Toolbar;
-
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Random;
 
@@ -35,22 +35,21 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        HandleThemes();
         super.onCreate(savedInstanceState);
 
         overridePendingTransition(R.anim.right_in, R.anim.left_out);
 
 
-        if (!InternetConnection.checkConnection(getApplicationContext()))
-        {
-            snackbar= Snackbar.make(getWindow().getDecorView().getRootView(),"No Internet Connection", Snackbar.LENGTH_INDEFINITE);
+        if (!InternetConnection.checkConnection(getApplicationContext())) {
+            snackbar = Snackbar.make(getWindow().getDecorView().getRootView(), "No Internet Connection", Snackbar.LENGTH_INDEFINITE);
             snackbar.setAction("RETRY", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    if (InternetConnection.checkConnection(getApplicationContext()))
-                    {
+                    if (InternetConnection.checkConnection(getApplicationContext())) {
                         snackbar.dismiss();
-                    }else {
+                    } else {
                         snackbar.show();
                     }
                 }
@@ -60,37 +59,33 @@ public class BaseActivity extends AppCompatActivity {
         }
 
 
-         receiver=new BroadcastReceiver() {
+        receiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
 
-                if (!InternetConnection.checkConnection(getApplicationContext()))
-                {
-                   snackbar= Snackbar.make(getWindow().getDecorView().getRootView(),"No Internet Connection", Snackbar.LENGTH_INDEFINITE);
-                   snackbar.setAction("RETRY", new View.OnClickListener() {
-                       @Override
-                       public void onClick(View v) {
+                if (!InternetConnection.checkConnection(getApplicationContext())) {
+                    snackbar = Snackbar.make(getWindow().getDecorView().getRootView(), "No Internet Connection", Snackbar.LENGTH_INDEFINITE);
+                    snackbar.setAction("RETRY", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
 
-                           if (InternetConnection.checkConnection(getApplicationContext()))
-                           {
-                            snackbar.dismiss();
-                           }else {
-                               snackbar.show();
-                           }
-                       }
-                   }).show();
+                            if (InternetConnection.checkConnection(getApplicationContext())) {
+                                snackbar.dismiss();
+                            } else {
+                                snackbar.show();
+                            }
+                        }
+                    }).show();
 
 
-                }else {
+                } else {
 
 
-                    if (snackbar!=null)
-                    {
+                    if (snackbar != null) {
                         snackbar.dismiss();
                     }
 
                 }
-
 
 
             }
@@ -98,6 +93,38 @@ public class BaseActivity extends AppCompatActivity {
 
         registerReceiver(receiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
 
+
+    }
+
+    private void HandleThemes() {
+
+        int num = getRandomNumber();
+        Log.d("Responserandomnum", String.valueOf(num));
+
+        switch (num) {
+            case 1:
+
+                setTheme(R.style.CustomeTheme1);
+
+                break;
+
+            case 2:
+                setTheme(R.style.CustomeTheme2);
+                break;
+
+            case 3:
+                setTheme(R.style.CustomeTheme3);
+                break;
+
+            case 4:
+                setTheme(R.style.CustomeTheme4);
+                break;
+
+            case 5:
+                setTheme(R.style.CustomeTheme5);
+                break;
+
+        }
 
 
     }
@@ -108,7 +135,6 @@ public class BaseActivity extends AppCompatActivity {
         unregisterReceiver(receiver);
         super.onDestroy();
     }
-
 
 
     @Override
@@ -131,7 +157,6 @@ public class BaseActivity extends AppCompatActivity {
 
         overridePendingTransition(R.anim.left_in, R.anim.right_out);
     }
-
 
 
     public boolean isToolbarRequired() {
@@ -168,29 +193,25 @@ public class BaseActivity extends AppCompatActivity {
             toolbar.setTitle(toolbarTitle);
 
             toolbar.setTitleTextAppearance(this, R.style.ToolBarText);
-
-            int color_combo=getRandomColor();
-            toolbar.setBackgroundColor(color_combo);
             setSupportActionBar(toolbar);
 
-           changeStatusbar(color_combo);
+           /* int color_combo=getRandomColor();
+            toolbar.setBackgroundColor(color_combo);
+            changeStatusbar(color_combo);*/
 
 
-                if (getSupportActionBar() != null){
+            if (getSupportActionBar() != null) {
 
-                    if (isHomeMenuRequired)
-                    {
-                        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
-                    }else {
-                        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                        getSupportActionBar().setDisplayShowHomeEnabled(true);
-                    }
-
-
+                if (isHomeMenuRequired) {
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                    getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
+                } else {
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                    getSupportActionBar().setDisplayShowHomeEnabled(true);
                 }
 
 
+            }
 
 
             super.setContentView(view);
@@ -199,8 +220,7 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    void changeStatusbar(int color)
-    {
+    void changeStatusbar(int color) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -209,28 +229,29 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public int getRandomColor(){
+    public int getRandomColor() {
         Random rnd = new Random();
         return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
     }
 
 
-    public void activateSlideLeft()
-    {
+    public void activateSlideLeft() {
         overridePendingTransition(R.anim.right_in, R.anim.left_out);
     }
 
-    public void activateSlideRight()
-    {
+    public void activateSlideRight() {
         overridePendingTransition(R.anim.left_in, R.anim.right_out);
     }
 
 
-  /*  @Override
+    /*@Override
     public Resources.Theme getTheme() {
         Resources.Theme theme = super.getTheme();
 
-        switch (getRandomNumber())
+        int num=getRandomNumber();
+        Log.d("Responserandomnum", String.valueOf(num));
+
+        switch (num)
         {
             case 1:
                 theme.applyStyle(R.style.CustomeTheme1, true);
@@ -251,19 +272,19 @@ public class BaseActivity extends AppCompatActivity {
         return theme;
     }*/
 
+    private int getRandomNumber() {
+        Random random = new Random();
+        int num = random.nextInt(6 - 1) + 1;
 
-    private int getRandomNumber()
-    {
-        Random random=new Random();
-       return random.nextInt(3);
+        return num;
+        //return random.nextInt(3 - 1) + 1;
 
     }
 
-    public Toolbar getToolbar()
-    {
 
-        if (toolbar!=null)
-        {
+    public Toolbar getToolbar() {
+
+        if (toolbar != null) {
             return toolbar;
         }
 

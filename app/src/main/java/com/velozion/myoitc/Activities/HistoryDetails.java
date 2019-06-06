@@ -1,10 +1,11 @@
 package com.velozion.myoitc.Activities;
 
-import androidx.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.databinding.DataBindingUtil;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -41,17 +42,18 @@ public class HistoryDetails extends BaseActivity {
 
     ActivityHistoryDetailsBinding historyDetailsBinding;
     HistoryData historyData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.CustomeTheme5);
         super.onCreate(savedInstanceState);
         setToolbarRequired(true);
         setToolbarTitle(getResources().getString(R.string.activity_historydetails));
-        historyDetailsBinding=DataBindingUtil.setContentView(this,R.layout.activity_history_details);
+        historyDetailsBinding = DataBindingUtil.setContentView(this, R.layout.activity_history_details);
 
-        historyData= getIntent().getExtras().getParcelable("data");
+        historyData = getIntent().getExtras().getParcelable("data");
 
-
-        supportMapFragment= (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
         supportMapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
@@ -67,9 +69,7 @@ public class HistoryDetails extends BaseActivity {
                 mMap.getUiSettings().setZoomGesturesEnabled(true);
 
 
-
-                if (!historyData.getCheckinLat().equals("null") && !historyData.getCheckinLang().equals("null"))
-                {
+                if (!historyData.getCheckinLat().equals("null") && !historyData.getCheckinLang().equals("null")) {
                     LatLng chekinloc = new LatLng(Double.parseDouble(historyData.getCheckinLat()), Double.parseDouble(historyData.getCheckinLang()));
                     mMap.addMarker(new MarkerOptions().position(chekinloc).title("Check In").snippet(historyData.getCheckinloc()));
 
@@ -78,24 +78,22 @@ public class HistoryDetails extends BaseActivity {
 
                 }
 
-                if (!historyData.getCheckoutLan().equals("null") && !historyData.getCheckoutLang().equals("null"))
-                {
+                if (!historyData.getCheckoutLan().equals("null") && !historyData.getCheckoutLang().equals("null")) {
                     LatLng chekoutloc = new LatLng(Double.parseDouble(historyData.getCheckoutLan()), Double.parseDouble(historyData.getCheckoutLang()));
                     mMap.addMarker(new MarkerOptions().position(chekoutloc).title("Check Out").snippet(historyData.getCheckoutloc()));
-                    Log.d("Response","Desinationmarker added");
+                    Log.d("Response", "Desinationmarker added");
 
                 }
 
 
-                if (!historyData.getCheckinLat().equals("null") && !historyData.getCheckinLang().equals("null") && !historyData.getCheckoutLan().equals("null") && !historyData.getCheckoutLang().equals("null"))
-                {
+                if (!historyData.getCheckinLat().equals("null") && !historyData.getCheckinLang().equals("null") && !historyData.getCheckoutLan().equals("null") && !historyData.getCheckoutLang().equals("null")) {
 
                     StringBuilder googleDirectionsUrl = new StringBuilder("https://maps.googleapis.com/maps/api/directions/json?");
-                    googleDirectionsUrl.append("origin="+historyData.getCheckinLat()+","+historyData.getCheckinLang());
-                    googleDirectionsUrl.append("&destination="+historyData.getCheckoutLan()+","+historyData.getCheckoutLang());
-                    googleDirectionsUrl.append("&key="+getResources().getString(R.string.google_key));
+                    googleDirectionsUrl.append("origin=" + historyData.getCheckinLat() + "," + historyData.getCheckinLang());
+                    googleDirectionsUrl.append("&destination=" + historyData.getCheckoutLan() + "," + historyData.getCheckoutLang());
+                    googleDirectionsUrl.append("&key=" + getResources().getString(R.string.google_key));
 
-                    Log.d("url",googleDirectionsUrl.toString());
+                    Log.d("url", googleDirectionsUrl.toString());
                     getResponseFromUrl(String.valueOf(googleDirectionsUrl));
 
                 }
@@ -111,48 +109,43 @@ public class HistoryDetails extends BaseActivity {
         });
 
 
-
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");//set format of date you receiving from db
 
         SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
         SimpleDateFormat time = new SimpleDateFormat("hh:mm a");
 
 
-        if (!historyData.getCheckintime().equals("null") )
-        {
+        if (!historyData.getCheckintime().equals("null")) {
             String checkin = historyData.getCheckintime();
 
 
             try {
-                Date  data1 = (Date) sdf.parse(checkin);
+                Date data1 = (Date) sdf.parse(checkin);
 
-                historyData.setCheckintime(""+date.format(data1)+"\n"+time.format(data1));
+                historyData.setCheckintime("" + date.format(data1) + "\n" + time.format(data1));
                 //checkintime.setText(""+date.format(data1)+"\n"+time.format(data1));
 
             } catch (ParseException e) {
                 e.printStackTrace();
-                Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
 
 
         }
 
-        if ( !historyData.getCheckouttime().equals("null"))
-        {
-            String checkout=historyData.getCheckouttime();
+        if (!historyData.getCheckouttime().equals("null")) {
+            String checkout = historyData.getCheckouttime();
 
             try {
-                Date  data2 = (Date) sdf.parse(checkout);
+                Date data2 = (Date) sdf.parse(checkout);
 
-                historyData.setCheckouttime(""+date.format(data2)+"\n"+time.format(data2));
-               // checkouttime.setText();
-
-
+                historyData.setCheckouttime("" + date.format(data2) + "\n" + time.format(data2));
+                // checkouttime.setText();
 
 
             } catch (ParseException e) {
                 e.printStackTrace();
-                Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -163,70 +156,61 @@ public class HistoryDetails extends BaseActivity {
     }
 
 
-
     private void getResponseFromUrl(String url) {
 
 
         Utils.displayCustomDailog(HistoryDetails.this);
 
-        RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
-        Log.d("response",url);
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        Log.d("response", url);
 
 
-        StringRequest stringRequest=new StringRequest(url, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
                 try {
-                    Log.d("response",response);
+                    Log.d("response", response);
 
-                    JSONObject jsonObject=new JSONObject(response);
+                    JSONObject jsonObject = new JSONObject(response);
 
-                    String status=jsonObject.getString("status");
+                    String status = jsonObject.getString("status");
 
-                    if (status.equals("REQUEST_DENIED"))
-                    {
+                    if (status.equals("REQUEST_DENIED")) {
 
-                        Toast.makeText(HistoryDetails.this, ""+status, Toast.LENGTH_SHORT).show();
-                    }else if (status.equals("ZERO_RESULTS"))
-                    {
+                        Toast.makeText(HistoryDetails.this, "" + status, Toast.LENGTH_SHORT).show();
+                    } else if (status.equals("ZERO_RESULTS")) {
                         Toast.makeText(HistoryDetails.this, "Results Not Found", Toast.LENGTH_SHORT).show();
-                    } else if (status.equals("OVER_QUERY_LIMIT"))
-                    {
-                        Toast.makeText(HistoryDetails.this, ""+status, Toast.LENGTH_SHORT).show();
+                    } else if (status.equals("OVER_QUERY_LIMIT")) {
+                        Toast.makeText(HistoryDetails.this, "" + status, Toast.LENGTH_SHORT).show();
 
-                    }else {
+                    } else {
 
-                        if (jsonObject.getJSONArray("routes").length()>0)
-                        {
+                        if (jsonObject.getJSONArray("routes").length() > 0) {
                             String[] directionsList;
-                            directionsList= parseDirections(response);
+                            directionsList = parseDirections(response);
 
                             displayDirection(directionsList);
                         }
 
                     }
 
-                   Utils.dismissCustomDailog();
+                    Utils.dismissCustomDailog();
 
+                } catch (Exception e) {
+
+                    Toast.makeText(HistoryDetails.this, "exception:\n" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Utils.dismissCustomDailog();
                 }
-                catch (Exception e)
-                {
-
-                    Toast.makeText(HistoryDetails.this, "exception:\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
-                  Utils.dismissCustomDailog();
-                }
-
-
 
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-              Utils.dismissCustomDailog();
+                Utils.dismissCustomDailog();
 
-                Toast.makeText(HistoryDetails.this, ""+error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(HistoryDetails.this, "" + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -234,13 +218,10 @@ public class HistoryDetails extends BaseActivity {
         requestQueue.add(stringRequest);
 
 
-
-
     }
 
 
-    public String[] parseDirections(String jsonData)
-    {
+    public String[] parseDirections(String jsonData) {
         JSONArray jsonArray = null;
         JSONObject jsonObject;
 
@@ -249,7 +230,7 @@ public class HistoryDetails extends BaseActivity {
             jsonArray = jsonObject.getJSONArray("routes").getJSONObject(0).getJSONArray("legs").getJSONObject(0).getJSONArray("steps");
 
 
-            Log.d("steparray",jsonArray.toString());
+            Log.d("steparray", jsonArray.toString());
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -257,8 +238,7 @@ public class HistoryDetails extends BaseActivity {
         return getPaths(jsonArray);
     }
 
-    public String[] getPaths(JSONArray googleStepsJson )
-    {
+    public String[] getPaths(JSONArray googleStepsJson) {
 
         int count = googleStepsJson.length();
 
@@ -266,8 +246,7 @@ public class HistoryDetails extends BaseActivity {
 
         try {
 
-            for(int i = 0;i<count;i++)
-            {
+            for (int i = 0; i < count; i++) {
                 try {
                     polylines[i] = getPath(googleStepsJson.getJSONObject(i));
                 } catch (JSONException e) {
@@ -275,9 +254,8 @@ public class HistoryDetails extends BaseActivity {
                 }
             }
 
-        }catch (Exception e)
-        {
-            Toast.makeText(this, "Steps exception"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "Steps exception" + e.getMessage(), Toast.LENGTH_SHORT).show();
 
         }
 
@@ -285,8 +263,7 @@ public class HistoryDetails extends BaseActivity {
         return polylines;
     }
 
-    public String getPath(JSONObject googlePathJson)
-    {
+    public String getPath(JSONObject googlePathJson) {
         String polyline = "";
         try {
             polyline = googlePathJson.getJSONObject("polyline").getString("points");
@@ -297,13 +274,11 @@ public class HistoryDetails extends BaseActivity {
     }
 
 
-    public void displayDirection(String[] directionsList)
-    {
+    public void displayDirection(String[] directionsList) {
 
         int count = directionsList.length;
 
-        for(int i = 0;i<count;i++)
-        {
+        for (int i = 0; i < count; i++) {
             PolylineOptions options = new PolylineOptions();
             options.color(Color.BLUE);
             options.width(10);
@@ -311,9 +286,9 @@ public class HistoryDetails extends BaseActivity {
             mMap.addPolyline(options);
 
 
-            float[] results=new float[10];
+            float[] results = new float[10];
 
-           // Location.distanceBetween(data.get(0).latitude,data.get(0).longitude,data.get(1).latitude,data.get(1).longitude,results);
+            // Location.distanceBetween(data.get(0).latitude,data.get(0).longitude,data.get(1).latitude,data.get(1).longitude,results);
 
            /* float Kms=results[0]/1000;
             destMarker.snippet("Distance:"+Kms+" Kms");
@@ -322,7 +297,6 @@ public class HistoryDetails extends BaseActivity {
 
             distanceTextview.setText("Distance : "+Kms+" Kms");
             shippingTextview.setText("Shipping Charges:"+shippingCharges+" Rs");*/
-
 
 
         }

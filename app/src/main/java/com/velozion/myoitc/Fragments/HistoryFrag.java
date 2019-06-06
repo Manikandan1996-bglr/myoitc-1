@@ -1,19 +1,20 @@
 package com.velozion.myoitc.Fragments;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.velozion.myoitc.Adapter.HistoryBindingAdapter;
 import com.velozion.myoitc.R;
@@ -23,13 +24,7 @@ import com.velozion.myoitc.db.HistoryData;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * to handle interaction events.
- * Use the {@link HistoryFrag#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class HistoryFrag extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,8 +40,8 @@ public class HistoryFrag extends Fragment {
     ProgressBar progressBar;
     LinearLayout nodata;
     TextView textView;
-    ArrayList<HashMap<String,String>> Data=new ArrayList<>();
-   // HistoryAdapter historyAdapter;
+    ArrayList<HashMap<String, String>> Data = new ArrayList<>();
+    // HistoryAdapter historyAdapter;
 
     Context context;
     MyViewModel myViewModel;
@@ -80,20 +75,18 @@ public class HistoryFrag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        if (view==null)
-        {
-            view=inflater.inflate(R.layout.fragment_history_, container, false);
+        if (view == null) {
+            view = inflater.inflate(R.layout.fragment_history_, container, false);
 
-            myViewModel=ViewModelProviders.of(getActivity()).get(MyViewModel.class);
+            myViewModel = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
 
-            recyclerView=(RecyclerView)view.findViewById(R.id.history_recylerview);
-            progressBar=(ProgressBar)view.findViewById(R.id.history_progressbar);
-            textView=(TextView)view.findViewById(R.id.history_textview);
-            nodata=(LinearLayout)view.findViewById(R.id.history_nodata_ll);
+            recyclerView = (RecyclerView) view.findViewById(R.id.history_recylerview);
+            progressBar = (ProgressBar) view.findViewById(R.id.history_progressbar);
+            textView = (TextView) view.findViewById(R.id.history_textview);
+            nodata = (LinearLayout) view.findViewById(R.id.history_nodata_ll);
 
-            LinearLayoutManager manager=new LinearLayoutManager(getActivity());
+            LinearLayoutManager manager = new LinearLayoutManager(getActivity());
             recyclerView.setLayoutManager(manager);
-
 
 
             LoadHistory();
@@ -105,21 +98,19 @@ public class HistoryFrag extends Fragment {
     private void LoadHistory() {
 
 
-
         myViewModel.getHistoryList(getActivity()).observe(this, new Observer<ArrayList<HistoryData>>() {
             @Override
             public void onChanged(@Nullable ArrayList<HistoryData> historyData) {
 
-                if (historyData.size()>0)
-                {
+                if (historyData.size() > 0) {
                     //historyAdapter=new HistoryAdapter(getActivity(),historyData);
-                    historyBindingAdapter=new HistoryBindingAdapter(getActivity(),historyData);
+                    historyBindingAdapter = new HistoryBindingAdapter(getActivity(), historyData);
                     recyclerView.setAdapter(historyBindingAdapter);
 
                     TriggerUI(true);
 
 
-                }else {
+                } else {
 
                     textView.setText("No Data Found");
                     TriggerUI(false);
@@ -284,19 +275,16 @@ public class HistoryFrag extends Fragment {
       }*/
 
 
-
-
     }
 
-    void TriggerUI(boolean showui)
-    {
+    void TriggerUI(boolean showui) {
         if (showui)//show recyclerview
         {
             progressBar.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
             nodata.setVisibility(View.GONE);
 
-        }else {//show error
+        } else {//show error
             progressBar.setVisibility(View.GONE);
             recyclerView.setVisibility(View.GONE);
             nodata.setVisibility(View.VISIBLE);
@@ -306,7 +294,7 @@ public class HistoryFrag extends Fragment {
     @Override
     public void onAttach(Context ctx) {
         super.onAttach(ctx);
-        this.context=ctx;
+        this.context = ctx;
     }
 
 }

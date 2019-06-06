@@ -18,13 +18,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.DisplayFullImage"></activity>
+        <activity android:name=".Activities.DisplayFullImage"
+            android:theme="@android:style/Theme.Translucent"
+          ></activity>
         <activity
             android:name=".Activities.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.DoctorsOnMap" />
-        <activity android:name=".Activities.BookAppointment" />
+        <activity android:name=".Activities.BookAppointment"
+            />
         <activity android:name=".Activities.BookingStatus" />
         <activity android:name=".Activities.DoctorsCategory" />
         <activity android:name=".Activities.DocterDetails" />

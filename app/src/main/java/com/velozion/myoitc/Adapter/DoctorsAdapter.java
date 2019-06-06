@@ -2,13 +2,14 @@ package com.velozion.myoitc.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import androidx.databinding.DataBindingUtil;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
+
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.velozion.myoitc.Activities.BookAppointment;
 import com.velozion.myoitc.Activities.DisplayFullImage;
@@ -43,7 +44,7 @@ public class DoctorsAdapter extends RecyclerView.Adapter<DoctorsAdapter.DoctorsV
             layoutInflater = LayoutInflater.from(viewGroup.getContext());
         }
 
-        ItemDoctersBinding  itemDoctersBinding=DataBindingUtil.inflate(layoutInflater,R.layout.item_docters,viewGroup,false);
+        ItemDoctersBinding itemDoctersBinding = DataBindingUtil.inflate(layoutInflater, R.layout.item_docters, viewGroup, false);
 
         DoctorsViewHolder doctorsViewHolder = new DoctorsViewHolder(itemDoctersBinding);
         return doctorsViewHolder;
@@ -81,11 +82,11 @@ public class DoctorsAdapter extends RecyclerView.Adapter<DoctorsAdapter.DoctorsV
             @Override
             public void onClick(View v) {
 
-              //  Utils.displayFullImage(context,data.get(position).getPic());
+                //  Utils.displayFullImage(context,data.get(position).getPic());
 
-                Intent intent=new Intent(context, DisplayFullImage.class);
-                intent.putExtra("profile_name",data.get(position).getName());
-                intent.putExtra("profile_pic",data.get(position).getPic());
+                Intent intent = new Intent(context, DisplayFullImage.class);
+                intent.putExtra("profile_name", data.get(position).getName());
+                intent.putExtra("profile_pic", data.get(position).getPic());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 
@@ -161,9 +162,9 @@ public class DoctorsAdapter extends RecyclerView.Adapter<DoctorsAdapter.DoctorsV
 
         public DoctorsViewHolder(ItemDoctersBinding doctersBinding) {
             super(doctersBinding.getRoot());
-            itemDoctersBinding=doctersBinding;
+            itemDoctersBinding = doctersBinding;
 
-           // ratingBar = (RatingBar) itemView.findViewById(R.id.docter_rating);
+            // ratingBar = (RatingBar) itemView.findViewById(R.id.docter_rating);
 
         }
     }

@@ -1,31 +1,29 @@
 package com.velozion.myoitc.Activities;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import androidx.appcompat.app.AlertDialog;
 import android.view.Gravity;
-import android.view.View;
-import androidx.core.view.GravityCompat;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import android.view.MenuItem;
-import com.google.android.material.navigation.NavigationView;
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.velozion.myoitc.PreferenceUtil;
 import com.velozion.myoitc.R;
 import com.velozion.myoitc.ViewModel.MyViewModel;
@@ -39,6 +37,7 @@ public class HomeActivity extends AppCompatActivity
     MyViewModel myViewModel;
     BottomNavigationView bottomNavigationView;
     NavController navController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,8 +47,8 @@ public class HomeActivity extends AppCompatActivity
         toolbar.setTitle(getResources().getString(R.string.app_name));
         setSupportActionBar(toolbar);
 
-         drawer = findViewById(R.id.drawer_layout);
-         navigationView = findViewById(R.id.nav_view);
+        drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -58,11 +57,11 @@ public class HomeActivity extends AppCompatActivity
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        myViewModel=ViewModelProviders.of(this).get(MyViewModel.class);
+        myViewModel = ViewModelProviders.of(this).get(MyViewModel.class);
 
         LoadProfile();
 
-        bottomNavigationView=(BottomNavigationView)findViewById(R.id.bottomnavigationview);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomnavigationview);
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.my_nav_host_fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, navHostFragment.getNavController());
@@ -75,21 +74,12 @@ public class HomeActivity extends AppCompatActivity
             @Override
             public void onChanged(@Nullable HashMap<String, String> stringStringHashMap) {
 
-                /*
-                 HashMap<String,String> data=new HashMap<>();
-                                        data.put("id",object.getString("id"));
-                                        data.put("name",object.getString("name"));
-                                        data.put("username",object.getString("username"));
-                                        data.put("email",object.getString("email"));
-                 */
-
-                View view=navigationView.getHeaderView(0);
-                TextView name=view.findViewById(R.id.header_profile_name);
-                TextView desc=view.findViewById(R.id.header_profile_desc);
+                View view = navigationView.getHeaderView(0);
+                TextView name = view.findViewById(R.id.header_profile_name);
+                TextView desc = view.findViewById(R.id.header_profile_desc);
 
                 name.setText(stringStringHashMap.get("name"));
                 desc.setText(stringStringHashMap.get("email"));
-
 
 
             }
@@ -118,7 +108,7 @@ public class HomeActivity extends AppCompatActivity
         switch (item.getItemId()) {
 
             case android.R.id.home:
-                drawer.openDrawer(Gravity.START);
+                drawer.openDrawer(GravityCompat.START);
                 break;
             case R.id.menu_logout:
 
@@ -145,7 +135,7 @@ public class HomeActivity extends AppCompatActivity
         if (id == R.id.nav_appointment) {
             // Handle the camera action
 
-            startActivity(new Intent(getApplicationContext(),DoctorsCategory.class));
+            startActivity(new Intent(getApplicationContext(), DoctorsCategory.class));
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {

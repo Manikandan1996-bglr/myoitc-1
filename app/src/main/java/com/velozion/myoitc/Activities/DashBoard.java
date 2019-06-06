@@ -2,22 +2,24 @@ package com.velozion.myoitc.Activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Handler;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.velozion.myoitc.Fragments.HistoryFrag;
 import com.velozion.myoitc.Fragments.MapFrag;
 import com.velozion.myoitc.PreferenceUtil;
@@ -38,8 +40,8 @@ public class DashBoard extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
 
-         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-         navigationView = (NavigationView) findViewById(R.id.nav_view);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomnavigationview);
 
@@ -74,24 +76,20 @@ public class DashBoard extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-                switch (menuItem.getItemId())
-                {
+                switch (menuItem.getItemId()) {
                     case R.id.nav_appointment:
 
                         drawerLayout.closeDrawers();
 
-                        startActivity(new Intent(getApplicationContext(),DoctorsCategory.class));
-
+                        startActivity(new Intent(getApplicationContext(), DoctorsCategory.class));
 
                         break;
-
 
                 }
 
                 return false;
             }
         });
-
 
 
     }
@@ -108,7 +106,7 @@ public class DashBoard extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case android.R.id.home:
-                drawerLayout.openDrawer(Gravity.START);
+                drawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.menu_logout:
 

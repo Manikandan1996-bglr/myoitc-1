@@ -13,11 +13,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,6 +21,11 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -48,6 +48,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.snackbar.Snackbar;
 import com.velozion.myoitc.CustomRequest;
 import com.velozion.myoitc.PreferenceUtil;
 import com.velozion.myoitc.R;
@@ -82,11 +83,11 @@ public class MapFrag extends Fragment {
 
     LocationManager manager;
 
-    double latitude,longitude;
+    double latitude, longitude;
     String locationAddres;
-    TextView chekin,checkout;
+    TextView chekin, checkout;
 
-    boolean frag_alive=true;
+    boolean frag_alive = true;
 
     Context context;
     LinearLayout info_ll;
@@ -121,15 +122,14 @@ public class MapFrag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        if (view==null)
-        {
-            view=inflater.inflate(R.layout.fragment_map_, container, false);
+        if (view == null) {
+            view = inflater.inflate(R.layout.fragment_map_, container, false);
 
-            supportMapFragment= (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-            chekin=(TextView) view.findViewById(R.id.checkin);
-            checkout=(TextView) view.findViewById(R.id.checkout);
-            info_ll=(LinearLayout)view.findViewById(R.id.info_ll);
-            info_text=(TextView)view.findViewById(R.id.info_text);
+            supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+            chekin = (TextView) view.findViewById(R.id.checkin);
+            checkout = (TextView) view.findViewById(R.id.checkout);
+            info_ll = (LinearLayout) view.findViewById(R.id.info_ll);
+            info_text = (TextView) view.findViewById(R.id.info_text);
 
             supportMapFragment.getMapAsync(new OnMapReadyCallback() {
                 @Override
@@ -152,19 +152,17 @@ public class MapFrag extends Fragment {
             chekin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    CheckIn(locationAddres,Double.toString(latitude),Double.toString(longitude),"1");
+                    CheckIn(locationAddres, Double.toString(latitude), Double.toString(longitude), "1");
                 }
             });
 
             checkout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    CheckOut(locationAddres,Double.toString(latitude),Double.toString(longitude),"2",PreferenceUtil.getData("checkin_id",context));
+                    CheckOut(locationAddres, Double.toString(latitude), Double.toString(longitude), "2", PreferenceUtil.getData("checkin_id", context));
                 }
             });
         }
-
-
 
 
         return view;
@@ -174,29 +172,29 @@ public class MapFrag extends Fragment {
 
         Utils.displayCustomDailog(getActivity());
 
-        Map<String,String> headers = new HashMap<>();
-        String credentials = PreferenceUtil.getData("username",getActivity())+":"+PreferenceUtil.getData("password",getActivity());
-        String auth = "Basic "+ Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+        Map<String, String> headers = new HashMap<>();
+        String credentials = PreferenceUtil.getData("username", getActivity()) + ":" + PreferenceUtil.getData("password", getActivity());
+        String auth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
         headers.put("Authorization", auth);
 
         Map<String, String> jsonParams = new HashMap<String, String>();
-        jsonParams.put("location",name);
-        jsonParams.put("lat",latitude);
-        jsonParams.put("long",longitude);
-        jsonParams.put("log_type",type);
+        jsonParams.put("location", name);
+        jsonParams.put("lat", latitude);
+        jsonParams.put("long", longitude);
+        jsonParams.put("log_type", type);
 
-        Log.d( "RespondedData",jsonParams.toString()+" headers: \n"+headers);
+        Log.d("RespondedData", jsonParams.toString() + " headers: \n" + headers);
 
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
-        CustomRequest customRequest = new CustomRequest( Request.Method.POST,Utils.CheckinApi, jsonParams,headers,
+        CustomRequest customRequest = new CustomRequest(Request.Method.POST, Utils.CheckinApi, jsonParams, headers,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d( "ResponseS",response.toString() );
+                        Log.d("ResponseS", response.toString());
                         try {
-                            if (response.getString("success").equalsIgnoreCase("true")){
+                            if (response.getString("success").equalsIgnoreCase("true")) {
 
                                 Utils.dismissCustomDailog();
 
@@ -204,38 +202,35 @@ public class MapFrag extends Fragment {
                                 {
 
 
-                                    String msg=response.getJSONObject("messages").getJSONArray("success").get(0).toString();
-                                    Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                                    String msg = response.getJSONObject("messages").getJSONArray("success").get(0).toString();
+                                    Toast.makeText(getActivity(), "" + msg, Toast.LENGTH_SHORT).show();
 
-                                    PreferenceUtil.saveData("checkin_id",response.getString("data"),context);
+                                    PreferenceUtil.saveData("checkin_id", response.getString("data"), context);
 
                                     chekin.setVisibility(View.GONE);
                                     checkout.setVisibility(View.VISIBLE);
 
-                                    info_text.setText(""+name);
+                                    info_text.setText("" + name);
                                     info_ll.setVisibility(View.VISIBLE);
 
-                                }else {
+                                } else {
 
-                                    String msg=response.getJSONObject("messages").getJSONArray("error").get(0).toString();
-                                    Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                                    String msg = response.getJSONObject("messages").getJSONArray("error").get(0).toString();
+                                    Toast.makeText(getActivity(), "" + msg, Toast.LENGTH_SHORT).show();
                                 }
 
 
-
-
-                            }
-                            else{
+                            } else {
 
                                 Utils.dismissCustomDailog();
-                                Toast.makeText(getActivity(), ""+response.getString("message"), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "" + response.getString("message"), Toast.LENGTH_SHORT).show();
 
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
 
                             Utils.dismissCustomDailog();
-                            Toast.makeText(getActivity(), "Json Error:\n"+e.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "Json Error:\n" + e.getMessage(), Toast.LENGTH_LONG).show();
                         }
 
                     }
@@ -243,46 +238,46 @@ public class MapFrag extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d( "ResponseE",error.toString() );
+                        Log.d("ResponseE", error.toString());
 
                         Utils.dismissCustomDailog();
-                        Toast.makeText(getActivity(), "Volley Error:\n"+error.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "Volley Error:\n" + error.getMessage(), Toast.LENGTH_LONG).show();
 
                     }
-                } );
+                });
         requestQueue.add(customRequest);
 
     }
 
-    private void CheckOut(String name,String latitude,String longitude,String type,String link) {
+    private void CheckOut(String name, String latitude, String longitude, String type, String link) {
 
         Utils.displayCustomDailog(getActivity());
 
-        Map<String,String> headers = new HashMap<>();
-        String credentials = PreferenceUtil.getData("username",getActivity())+":"+PreferenceUtil.getData("password",getActivity());
-        String auth = "Basic "+ Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+        Map<String, String> headers = new HashMap<>();
+        String credentials = PreferenceUtil.getData("username", getActivity()) + ":" + PreferenceUtil.getData("password", getActivity());
+        String auth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
         headers.put("Authorization", auth);
 
 
         Map<String, String> jsonParams = new HashMap<String, String>();
-        jsonParams.put("location",name);
-        jsonParams.put("lat",latitude);
-        jsonParams.put("long",longitude);
-        jsonParams.put("log_type",type);
-        jsonParams.put("in_link",link);
+        jsonParams.put("location", name);
+        jsonParams.put("lat", latitude);
+        jsonParams.put("long", longitude);
+        jsonParams.put("log_type", type);
+        jsonParams.put("in_link", link);
 
-        Log.d( "RespondedData",jsonParams.toString());
+        Log.d("RespondedData", jsonParams.toString());
 
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
-        CustomRequest customRequest = new CustomRequest( Request.Method.POST,Utils.CheckOutApi, jsonParams,headers,
+        CustomRequest customRequest = new CustomRequest(Request.Method.POST, Utils.CheckOutApi, jsonParams, headers,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d( "ResponseS",response.toString() );
+                        Log.d("ResponseS", response.toString());
                         try {
-                            if (response.getString("success").equalsIgnoreCase("true")){
+                            if (response.getString("success").equalsIgnoreCase("true")) {
 
                                 Utils.dismissCustomDailog();
 
@@ -290,36 +285,32 @@ public class MapFrag extends Fragment {
                                 {
 
 
-                                    String msg=response.getJSONObject("messages").getJSONArray("success").get(0).toString();
-                                    Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                                    String msg = response.getJSONObject("messages").getJSONArray("success").get(0).toString();
+                                    Toast.makeText(getActivity(), "" + msg, Toast.LENGTH_SHORT).show();
 
                                     chekin.setVisibility(View.VISIBLE);
                                     checkout.setVisibility(View.GONE);
 
                                     info_ll.setVisibility(View.GONE);
 
-                                }else {
+                                } else {
 
-                                    String msg=response.getJSONObject("messages").getJSONArray("error").get(0).toString();
-                                    Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                                    String msg = response.getJSONObject("messages").getJSONArray("error").get(0).toString();
+                                    Toast.makeText(getActivity(), "" + msg, Toast.LENGTH_SHORT).show();
                                 }
 
 
-
-
-
-                            }
-                            else{
+                            } else {
 
                                 Utils.dismissCustomDailog();
-                                Toast.makeText(getActivity(), ""+response.getString("message"), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "" + response.getString("message"), Toast.LENGTH_SHORT).show();
 
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
 
                             Utils.dismissCustomDailog();
-                            Toast.makeText(getActivity(), "Json Error:\n"+e.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "Json Error:\n" + e.getMessage(), Toast.LENGTH_LONG).show();
                         }
 
                     }
@@ -327,13 +318,13 @@ public class MapFrag extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d( "ResponseE",error.toString() );
+                        Log.d("ResponseE", error.toString());
 
                         Utils.dismissCustomDailog();
-                        Toast.makeText(getActivity(), "Volley Error:\n"+error.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "Volley Error:\n" + error.getMessage(), Toast.LENGTH_LONG).show();
 
                     }
-                } );
+                });
         requestQueue.add(customRequest);
 
     }
@@ -367,7 +358,6 @@ public class MapFrag extends Fragment {
 
             requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
         }
-
 
 
     }
@@ -499,15 +489,12 @@ public class MapFrag extends Fragment {
 
 
                 Log.d("Response", latitude + " " + longitude);
-                latitude=location.getLatitude();
-                longitude=location.getLongitude();
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
 
-                if (frag_alive)
-                {
+                if (frag_alive) {
                     getLocationDetails(location);
                 }
-
-
 
 
             }
@@ -536,7 +523,6 @@ public class MapFrag extends Fragment {
         manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
 
 
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -546,19 +532,18 @@ public class MapFrag extends Fragment {
         if (requestCode == 100 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
 
 
-
             CheckGpsConnection();
 
-        }else {
+        } else {
 
 
-            Snackbar.make(getActivity().getWindow().getDecorView().getRootView(),"Permission Denied",Snackbar.LENGTH_LONG).show();
+            Snackbar.make(getActivity().getWindow().getDecorView().getRootView(), "Permission Denied", Snackbar.LENGTH_LONG).show();
         }
     }
 
     private void getLocationDetails(Location location) {
 
-       // Utils.displayCustomDailog(getActivity());
+        // Utils.displayCustomDailog(getActivity());
 
         Geocoder gcd = new Geocoder(context, Locale.getDefault());
         List<Address> addresses;
@@ -598,25 +583,22 @@ public class MapFrag extends Fragment {
 
                 Utils.dismissCustomDailog();
 
-                locationAddres=addresses.get(0).getAddressLine(0);
+                locationAddres = addresses.get(0).getAddressLine(0);
 
-                if (mMap!=null)
-                {
+                if (mMap != null) {
                     mMap.clear();
 
 
                     LatLng curentloc = new LatLng(latitude, longitude);
                     mMap.addMarker(new MarkerOptions().position(curentloc).title("Current location").snippet(locationAddres));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(curentloc,15));
-                   // mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(curentloc, 10, 30, 0)));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(curentloc, 15));
+                    // mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(curentloc, 10, 30, 0)));
                     mMap.animateCamera(CameraUpdateFactory.zoomIn());
                     // Zoom out to zoom level 10, animating with a duration of 2 seconds.
                     mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
 
 
                 }
-
-
 
 
             }
@@ -633,12 +615,12 @@ public class MapFrag extends Fragment {
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        frag_alive=hidden;
+        frag_alive = hidden;
     }
 
     @Override
     public void onAttach(Context ctx) {
         super.onAttach(context);
-        this.context=ctx;
+        this.context = ctx;
     }
 }

@@ -21,41 +21,38 @@ import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 
 public class Utils {
 
-    static  ProgressDialog progressDialog;
-   static Dialog dialog;
+    static ProgressDialog progressDialog;
+    static Dialog dialog;
 
-    public static String appName="Myoitc";
-    public static String LoginApi="http://www.myoitc.com/beta/?option=com_ajax&group=cmajax&plugin=cmmap&type=login&format=json&=employer&=demo&ignoreMessages=0";
-    public static String CheckinApi="http://www.myoitc.com/beta/?option=com_ajax&group=cmajax&plugin=cmmap&type=loc_update&format=json&ignoreMessages=0";
-    public static String CheckOutApi="http://www.myoitc.com/beta/?option=com_ajax&group=cmajax&plugin=cmmap&type=loc_update&format=json&ignoreMessages=0";
-    public static String HistoryApi="http://www.myoitc.com/beta/?option=com_ajax&group=cmajax&plugin=cmmap&type=getmylocation&format=json&ignoreMessages=0";
-    public static String ProfileApi="http://www.myoitc.com/beta/?option=com_ajax&group=cmajax&plugin=cmmap&type=getProfile&format=json";
-    public static String DocterListApi="https://script.google.com/macros/s/AKfycbxOLElujQcy1-ZUer1KgEvK16gkTLUqYftApjNCM_IRTL3HSuDk/exec?id=1s8a9XLIMB-jChvQIGhli5579HGme_WMKR_enz08rce0&sheet=Sheet1";
-            //"https://api.myjson.com/bins/pdbsb";
-            //"https://api.myjson.com/bins/fmufb";
+    public static String appName = "Myoitc";
+    public static String LoginApi = "http://www.myoitc.com/beta/?option=com_ajax&group=cmajax&plugin=cmmap&type=login&format=json&=employer&=demo&ignoreMessages=0";
+    public static String CheckinApi = "http://www.myoitc.com/beta/?option=com_ajax&group=cmajax&plugin=cmmap&type=loc_update&format=json&ignoreMessages=0";
+    public static String CheckOutApi = "http://www.myoitc.com/beta/?option=com_ajax&group=cmajax&plugin=cmmap&type=loc_update&format=json&ignoreMessages=0";
+    public static String HistoryApi = "http://www.myoitc.com/beta/?option=com_ajax&group=cmajax&plugin=cmmap&type=getmylocation&format=json&ignoreMessages=0";
+    public static String ProfileApi = "http://www.myoitc.com/beta/?option=com_ajax&group=cmajax&plugin=cmmap&type=getProfile&format=json";
+    public static String DocterListApi = "https://script.google.com/macros/s/AKfycbxOLElujQcy1-ZUer1KgEvK16gkTLUqYftApjNCM_IRTL3HSuDk/exec?id=1s8a9XLIMB-jChvQIGhli5579HGme_WMKR_enz08rce0&sheet=Sheet1";
+    //"https://api.myjson.com/bins/pdbsb";
+    //"https://api.myjson.com/bins/fmufb";
     Context context;
     static DisplayImageOptions options;
     static ImageLoaderConfiguration imgconfig;
 
-    public static void displayProgressDailog(Context context)
-    {
+    public static void displayProgressDailog(Context context) {
 
-        progressDialog=new ProgressDialog(context);
+        progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("loading..");
         progressDialog.show();
 
     }
 
-    public static void dismissProgressDailog()
-    {
+    public static void dismissProgressDailog() {
 
         progressDialog.dismiss();
 
     }
 
 
-   public static void displayCustomDailog(Context context)
-    {
+    public static void displayCustomDailog(Context context) {
 
         dialog = new Dialog(context, android.R.style.Theme_Black);
         View view2 = LayoutInflater.from(context).inflate(R.layout.progressbar_bg, null);
@@ -66,15 +63,13 @@ public class Utils {
 
     }
 
-    public static void dismissCustomDailog()
-    {
+    public static void dismissCustomDailog() {
 
         dialog.dismiss();
 
     }
 
-    public static void ImageLoaderInitialization(Context context)
-    {
+    public static void ImageLoaderInitialization(Context context) {
         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.icon_user)
                 .showImageForEmptyUri(R.drawable.icon_user)
@@ -92,13 +87,12 @@ public class Utils {
 
     }
 
-    public static void LoadImage(String url, ImageView imageView)
-    {
-        ImageLoader.getInstance().displayImage(url,imageView);
+    public static void LoadImage(String url, ImageView imageView) {
+        ImageLoader.getInstance().displayImage(url, imageView);
     }
 
 
-    public static void displayFullImage(Context context,String image) {
+    public static void displayFullImage(Context context, String image) {
 
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -109,7 +103,7 @@ public class Utils {
         ImageView iv_image_cancle = (ImageView) dialog.findViewById(R.id.iv_dialog_cancle);
         ImageView iv_image = (ImageView) dialog.findViewById(R.id.iv_dialog_img);
 
-        ImageLoader.getInstance().displayImage(image,iv_image);
+        ImageLoader.getInstance().displayImage(image, iv_image);
 
         iv_image_cancle.setOnClickListener(new View.OnClickListener() {
             @Override

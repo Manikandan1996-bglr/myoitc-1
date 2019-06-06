@@ -110,7 +110,7 @@
                                 android:padding="@dimen/_2sdp"
                                 android:gravity="center"
                                 android:text="@{String.format(@string/fees, DoctorProfile.fees)}"
-                                android:textColor="@color/colorPrimary"
+                                android:textColor="?attr/themeColorPrimary"
                                 android:textSize="@dimen/_18sdp"
                                 app:textView_font="@string/font_exo_bold"
                                 android:textStyle="bold" />
@@ -198,7 +198,7 @@
                             android:layout_marginBottom="@dimen/_2sdp"
                             android:layout_marginLeft="@dimen/_7sdp"
                             android:layout_height="wrap_content"
-                            app:textColorSelected="@color/colorPrimary"
+                            app:textColorSelected="?attr/themeColorPrimary"
                             app:textColorNormal="#807D7D"
                             app:selectorColor="#B64A4A"
                             />

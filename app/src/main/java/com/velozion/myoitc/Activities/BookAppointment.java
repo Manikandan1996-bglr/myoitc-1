@@ -1,15 +1,16 @@
 package com.velozion.myoitc.Activities;
 
 import android.content.Intent;
-import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
 import com.velozion.myoitc.Adapter.TimeSlotAdapter;
 import com.velozion.myoitc.BaseActivity;
 import com.velozion.myoitc.R;
@@ -42,6 +43,7 @@ public class BookAppointment extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.CustomeTheme3);
         super.onCreate(savedInstanceState);
         setToolbarRequired(true);
         setToolbarTitle(getResources().getString(R.string.activity_book_app));
@@ -106,9 +108,9 @@ public class BookAppointment extends BaseActivity {
         bookAppointmentBinding.bnPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(), DisplayFullImage.class);
-                intent.putExtra("profile_name",doctorProfileData.getName());
-                intent.putExtra("profile_pic",doctorProfileData.getPic());
+                Intent intent = new Intent(getApplicationContext(), DisplayFullImage.class);
+                intent.putExtra("profile_name", doctorProfileData.getName());
+                intent.putExtra("profile_pic", doctorProfileData.getPic());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
@@ -129,7 +131,6 @@ public class BookAppointment extends BaseActivity {
         SimpleDateFormat df = new SimpleDateFormat("hh:mm a");
         Date dStart = df.parse(fromTime);
         Date dEnd = df.parse(toTime);
-
 
         Calendar calendarStart = Calendar.getInstance();
         calendarStart.setTime(dStart);

@@ -63,7 +63,7 @@
                     android:maxLines="1"
                     android:padding="@dimen/_2sdp"
                     android:text="@{History.checkinloc}"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="?attr/themeColorPrimary" />
 
             </LinearLayout>
 
@@ -104,7 +104,7 @@
                     android:maxLines="1"
                     android:text="@{History.checkoutloc}"
                     android:id="@+id/checkoutloc"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="?attr/themeColorPrimary"
                     />
 
             </LinearLayout>

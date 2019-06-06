@@ -1,8 +1,7 @@
 package com.velozion.myoitc.Activities;
 
-import android.os.Handler;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -32,12 +31,12 @@ import java.util.Map;
 
 public class Profile_Activity extends BaseActivity {
 
-    ImageView back,pic;
-    TextView name,desc;
+    ImageView back, pic;
+    TextView name, desc;
     Button edit;
 
     Animation animation;
-    HashMap<String,String> Profile=new HashMap<>();
+    HashMap<String, String> Profile = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +44,11 @@ public class Profile_Activity extends BaseActivity {
         setContentView(R.layout.activity_profile_layout);
 
 
-        back=(ImageView)findViewById(R.id.profile_back);
-        pic=(ImageView)findViewById(R.id.profile_pic);
-        name=(TextView) findViewById(R.id.profile_username);
-        desc=(TextView) findViewById(R.id.profile_desc);
-        edit=(Button) findViewById(R.id.profile_edit);
+        back = (ImageView) findViewById(R.id.profile_back);
+        pic = (ImageView) findViewById(R.id.profile_pic);
+        name = (TextView) findViewById(R.id.profile_username);
+        desc = (TextView) findViewById(R.id.profile_desc);
+        edit = (Button) findViewById(R.id.profile_edit);
 
         pic.setVisibility(View.GONE);
         edit.setVisibility(View.GONE);
@@ -66,51 +65,48 @@ public class Profile_Activity extends BaseActivity {
         LoadProfile();
 
 
-
-
-
     }
 
     private void LoadProfile() {
         Utils.displayCustomDailog(Profile_Activity.this);
 
-        Map<String,String> headers = new HashMap<>();
-        String credentials = PreferenceUtil.getData("username",getApplicationContext())+":"+PreferenceUtil.getData("password",getApplicationContext());
-        String auth = "Basic "+ Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+        Map<String, String> headers = new HashMap<>();
+        String credentials = PreferenceUtil.getData("username", getApplicationContext()) + ":" + PreferenceUtil.getData("password", getApplicationContext());
+        String auth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
         headers.put("Authorization", auth);
 
         Map<String, String> jsonParams = new HashMap<String, String>();
-        jsonParams.put("userid",PreferenceUtil.getData("userid",getApplicationContext()));
+        jsonParams.put("userid", PreferenceUtil.getData("userid", getApplicationContext()));
 
 
-        Log.d( "RespondedData",jsonParams.toString()+" headers: \n"+headers);
+        Log.d("RespondedData", jsonParams.toString() + " headers: \n" + headers);
 
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-        CustomRequest customRequest = new CustomRequest( Request.Method.POST,Utils.ProfileApi, jsonParams,headers,
+        CustomRequest customRequest = new CustomRequest(Request.Method.POST, Utils.ProfileApi, jsonParams, headers,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d( "ResponseS",response.toString() );
+                        Log.d("ResponseS", response.toString());
                         try {
-                            if (response.getString("success").equalsIgnoreCase("true")){
+                            if (response.getString("success").equalsIgnoreCase("true")) {
 
                                 Utils.dismissCustomDailog();
 
-                                if (response.getJSONObject("data")!=null)//sucess
+                                if (response.getJSONObject("data") != null)//sucess
                                 {
 
-                                    JSONObject object=response.getJSONObject("data");
+                                    JSONObject object = response.getJSONObject("data");
 
-                                    Profile.put("id",object.getString("id"));
-                                    Profile.put("name",object.getString("name"));
-                                    Profile.put("username",object.getString("username"));
-                                    Profile.put("email",object.getString("email"));
+                                    Profile.put("id", object.getString("id"));
+                                    Profile.put("name", object.getString("name"));
+                                    Profile.put("username", object.getString("username"));
+                                    Profile.put("email", object.getString("email"));
 
 
-                                    name.setText(""+Profile.get("name"));
-                                    desc.setText(""+Profile.get("email"));
+                                    name.setText("" + Profile.get("name"));
+                                    desc.setText("" + Profile.get("email"));
 
                                     pic.setVisibility(View.VISIBLE);
 
@@ -118,27 +114,24 @@ public class Profile_Activity extends BaseActivity {
                                     AllowUx();
 
 
-                                }else {
+                                } else {
 
-                                    String msg=response.getJSONObject("messages").getJSONArray("error").get(0).toString();
-                                    Toast.makeText(getApplicationContext(), ""+msg, Toast.LENGTH_SHORT).show();
+                                    String msg = response.getJSONObject("messages").getJSONArray("error").get(0).toString();
+                                    Toast.makeText(getApplicationContext(), "" + msg, Toast.LENGTH_SHORT).show();
                                 }
 
 
-
-
-                            }
-                            else{
+                            } else {
 
                                 Utils.dismissCustomDailog();
-                                Toast.makeText(getApplicationContext(), ""+response.getString("message"), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "" + response.getString("message"), Toast.LENGTH_SHORT).show();
 
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
 
                             Utils.dismissCustomDailog();
-                            Toast.makeText(getApplicationContext(), "Json Error:\n"+e.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Json Error:\n" + e.getMessage(), Toast.LENGTH_LONG).show();
                         }
 
                     }
@@ -146,21 +139,20 @@ public class Profile_Activity extends BaseActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d( "ResponseE",error.toString() );
+                        Log.d("ResponseE", error.toString());
 
                         Utils.dismissCustomDailog();
-                        Toast.makeText(getApplicationContext(), "Volley Error:\n"+error.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Volley Error:\n" + error.getMessage(), Toast.LENGTH_LONG).show();
 
                     }
-                } );
+                });
         requestQueue.add(customRequest);
     }
 
-    void AllowUx(){
+    void AllowUx() {
 
 
-
-        animation= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.anim_down_to_up);
+        animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_down_to_up);
 
         pic.setAnimation(animation);
 

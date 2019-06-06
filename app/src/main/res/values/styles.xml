@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="themeColorPrimary">@color/colorPrimary</item>
+        <item name="themeColorPrimaryDark">@color/colorPrimaryDark</item>
     </style>
 
     <style name="AppTheme2" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -13,6 +15,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="themeColorPrimary">@color/colorPrimary</item>
+        <item name="themeColorPrimaryDark">@color/colorPrimaryDark</item>
     </style>
 
     <style name="BottomNavigation">
@@ -43,23 +48,50 @@
 
     <style name="CustomeTheme1" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#673AB7</item>
-        <item name="colorPrimaryDark">#7F53CE</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">?themeColorPrimary</item>
+        <item name="colorPrimaryDark">?themeColorPrimaryDark</item>
+        <item name="colorAccent">?themeColorPrimary</item>
+        <item name="themeColorPrimary">@color/colorOrange</item>
+        <item name="themeColorPrimaryDark">@color/colorOrangeT</item>
     </style>
+
 
     <style name="CustomeTheme2" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#3F51B5</item>
-        <item name="colorPrimaryDark">#5969C2</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">?themeColorPrimary</item>
+        <item name="colorPrimaryDark">?themeColorPrimaryDark</item>
+        <item name="colorAccent">?themeColorPrimary</item>
+        <item name="themeColorPrimary">@color/colorPink</item>
+        <item name="themeColorPrimaryDark">@color/colorPinkT</item>
     </style>
 
     <style name="CustomeTheme3" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#4CAF50</item>
-        <item name="colorPrimaryDark">#76CC7A</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">?themeColorPrimary</item>
+        <item name="colorPrimaryDark">?themeColorPrimaryDark</item>
+        <item name="colorAccent">?themeColorPrimary</item>
+        <item name="themeColorPrimary">@color/colorGreen</item>
+        <item name="themeColorPrimaryDark">@color/colorGreenT</item>
     </style>
+
+    <style name="CustomeTheme4" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">?themeColorPrimary</item>
+        <item name="colorPrimaryDark">?themeColorPrimaryDark</item>
+        <item name="colorAccent">?themeColorPrimary</item>
+        <item name="themeColorPrimary">@color/colorYellow</item>
+        <item name="themeColorPrimaryDark">@color/colorYellowT</item>
+    </style>
+
+
+    <style name="CustomeTheme5" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">?themeColorPrimary</item>
+        <item name="colorPrimaryDark">?themeColorPrimaryDark</item>
+        <item name="colorAccent">?themeColorPrimary</item>
+        <item name="themeColorPrimary">@color/colorNevyBlue</item>
+        <item name="themeColorPrimaryDark">@color/colorNevyBlueT</item>
+    </style>
+
 
 </resources>

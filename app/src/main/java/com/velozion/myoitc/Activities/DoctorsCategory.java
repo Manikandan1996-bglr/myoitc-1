@@ -1,6 +1,7 @@
 package com.velozion.myoitc.Activities;
 
 import android.os.Bundle;
+
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +29,7 @@ public class DoctorsCategory extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //setTheme(R.style.CustomeTheme1);
         super.onCreate(savedInstanceState);
         setToolbarRequired(true);
         setToolbarTitle(getResources().getString(R.string.activity_doctor_cat));
@@ -58,7 +60,6 @@ public class DoctorsCategory extends BaseActivity {
 
         }
     }
-
 
 
 }

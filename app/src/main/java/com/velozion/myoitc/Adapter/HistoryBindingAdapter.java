@@ -2,12 +2,13 @@ package com.velozion.myoitc.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import androidx.databinding.DataBindingUtil;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.velozion.myoitc.Activities.HistoryDetails;
 import com.velozion.myoitc.AnimUtils;
@@ -22,7 +23,7 @@ public class HistoryBindingAdapter extends RecyclerView.Adapter<HistoryBindingAd
     Context context;
     ArrayList<HistoryData> data;
     LayoutInflater layoutInflater;
-    int pos=0;
+    int pos = 0;
 
     public HistoryBindingAdapter(Context context, ArrayList<HistoryData> data) {
         this.context = context;
@@ -37,9 +38,9 @@ public class HistoryBindingAdapter extends RecyclerView.Adapter<HistoryBindingAd
             layoutInflater = LayoutInflater.from(viewGroup.getContext());
         }
 
-        ItemHistory2Binding binding=DataBindingUtil.inflate(layoutInflater, R.layout.item_history2,viewGroup,false);
+        ItemHistory2Binding binding = DataBindingUtil.inflate(layoutInflater, R.layout.item_history2, viewGroup, false);
 
-        HistoryHolder historyHolder=new HistoryHolder(binding);
+        HistoryHolder historyHolder = new HistoryHolder(binding);
 
         return historyHolder;
     }
@@ -53,8 +54,8 @@ public class HistoryBindingAdapter extends RecyclerView.Adapter<HistoryBindingAd
         historyHolder.itemView.getRootView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, HistoryDetails.class);
-                intent.putExtra("data",data.get(position));
+                Intent intent = new Intent(context, HistoryDetails.class);
+                intent.putExtra("data", data.get(position));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 
@@ -62,15 +63,14 @@ public class HistoryBindingAdapter extends RecyclerView.Adapter<HistoryBindingAd
         });
 
 
-        if(position>pos)
-        {
+        if (position > pos) {
 
-            AnimUtils.animate(historyHolder.itemView.getRootView(),true);
-        }else {
-            AnimUtils.animate(historyHolder.itemView.getRootView(),false);
+            AnimUtils.animate(historyHolder.itemView.getRootView(), true);
+        } else {
+            AnimUtils.animate(historyHolder.itemView.getRootView(), false);
 
         }
-        pos=position;
+        pos = position;
 
 
     }
@@ -80,12 +80,13 @@ public class HistoryBindingAdapter extends RecyclerView.Adapter<HistoryBindingAd
         return data.size();
     }
 
-    class HistoryHolder extends RecyclerView.ViewHolder{
+    class HistoryHolder extends RecyclerView.ViewHolder {
 
         ItemHistory2Binding itemHistory2Binding;
-        public HistoryHolder( ItemHistory2Binding itemView) {
+
+        public HistoryHolder(ItemHistory2Binding itemView) {
             super(itemView.getRoot());
-            itemHistory2Binding=itemView;
+            itemHistory2Binding = itemView;
         }
     }
 }

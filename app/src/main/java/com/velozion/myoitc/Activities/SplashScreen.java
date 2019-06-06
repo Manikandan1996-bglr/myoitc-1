@@ -2,9 +2,8 @@ package com.velozion.myoitc.Activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Handler;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
 
 import com.velozion.myoitc.BaseActivity;
 import com.velozion.myoitc.R;
@@ -21,16 +20,15 @@ public class SplashScreen extends BaseActivity {
             @Override
             public void run() {
 
-               SharedPreferences sharedPreferences= getSharedPreferences(Utils.appName,MODE_PRIVATE);
+                SharedPreferences sharedPreferences = getSharedPreferences(Utils.appName, MODE_PRIVATE);
 
-               if (sharedPreferences.contains("userid"))
-               {
-                   startActivity(new Intent(getApplicationContext(),HomeActivity.class));
-                   finish();
-               }else {
-                   startActivity(new Intent(getApplicationContext(),LoginActivity.class));
-                   finish();
-               }
+                if (sharedPreferences.contains("userid")) {
+                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                    finish();
+                } else {
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    finish();
+                }
 
             }
         }, 3000);
