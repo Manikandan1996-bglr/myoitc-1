@@ -99,6 +99,7 @@
                                 android:id="@+id/detail_checkintime"
                                 android:layout_width="0dp"
                                 android:padding="@dimen/_2sdp"
+                                android:textSize="@dimen/_12sdp"
                                 app:textView_font="@string/font_exo_regular"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="2"
@@ -155,6 +156,7 @@
                                 android:padding="@dimen/_2sdp"
                                 android:layout_height="wrap_content"
                                 android:text="@{History.checkouttime}"
+                                android:textSize="@dimen/_12sdp"
                                 android:layout_weight="2"
                                 android:gravity="center_vertical"
                                 android:textColor="?attr/themeColorPrimary" />

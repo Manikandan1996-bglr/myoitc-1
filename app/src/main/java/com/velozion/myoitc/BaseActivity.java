@@ -106,24 +106,24 @@ public class BaseActivity extends AppCompatActivity {
         switch (num) {
             case 1:
 
-                setTheme(R.style.CustomeTheme1);
+                setTheme(R.style.MorningSession);
 
                 break;
 
             case 2:
-                setTheme(R.style.CustomeTheme2);
+                setTheme(R.style.AfternoonSession);
                 break;
 
             case 3:
-                setTheme(R.style.CustomeTheme3);
+                setTheme(R.style.EveningSession);
                 break;
 
             case 4:
-                setTheme(R.style.CustomeTheme4);
+                setTheme(R.style.NightSession);
                 break;
 
             case 5:
-                setTheme(R.style.CustomeTheme5);
+                setTheme(R.style.DefaultSession);
                 break;
 
         }
@@ -300,15 +300,15 @@ public class BaseActivity extends AppCompatActivity {
         int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
 
         if(timeOfDay >= 0 && timeOfDay < 12){
-            setTheme(R.style.CustomeTheme1);
+            setTheme(R.style.MorningSession);
         }else if(timeOfDay >= 12 && timeOfDay < 16){
-            setTheme(R.style.CustomeTheme2);
+            setTheme(R.style.AfternoonSession);
         }else if(timeOfDay >= 16 && timeOfDay < 21){
-            setTheme(R.style.CustomeTheme3);
+            setTheme(R.style.EveningSession);
         }else if(timeOfDay >= 21 && timeOfDay < 24){
-            setTheme(R.style.CustomeTheme4);
+            setTheme(R.style.NightSession);
         }else {
-            setTheme(R.style.CustomeTheme5);
+            setTheme(R.style.DefaultSession);
         }
 
     }

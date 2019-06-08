@@ -13,6 +13,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,13 +34,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -48,7 +52,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCanceledListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
+import com.velozion.myoitc.Activities.HomeActivity;
 import com.velozion.myoitc.CustomRequest;
 import com.velozion.myoitc.PreferenceUtil;
 import com.velozion.myoitc.R;
@@ -62,6 +70,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class MapFrag extends Fragment {
@@ -79,7 +88,8 @@ public class MapFrag extends Fragment {
     private GoogleMap mMap;
 
     private GoogleApiClient googleApiClient;
-    final static int REQUEST_LOCATION = 199;
+    public final static int REQUEST_LOCATION = 199;
+    public final static int REQUEST_ENABLE_GPS=300;
 
     LocationManager manager;
 
@@ -94,6 +104,8 @@ public class MapFrag extends Fragment {
     TextView info_text;
 
 
+
+
     public MapFrag() {
         // Required empty public constructor
     }
@@ -104,6 +116,11 @@ public class MapFrag extends Fragment {
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
+        return fragment;
+    }
+    public static MapFrag newInstance() {
+        MapFrag fragment = new MapFrag();
+
         return fragment;
     }
 
@@ -344,9 +361,10 @@ public class MapFrag extends Fragment {
                 Toast.makeText(getActivity(), "Gps not Supported", Toast.LENGTH_SHORT).show();
             }
 
-            if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER) && hasGPSDevice(getActivity())) {
+            if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER) && hasGPSDevice(context)) {
 
-                enableLoc();
+               enableLoc();
+               //EnableLocation();
             } else {
                 //enabled
 
@@ -384,18 +402,20 @@ public class MapFrag extends Fragment {
                         @Override
                         public void onConnected(Bundle bundle) {
 
+                            Log.d("ResponseLoc","connected");
                         }
 
                         @Override
                         public void onConnectionSuspended(int i) {
                             googleApiClient.connect();
+                            Log.d("ResponseLoc","connectedSuspended");
                         }
                     })
                     .addOnConnectionFailedListener(new GoogleApiClient.OnConnectionFailedListener() {
                         @Override
                         public void onConnectionFailed(ConnectionResult connectionResult) {
 
-                            Log.d("Location error", "Location error " + connectionResult.getErrorCode());
+                            Log.d("ResponseLocationError", "Location error " + connectionResult.getErrorCode());
                         }
                     }).build();
             googleApiClient.connect();
@@ -409,20 +429,24 @@ public class MapFrag extends Fragment {
 
             builder.setAlwaysShow(true);
 
-            PendingResult<LocationSettingsResult> result =
-                    LocationServices.SettingsApi.checkLocationSettings(googleApiClient, builder.build());
+            PendingResult<LocationSettingsResult> result =LocationServices.SettingsApi.checkLocationSettings(googleApiClient, builder.build());
+
+
+
             result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
                 @RequiresApi(api = Build.VERSION_CODES.M)
                 @Override
                 public void onResult(LocationSettingsResult result) {
 
                     final Status status = result.getStatus();
+
                     switch (status.getStatusCode()) {
 
                         case LocationSettingsStatusCodes.SUCCESS:
                             // All location settings are satisfied. The client can initialize location
                             // requests here.
 
+                            Log.d("ResponseLoc","responsesucces");
 
                             getLatandLon();
 
@@ -430,10 +454,11 @@ public class MapFrag extends Fragment {
                             break;
 
                         case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                            Log.d("ResponseLoc","response_resolutionrequired");
                             try {
-                                // Show the dialog by calling startResolutionForResult(),
-                                // and check the result in onActivityResult().
-                                status.startResolutionForResult(getActivity(), REQUEST_LOCATION);
+
+                               // status.startResolutionForResult(getActivity(), REQUEST_LOCATION);
+                                startIntentSenderForResult(status.getResolution().getIntentSender(), REQUEST_LOCATION, null, 0, 0, 0, null);
 
                             } catch (IntentSender.SendIntentException e) {
                                 Utils.dismissCustomDailog();
@@ -445,6 +470,7 @@ public class MapFrag extends Fragment {
                             // Location settings are not satisfied. However, we have no way to fix the
                             // settings so we won't show the dialog.
 
+                            Log.d("ResponseLoc","responsecheckunavailable");
                             Utils.dismissCustomDailog();
                             break;
                     }
@@ -456,25 +482,34 @@ public class MapFrag extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // final LocationSettingsStates states = LocationSettingsStates.fromIntent(data);
+        //super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case REQUEST_LOCATION:
                 switch (resultCode) {
                     case Activity.RESULT_OK:
-                        // All required changes were successfully made
 
                         getLatandLon();
 
                         break;
                     case Activity.RESULT_CANCELED:
-                        // The user was asked to change settings, but chose not to
-                        Toast.makeText(getActivity(), "Unable to fetch Location", Toast.LENGTH_SHORT).show();
+
                         Utils.dismissCustomDailog();
+
+                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivityForResult(intent, REQUEST_ENABLE_GPS);
 
                         break;
                     default:
+                        Utils.dismissCustomDailog();
+                        Log.d("Response","default activity result");
                         break;
                 }
+                break;
+
+            case REQUEST_ENABLE_GPS:
+
+                getLatandLon();
+
                 break;
         }
     }
@@ -488,9 +523,11 @@ public class MapFrag extends Fragment {
                 // Called when a new location is found by the network location provider.
 
 
-                Log.d("Response", latitude + " " + longitude);
+
                 latitude = location.getLatitude();
                 longitude = location.getLongitude();
+
+                Log.d("ResponseLoc", latitude + " " + longitude);
 
                 if (frag_alive) {
                     getLocationDetails(location);
@@ -510,7 +547,7 @@ public class MapFrag extends Fragment {
         };
 
 // Register the listener with the Location Manager to receive location updates
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(Objects.requireNonNull(getActivity()), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -584,12 +621,13 @@ public class MapFrag extends Fragment {
                 Utils.dismissCustomDailog();
 
                 locationAddres = addresses.get(0).getAddressLine(0);
+                Log.d("Response",locationAddres);
 
                 if (mMap != null) {
                     mMap.clear();
 
+                    LatLng curentloc = new LatLng(location.getLatitude(), location.getLongitude());
 
-                    LatLng curentloc = new LatLng(latitude, longitude);
                     mMap.addMarker(new MarkerOptions().position(curentloc).title("Current location").snippet(locationAddres));
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(curentloc, 15));
                     // mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(curentloc, 10, 30, 0)));
@@ -623,4 +661,61 @@ public class MapFrag extends Fragment {
         super.onAttach(context);
         this.context = ctx;
     }
+
+
+    void EnableLocation()
+    {
+
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
+        builder.addLocationRequest(new LocationRequest().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY));
+        builder.setAlwaysShow(true);
+
+
+         LocationServices.getSettingsClient(context)
+                 .checkLocationSettings(builder.build())
+                .addOnSuccessListener(new OnSuccessListener<LocationSettingsResponse>() {
+                    @RequiresApi(api = Build.VERSION_CODES.M)
+                    @Override
+                    public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
+                        //Success Perform Task Here
+                        Log.e("Response","Sucess");
+                        getLatandLon();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        int statusCode = ((ApiException) e).getStatusCode();
+                        Log.e("Response","Failed Status code:"+statusCode);
+                        switch (statusCode) {
+                            case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+
+
+
+
+                               try {
+                                    ResolvableApiException rae = (ResolvableApiException) e;
+                                    rae.startResolutionForResult(getActivity(), REQUEST_LOCATION);
+                                } catch (IntentSender.SendIntentException sie) {
+                                    Log.e("Response","Unable to execute request.");
+                                    Utils.dismissCustomDailog();
+                                }
+                                break;
+                            case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                                Utils.dismissCustomDailog();
+                                Log.e("Response","Location settings are inadequate, and cannot be fixed here. Fix in Settings.");
+
+                        }
+                    }
+                })
+                .addOnCanceledListener(new OnCanceledListener() {
+                    @Override
+                    public void onCanceled() {
+                        Log.e("Response","checkLocationSettings -> onCanceled");
+                        Utils.dismissCustomDailog();
+                    }
+                });
+
+    }
+
 }

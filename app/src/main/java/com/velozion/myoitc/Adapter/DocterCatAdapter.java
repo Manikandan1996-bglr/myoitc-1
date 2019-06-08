@@ -2,13 +2,21 @@ package com.velozion.myoitc.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -21,6 +29,7 @@ import com.velozion.myoitc.AnimUtils;
 import com.velozion.myoitc.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 public class DocterCatAdapter extends RecyclerView.Adapter<DocterCatAdapter.DoctorsCatViewHolder> {
@@ -76,7 +85,7 @@ public class DocterCatAdapter extends RecyclerView.Adapter<DocterCatAdapter.Doct
         holder.name.setText("" + data.get(position).get("name"));
 
 
-        holder.pic.setImageResource(images[position]);
+      //  holder.pic.setImageResource(images[position]);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +97,14 @@ public class DocterCatAdapter extends RecyclerView.Adapter<DocterCatAdapter.Doct
 
             }
         });
+
+
+       /* Resources.Theme theme=context.getResources().newTheme();
+        final Drawable drawable = ResourcesCompat.getDrawable(context.getResources(),images[position], theme);
+        holder.pic.setImageDrawable(drawable);*/
+
+
+       ManageSvg(holder.pic,position);
 
 
         if (position > pos) {
@@ -118,4 +135,53 @@ public class DocterCatAdapter extends RecyclerView.Adapter<DocterCatAdapter.Doct
             pic = (ImageView) itemView.findViewById(R.id.cat_pic);
         }
     }
+
+    private void HandleTint(ImageView imageView) {
+
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = context.getTheme();
+        theme.resolveAttribute(R.attr.themeColorPrimary, typedValue, true);
+        @ColorInt int color = typedValue.data;
+
+
+        imageView.setColorFilter(color, PorterDuff.Mode.MULTIPLY);
+
+    }
+
+
+    void ManageSvg(ImageView imageView,int pos)
+    {
+
+        int data=getSelectedTheme();
+
+        Resources.Theme theme = context.getTheme();
+        theme.applyStyle(data, true);
+
+        final Drawable drawable = ResourcesCompat.getDrawable(context.getResources(),images[pos], theme);
+       imageView.setImageDrawable(drawable);
+
+    }
+
+    int getSelectedTheme()
+    {
+
+        Calendar c = Calendar.getInstance();
+        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+
+        if(timeOfDay >= 0 && timeOfDay < 12){
+            return R.style.MorningSession;
+        }else if(timeOfDay >= 12 && timeOfDay < 16){
+            return R.style.AfternoonSession;
+        }else if(timeOfDay >= 16 && timeOfDay < 21){
+            return R.style.EveningSession;
+        }else if(timeOfDay >= 21 && timeOfDay < 24){
+            return R.style.NightSession;
+        }
+
+        return R.style.DefaultSession;
+
+    }
+
+
+
 }

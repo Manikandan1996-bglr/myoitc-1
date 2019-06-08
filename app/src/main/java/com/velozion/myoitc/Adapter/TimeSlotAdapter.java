@@ -1,18 +1,23 @@
 package com.velozion.myoitc.Adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.velozion.myoitc.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class TimeSlotAdapter extends RecyclerView.Adapter<TimeSlotAdapter.TimeSlotViewHolder> {
 
@@ -44,13 +49,16 @@ public class TimeSlotAdapter extends RecyclerView.Adapter<TimeSlotAdapter.TimeSl
         holder.time.setText("" + data.get(position));
 
         if (pos == position) {
-            holder.time.setBackgroundResource(R.drawable.design_timeslot_checked);
+           // holder.time.setBackgroundResource(R.drawable.design_timeslot_checked);
+            ManageSvg(holder.time,R.drawable.design_timeslot_checked);
+
             holder.time.setTextColor(context.getResources().getColor(R.color.white));
             holder.time.setPadding(12, 12, 12, 12);
             holder.time.setTextSize(16);
         } else {
 
-            holder.time.setBackgroundResource(R.drawable.design_timeslot);
+            //holder.time.setBackgroundResource(R.drawable.design_timeslot);
+            ManageSvg(holder.time,R.drawable.design_timeslot);
             holder.time.setTextColor(context.getResources().getColor(R.color.greyblack));
             holder.time.setPadding(12, 12, 12, 12);
             holder.time.setTextSize(16);
@@ -94,4 +102,39 @@ public class TimeSlotAdapter extends RecyclerView.Adapter<TimeSlotAdapter.TimeSl
         return time_selected;
 
     }
+
+
+    void ManageSvg(TextView textView, int draw)
+    {
+
+        int data=getSelectedTheme();
+
+        Resources.Theme theme = context.getTheme();
+        theme.applyStyle(data, true);
+
+        final Drawable drawable = ResourcesCompat.getDrawable(context.getResources(),draw, theme);
+        textView.setBackground(drawable);
+
+    }
+
+    int getSelectedTheme()
+    {
+
+        Calendar c = Calendar.getInstance();
+        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+
+        if(timeOfDay >= 0 && timeOfDay < 12){
+            return R.style.MorningSession;
+        }else if(timeOfDay >= 12 && timeOfDay < 16){
+            return R.style.AfternoonSession;
+        }else if(timeOfDay >= 16 && timeOfDay < 21){
+            return R.style.EveningSession;
+        }else if(timeOfDay >= 21 && timeOfDay < 24){
+            return R.style.NightSession;
+        }
+
+        return R.style.DefaultSession;
+
+    }
+
 }

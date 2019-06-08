@@ -2,7 +2,9 @@ package com.velozion.myoitc.Activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -22,10 +25,17 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.velozion.myoitc.BaseActivity;
 import com.velozion.myoitc.R;
 import com.velozion.myoitc.Utils;
 import com.velozion.myoitc.ViewModel.MyViewModel;
+import com.velozion.myoitc.databinding.ItemInfowindowBinding;
 import com.velozion.myoitc.db.DoctorProfileData;
 
 import java.util.ArrayList;
@@ -78,6 +88,7 @@ public class DoctorsOnMap extends BaseActivity {
             @Override
             public void onChanged(@Nullable ArrayList<DoctorProfileData> doctorProfileData) {
 
+                List.clear();
                 progressBar.setVisibility(View.GONE);
 
                 if (doctorProfileData.size() > 0) {
@@ -94,7 +105,7 @@ public class DoctorsOnMap extends BaseActivity {
                     }
 
 
-                    CustominfoWindowAdapter custominfoWindowAdapter = new CustominfoWindowAdapter(getApplicationContext());
+                    CustominfoWindowAdapter custominfoWindowAdapter = new CustominfoWindowAdapter(getApplicationContext(), List);
                     mMap.setInfoWindowAdapter(custominfoWindowAdapter);
 
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 15));
@@ -134,24 +145,40 @@ public class DoctorsOnMap extends BaseActivity {
 
 
         Context context;
+        ArrayList<DoctorProfileData> data;
 
-        public CustominfoWindowAdapter(Context context) {
+         DisplayImageOptions options;
+         ImageLoaderConfiguration imgconfig;
+
+        public CustominfoWindowAdapter(Context context, ArrayList<DoctorProfileData> doctorProfileData) {
+
             this.context = context;
+            this.data = doctorProfileData;
+
+            options = new DisplayImageOptions.Builder()
+                    .showImageOnLoading(R.drawable.icon_profile_pic)
+                    .showImageForEmptyUri(R.drawable.icon_profile_pic)
+                    .showImageOnFail(R.drawable.icon_profile_pic)
+                    .cacheInMemory(true)
+                    .cacheOnDisk(true)
+                    .considerExifParams(true)
+                    .displayer(new SimpleBitmapDisplayer())
+                    .imageScaleType(ImageScaleType.NONE)
+                    .build();
+
+            imgconfig = new ImageLoaderConfiguration.Builder(context)
+                    .build();
+            ImageLoader.getInstance().init(imgconfig);
+
         }
 
         @Override
-        public View getInfoWindow(Marker marker) {
-
-
-            return null;
-        }
-
-        @Override
-        public View getInfoContents(Marker marker) {
-
+        public View getInfoWindow(final Marker marker) {
 
             LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View view = layoutInflater.inflate(R.layout.item_infowindow, null);
+            View view = layoutInflater.inflate(R.layout.item_infowindow,null);
+
+            //ItemInfowindowBinding binding=DataBindingUtil.inflate(layoutInflater,R.layout.item_infowindow,null,false);
 
 
             ImageView image = (ImageView) view.findViewById(R.id.docter_image);
@@ -163,18 +190,31 @@ public class DoctorsOnMap extends BaseActivity {
 
 
             if (marker.getId() != null) {
-                for (int i = 0; i < List.size(); i++) {
+                for (int i = 0; i < data.size(); i++) {
 
-                    if (List.get(i).getMobile().equals(marker.getId())) {
+                    if (data.get(i).getMobile().equals(marker.getId())) {
 
+                        Log.d("Response_url", data.get(i).getPic());
 
-                        Utils.ImageLoaderInitialization(getApplicationContext());
-                        Utils.LoadImage(List.get(i).getPic(), image);
+                       // binding.setDoctorProfile(data.get(i));
 
-                        name.setText("" + List.get(i).getName());
-                        qualification.setText("" + List.get(i).getQualification());
-                        specalist.setText("" + List.get(i).getSpecialist());
-                        ratingBar.setRating(Float.parseFloat(List.get(i).getRating()));
+                       // Utils.ImageLoaderInitialization(DoctorsOnMap.this);
+                       // Utils.LoadImage(data.get(i).getPic(), image);
+
+                        name.setText("" + data.get(i).getName());
+                        qualification.setText("" + data.get(i).getQualification());
+                        specalist.setText("" + data.get(i).getSpecialist());
+                        ratingBar.setRating(Float.parseFloat(data.get(i).getRating()));
+
+                        ImageLoader.getInstance().displayImage(data.get(i).getPic(), image, options, new SimpleImageLoadingListener() {
+                            @Override
+                            public void onLoadingComplete(String imageUri, View view,
+                                                          Bitmap loadedImage) {
+                                super.onLoadingComplete(imageUri, view, loadedImage);
+
+                                getInfoContents(marker);
+                            }
+                        });
 
 
                     }
@@ -184,6 +224,19 @@ public class DoctorsOnMap extends BaseActivity {
             }
 
             return view;
+        }
+
+        @Override
+        public View getInfoContents(Marker marker) {
+
+
+            if (marker!=null && marker.isInfoWindowShown())
+            {
+                marker.hideInfoWindow();
+                marker.showInfoWindow();
+            }
+
+            return null;
         }
 
 

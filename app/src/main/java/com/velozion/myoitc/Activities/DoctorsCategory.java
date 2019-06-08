@@ -1,7 +1,10 @@
 package com.velozion.myoitc.Activities;
 
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.TypedValue;
 
+import androidx.annotation.ColorInt;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,7 +45,11 @@ public class DoctorsCategory extends BaseActivity {
 
         LoadCategories();
 
+
+
     }
+
+
 
     private void LoadCategories() {
 

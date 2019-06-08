@@ -71,9 +71,9 @@ public class Utils {
 
     public static void ImageLoaderInitialization(Context context) {
         options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.icon_user)
-                .showImageForEmptyUri(R.drawable.icon_user)
-                .showImageOnFail(R.drawable.icon_user)
+                .showImageOnLoading(R.drawable.icon_profile_pic)
+                .showImageForEmptyUri(R.drawable.icon_profile_pic)
+                .showImageOnFail(R.drawable.icon_profile_pic)
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
                 .considerExifParams(true)

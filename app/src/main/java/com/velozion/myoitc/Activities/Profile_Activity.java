@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.databinding.DataBindingUtil;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -22,6 +24,8 @@ import com.velozion.myoitc.CustomRequest;
 import com.velozion.myoitc.PreferenceUtil;
 import com.velozion.myoitc.R;
 import com.velozion.myoitc.Utils;
+import com.velozion.myoitc.databinding.ActivityProfileLayoutBinding;
+import com.velozion.myoitc.db.UserProfile;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,29 +35,25 @@ import java.util.Map;
 
 public class Profile_Activity extends BaseActivity {
 
-    ImageView back, pic;
-    TextView name, desc;
-    Button edit;
+
 
     Animation animation;
-    HashMap<String, String> Profile = new HashMap<>();
+    UserProfile userProfile=new UserProfile();
+
+    ActivityProfileLayoutBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_layout);
+        //setContentView(R.layout.activity_profile_layout);
+        binding= DataBindingUtil.setContentView(this,R.layout.activity_profile_layout);
 
 
-        back = (ImageView) findViewById(R.id.profile_back);
-        pic = (ImageView) findViewById(R.id.profile_pic);
-        name = (TextView) findViewById(R.id.profile_username);
-        desc = (TextView) findViewById(R.id.profile_desc);
-        edit = (Button) findViewById(R.id.profile_edit);
 
-        pic.setVisibility(View.GONE);
-        edit.setVisibility(View.GONE);
+        binding.profilePic.setVisibility(View.GONE);
+        binding.profileEdit.setVisibility(View.GONE);
 
-        back.setOnClickListener(new View.OnClickListener() {
+        binding.profileBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -99,16 +99,14 @@ public class Profile_Activity extends BaseActivity {
 
                                     JSONObject object = response.getJSONObject("data");
 
-                                    Profile.put("id", object.getString("id"));
-                                    Profile.put("name", object.getString("name"));
-                                    Profile.put("username", object.getString("username"));
-                                    Profile.put("email", object.getString("email"));
+                                    userProfile.setId(object.getString("id"));
+                                    userProfile.setName(object.getString("name"));
+                                    userProfile.setUsername(object.getString("username"));
+                                    userProfile.setEmail(object.getString("email"));
 
+                                    binding.setUser(userProfile);
 
-                                    name.setText("" + Profile.get("name"));
-                                    desc.setText("" + Profile.get("email"));
-
-                                    pic.setVisibility(View.VISIBLE);
+                                    binding.profilePic.setVisibility(View.VISIBLE);
 
 
                                     AllowUx();
@@ -154,17 +152,17 @@ public class Profile_Activity extends BaseActivity {
 
         animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_down_to_up);
 
-        pic.setAnimation(animation);
+        binding.profilePic.setAnimation(animation);
 
-        name.setVisibility(View.GONE);
-        desc.setVisibility(View.GONE);
-        edit.setVisibility(View.GONE);
+        binding.profileUsername.setVisibility(View.GONE);
+        binding.profileDesc.setVisibility(View.GONE);
+        binding.profileEdit.setVisibility(View.GONE);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                name.setVisibility(View.VISIBLE);
-                name.setAnimation(animation);
+                binding.profileUsername.setVisibility(View.VISIBLE);
+                binding.profileDesc.setAnimation(animation);
 
 
             }
@@ -174,8 +172,8 @@ public class Profile_Activity extends BaseActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                desc.setVisibility(View.VISIBLE);
-                desc.setAnimation(animation);
+                binding.profileDesc.setVisibility(View.VISIBLE);
+                binding.profileDesc.setAnimation(animation);
 
             }
         }, 2000);
@@ -184,8 +182,8 @@ public class Profile_Activity extends BaseActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                edit.setVisibility(View.VISIBLE);
-                edit.setAnimation(animation);
+                binding.profileEdit.setVisibility(View.VISIBLE);
+                binding.profileEdit.setAnimation(animation);
             }
         }, 3000);
 

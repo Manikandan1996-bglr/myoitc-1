@@ -21,7 +21,7 @@ public class DocterDetails extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.CustomeTheme1);
+        setTheme(R.style.MorningSession);
         super.onCreate(savedInstanceState);
 
         profileLayoutBinding = DataBindingUtil.setContentView(this, R.layout.doctor_profile_layout);

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.MapFrag">
 
     <RelativeLayout
@@ -27,11 +28,12 @@
             android:layout_alignParentBottom="true"
             android:layout_height="wrap_content">
 
-            <TextView
+            <com.chootdev.typefaced.TypeFacedTextView
                 android:layout_width="wrap_content"
                 android:text="@string/checkin"
                 android:textColor="@color/white"
                 android:id="@+id/checkin"
+                app:textView_font="@string/font_exo_regular"
                 android:paddingTop="@dimen/_7sdp"
                 android:paddingBottom="@dimen/_7sdp"
                 android:paddingLeft="@dimen/_20sdp"
@@ -39,12 +41,13 @@
                 android:background="@drawable/button2_bg"
                 android:layout_height="wrap_content" />
 
-            <TextView
+            <com.chootdev.typefaced.TypeFacedTextView
                 android:layout_width="wrap_content"
                 android:text="@string/checkout"
                 android:textColor="@color/white"
                 android:id="@+id/checkout"
                 android:visibility="gone"
+                app:textView_font="@string/font_exo_regular"
                 android:background="@drawable/button2_bg"
                 android:paddingTop="@dimen/_7sdp"
                 android:paddingBottom="@dimen/_7sdp"
@@ -59,16 +62,19 @@
             android:layout_margin="@dimen/_2sdp"
             android:background="@color/colorPrimary"
             android:weightSum="5"
+            android:padding="@dimen/_3sdp"
             android:visibility="gone"
             android:id="@+id/info_ll"
             android:layout_alignParentTop="true"
             android:layout_height="wrap_content">
 
-            <TextView
+            <com.chootdev.typefaced.TypeFacedTextView
                 android:layout_width="0dp"
                 android:layout_weight="4"
                 android:textColor="@color/white"
                 android:id="@+id/info_text"
+                android:padding="@dimen/_2sdp"
+                app:textView_font="@string/font_exo_regular"
                 android:textSize="@dimen/_12sdp"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"

@@ -1,98 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="DoctorProfile"
+            type="com.velozion.myoitc.db.DoctorProfileData" />
+
+    </data>
+
+<LinearLayout
     android:layout_width="wrap_content"
     android:orientation="vertical"
     android:layout_height="wrap_content">
 
-<androidx.cardview.widget.CardView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    card_view:cardBackgroundColor="#fff"
-    card_view:cardUseCompatPadding="true">
-
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="#fff"
+        card_view:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="@dimen/_5sdp">
-
-            <com.velozion.myoitc.utilities.RoundedImageView
-                android:id="@+id/docter_image"
-                android:layout_width="@dimen/_80sdp"
-                android:layout_height="@dimen/_80sdp"
-                android:layout_gravity="center_vertical"
-                />
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_width="@dimen/_150sdp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_7sdp"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:padding="@dimen/_5sdp">
 
-                <com.chootdev.typefaced.TypeFacedTextView
-                    android:id="@+id/docter_name"
-                    android:layout_width="wrap_content"
+                <com.velozion.myoitc.utilities.RoundedImageView
+                    android:id="@+id/docter_image"
+                    android:layout_width="@dimen/_80sdp"
+                    android:profileImage="@{DoctorProfile.pic}"
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_gravity="center_vertical" />
+
+                <LinearLayout
+                    android:layout_width="@dimen/_150sdp"
                     android:layout_height="wrap_content"
-                    android:text="jaggi"
-                    card_view:textView_font="@string/font_exo_bold"
-                    android:textStyle="bold"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:layout_marginBottom="@dimen/_2sdp"
-                    android:padding="@dimen/_1sdp"
-                    android:textColor="@color/title_color"
-                    android:gravity="center_vertical"
-                    android:textSize="@dimen/_12sdp" />
+                    android:layout_marginLeft="@dimen/_7sdp"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_5sdp">
 
-                <com.chootdev.typefaced.TypeFacedTextView
-                    android:id="@+id/docter_education"
-                    android:layout_width="match_parent"
-                    android:text="mmbs"
-                    card_view:textView_font="@string/font_exo_medium"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:layout_marginBottom="@dimen/_2sdp"
-                    android:padding="@dimen/_1sdp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/title_color"
-                    android:textSize="@dimen/_10sdp" />
+                    <com.chootdev.typefaced.TypeFacedTextView
+                        android:id="@+id/docter_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{DoctorProfile.name}"
+                        card_view:textView_font="@string/font_exo_bold"
+                        android:textStyle="bold"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_marginBottom="@dimen/_2sdp"
+                        android:padding="@dimen/_1sdp"
+                        android:textColor="@color/title_color"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <com.chootdev.typefaced.TypeFacedTextView
+                        android:id="@+id/docter_education"
+                        android:layout_width="match_parent"
+                        android:text="@{DoctorProfile.qualification}"
+                        card_view:textView_font="@string/font_exo_medium"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_marginBottom="@dimen/_2sdp"
+                        android:padding="@dimen/_1sdp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/title_color"
+                        android:textSize="@dimen/_10sdp" />
 
 
+                    <com.chootdev.typefaced.TypeFacedTextView
+                        android:id="@+id/docter_specilist"
+                        android:layout_width="match_parent"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/_1sdp"
+                        android:layout_height="wrap_content"
+                        card_view:textView_font="@string/font_exo_medium"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_marginBottom="@dimen/_2sdp"
+                        android:text="@{String.format(@string/quali, DoctorProfile.specialist,DoctorProfile.experience)}"
 
-                <com.chootdev.typefaced.TypeFacedTextView
-                    android:id="@+id/docter_specilist"
-                    android:layout_width="match_parent"
-                    android:gravity="center_vertical"
-                    android:padding="@dimen/_1sdp"
-                    android:layout_height="wrap_content"
-                    card_view:textView_font="@string/font_exo_medium"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:layout_marginBottom="@dimen/_2sdp"
-                    android:text="Cardiology"
-                    android:textColor="@color/title_color"
-                    android:textSize="@dimen/_12sdp" />
+                        android:textColor="@color/title_color"
+                        android:textSize="@dimen/_12sdp" />
 
-                <RatingBar
-                    android:id="@+id/docter_rating"
-                    style="?android:attr/ratingBarStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:layout_marginBottom="@dimen/_2sdp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:padding="@dimen/_1sdp" />
+                    <RatingBar
+                        android:id="@+id/docter_rating"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_marginBottom="@dimen/_2sdp"
+                        android:padding="@dimen/_1sdp"
+                        android:rating="@{DoctorProfile.rating}" />
 
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
 
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>
+</layout>

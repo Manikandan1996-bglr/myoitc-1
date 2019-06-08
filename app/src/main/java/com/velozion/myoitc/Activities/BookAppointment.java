@@ -1,10 +1,12 @@
 package com.velozion.myoitc.Activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -40,6 +42,7 @@ public class BookAppointment extends BaseActivity {
     DoctorProfileData doctorProfileData;
 
     ActivityBookAppointmentBinding bookAppointmentBinding;
+    Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,9 @@ public class BookAppointment extends BaseActivity {
         super.onCreate(savedInstanceState);
         setToolbarRequired(true);
         setToolbarTitle(getResources().getString(R.string.activity_book_app));
+
+        activity=this;
+
 
         bookAppointmentBinding = DataBindingUtil.setContentView(this, R.layout.activity_book__appointment);
 
@@ -71,13 +77,14 @@ public class BookAppointment extends BaseActivity {
                     Snackbar.make(getWindow().getDecorView().getRootView(), "Select Time Slot", Snackbar.LENGTH_LONG).show();
                 } else {
 
-                    Utils.displayCustomDailog(BookAppointment.this);
+                     Utils.displayCustomDailog(BookAppointment.this);
 
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
 
                             Utils.dismissCustomDailog();
+                           // activity.setProgressBarIndeterminateVisibility(false);
 
 
                             BookingResponse bookingResponse = new BookingResponse("4561", "Nagi", "20-1-2019", "2:00 PM");

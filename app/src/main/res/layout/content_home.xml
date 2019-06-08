@@ -21,6 +21,7 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:id="@+id/bottomnavigationview"
+        app:itemTextAppearance="@style/ToolBarText"
         app:menu="@menu/navigation_menus"
         style="@style/BottomNavigation"
         android:layout_alignParentBottom="true"

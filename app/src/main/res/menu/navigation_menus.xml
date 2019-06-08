@@ -4,9 +4,11 @@
 
     <item android:title="@string/map"
         android:icon="@drawable/icon_map"
+        app:itemTextAppearance="@style/ToolBarText"
         android:id="@+id/bnv_map"/>
 
     <item android:title="@string/history"
         android:icon="@drawable/icon_history"
+        app:itemTextAppearance="@style/ToolBarText"
         android:id="@+id/bnv_history"/>
 </menu>

@@ -46,7 +46,7 @@
         <item name="android:fontFamily">@font/josefinsansregular</item>
     </style>
 
-    <style name="CustomeTheme1" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="MorningSession" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">?themeColorPrimary</item>
         <item name="colorPrimaryDark">?themeColorPrimaryDark</item>
@@ -56,7 +56,7 @@
     </style>
 
 
-    <style name="CustomeTheme2" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AfternoonSession" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">?themeColorPrimary</item>
         <item name="colorPrimaryDark">?themeColorPrimaryDark</item>
@@ -65,7 +65,7 @@
         <item name="themeColorPrimaryDark">@color/colorPinkT</item>
     </style>
 
-    <style name="CustomeTheme3" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="EveningSession" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">?themeColorPrimary</item>
         <item name="colorPrimaryDark">?themeColorPrimaryDark</item>
@@ -74,7 +74,7 @@
         <item name="themeColorPrimaryDark">@color/colorGreenT</item>
     </style>
 
-    <style name="CustomeTheme4" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="NightSession" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">?themeColorPrimary</item>
         <item name="colorPrimaryDark">?themeColorPrimaryDark</item>
@@ -84,7 +84,7 @@
     </style>
 
 
-    <style name="CustomeTheme5" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="DefaultSession" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">?themeColorPrimary</item>
         <item name="colorPrimaryDark">?themeColorPrimaryDark</item>

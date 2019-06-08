@@ -2,6 +2,7 @@ package com.velozion.myoitc.Activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +26,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.velozion.myoitc.Fragments.MapFrag;
 import com.velozion.myoitc.PreferenceUtil;
 import com.velozion.myoitc.R;
 import com.velozion.myoitc.ViewModel.MyViewModel;
@@ -38,6 +41,7 @@ public class HomeActivity extends AppCompatActivity
     BottomNavigationView bottomNavigationView;
     NavController navController;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +49,7 @@ public class HomeActivity extends AppCompatActivity
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(getResources().getString(R.string.app_name));
+        toolbar.setTitleTextAppearance(this, R.style.ToolBarText);
         setSupportActionBar(toolbar);
 
         drawer = findViewById(R.id.drawer_layout);
@@ -66,6 +71,8 @@ public class HomeActivity extends AppCompatActivity
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.my_nav_host_fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, navHostFragment.getNavController());
 
+
+
     }
 
     private void LoadProfile() {
@@ -80,6 +87,15 @@ public class HomeActivity extends AppCompatActivity
 
                 name.setText(stringStringHashMap.get("name"));
                 desc.setText(stringStringHashMap.get("email"));
+
+
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getApplicationContext(), Profile_Activity.class));
+
+                    }
+                });
 
 
             }
@@ -172,4 +188,6 @@ public class HomeActivity extends AppCompatActivity
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
+
 }

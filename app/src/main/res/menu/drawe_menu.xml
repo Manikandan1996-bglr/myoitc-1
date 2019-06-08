@@ -5,5 +5,6 @@
 
     <item android:title="@string/nav_book"
         android:id="@+id/nav_appointment"
+        app:itemTextAppearance="@style/ToolBarText"
         android:icon="@drawable/icon_icob_book_ap"/>
 </menu>

@@ -20,18 +20,14 @@ public class BookingStatus extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.CustomeTheme3);
+        setTheme(R.style.EveningSession);
         super.onCreate(savedInstanceState);
 
         bookingStatusBinding = DataBindingUtil.setContentView(this, R.layout.activity_booking_status);
 
         setToolbarRequired(true);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(getResources().getColor(R.color.statusbar_light));
-        }
+
 
         DoctorProfileData doctorProfileData = getIntent().getExtras().getParcelable("data");
         BookingResponse bookingResponse = getIntent().getExtras().getParcelable("bookingdata");
