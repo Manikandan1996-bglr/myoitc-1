@@ -56,10 +56,10 @@ public class BookAppointment extends BaseActivity {
 
         bookAppointmentBinding = DataBindingUtil.setContentView(this, R.layout.activity_book__appointment);
 
-        doctorProfileData = (DoctorProfileData) getIntent().getExtras().getParcelable("data");
+        doctorProfileData = getIntent().getExtras().getParcelable("data");
         bookAppointmentBinding.setDoctorProfile(doctorProfileData);
 
-        time_recyclerview = (RecyclerView) findViewById(R.id.bn_timingrecyclerview);
+        time_recyclerview = findViewById(R.id.bn_timingrecyclerview);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 4);
         time_recyclerview.setLayoutManager(gridLayoutManager);

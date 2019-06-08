@@ -29,7 +29,7 @@ public class DocterDetails extends BaseActivity {
         doctorProfileData = getIntent().getExtras().getParcelable("data");
 
         profileLayoutBinding.setDoctorProfile(doctorProfileData);
-        staticmap = (ImageView) findViewById(R.id.pd_hospotal_loc_pic);
+        staticmap = findViewById(R.id.pd_hospotal_loc_pic);
 
         profileLayoutBinding.pdBookappointment.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -120,7 +120,7 @@ public class HistoryDetails extends BaseActivity {
 
 
             try {
-                Date data1 = (Date) sdf.parse(checkin);
+                Date data1 = sdf.parse(checkin);
 
                 historyData.setCheckintime("" + date.format(data1) + "\n" + time.format(data1));
                 //checkintime.setText(""+date.format(data1)+"\n"+time.format(data1));
@@ -137,7 +137,7 @@ public class HistoryDetails extends BaseActivity {
             String checkout = historyData.getCheckouttime();
 
             try {
-                Date data2 = (Date) sdf.parse(checkout);
+                Date data2 = sdf.parse(checkout);
 
                 historyData.setCheckouttime("" + date.format(data2) + "\n" + time.format(data2));
                 // checkouttime.setText();

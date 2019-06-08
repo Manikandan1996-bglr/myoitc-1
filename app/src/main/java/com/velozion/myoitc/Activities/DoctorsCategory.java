@@ -38,7 +38,7 @@ public class DoctorsCategory extends BaseActivity {
         setToolbarTitle(getResources().getString(R.string.activity_doctor_cat));
         setContentView(R.layout.activity_doctors_category);
 
-        recyclerView = (RecyclerView) findViewById(R.id.doc_cat_recylerview);
+        recyclerView = findViewById(R.id.doc_cat_recylerview);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);

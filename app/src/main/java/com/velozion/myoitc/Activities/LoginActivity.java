@@ -40,9 +40,9 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
 
 
-        email = (EditText) findViewById(R.id.login_emailid);
-        password = (EditText) findViewById(R.id.login_password);
-        login = (Button) findViewById(R.id.login_login);
+        email = findViewById(R.id.login_emailid);
+        password = findViewById(R.id.login_password);
+        login = findViewById(R.id.login_login);
 
         animation = AnimationUtils.loadAnimation(this, R.anim.anim_down_to_up);
         //login.setAnimation(animation);

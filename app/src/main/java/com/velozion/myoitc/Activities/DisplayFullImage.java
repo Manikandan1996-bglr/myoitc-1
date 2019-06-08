@@ -43,7 +43,7 @@ public class DisplayFullImage extends BaseActivity {
             Toast.makeText(this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
-        imageView = (PhotoView) findViewById(R.id.fullimagview);
+        imageView = findViewById(R.id.fullimagview);
 
 
         imageView.setOnTouchListener(new View.OnTouchListener() {

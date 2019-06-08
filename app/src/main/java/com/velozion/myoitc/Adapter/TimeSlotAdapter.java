@@ -92,7 +92,7 @@ public class TimeSlotAdapter extends RecyclerView.Adapter<TimeSlotAdapter.TimeSl
 
         public TimeSlotViewHolder(@NonNull View itemView) {
             super(itemView);
-            time = (TextView) itemView.findViewById(R.id.timeslot_time);
+            time = itemView.findViewById(R.id.timeslot_time);
 
         }
     }

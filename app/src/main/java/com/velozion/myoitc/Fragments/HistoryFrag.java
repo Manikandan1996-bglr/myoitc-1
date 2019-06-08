@@ -80,10 +80,10 @@ public class HistoryFrag extends Fragment {
 
             myViewModel = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
 
-            recyclerView = (RecyclerView) view.findViewById(R.id.history_recylerview);
-            progressBar = (ProgressBar) view.findViewById(R.id.history_progressbar);
-            textView = (TextView) view.findViewById(R.id.history_textview);
-            nodata = (LinearLayout) view.findViewById(R.id.history_nodata_ll);
+            recyclerView = view.findViewById(R.id.history_recylerview);
+            progressBar = view.findViewById(R.id.history_progressbar);
+            textView = view.findViewById(R.id.history_textview);
+            nodata = view.findViewById(R.id.history_nodata_ll);
 
             LinearLayoutManager manager = new LinearLayoutManager(getActivity());
             recyclerView.setLayoutManager(manager);

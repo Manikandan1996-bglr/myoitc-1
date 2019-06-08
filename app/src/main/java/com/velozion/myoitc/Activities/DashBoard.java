@@ -40,10 +40,10 @@ public class DashBoard extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
 
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomnavigationview);
+        bottomNavigationView = findViewById(R.id.bottomnavigationview);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

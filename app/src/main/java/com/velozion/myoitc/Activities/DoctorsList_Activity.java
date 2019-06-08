@@ -43,10 +43,10 @@ public class DoctorsList_Activity extends BaseActivity {
 
         myViewModel = ViewModelProviders.of(this).get(MyViewModel.class);
 
-        recyclerView = (RecyclerView) findViewById(R.id.appointment_recylerview);
-        progressBar = (ProgressBar) findViewById(R.id.appointment_progressbar);
-        textView = (TextView) findViewById(R.id.appointment_textview);
-        nodata = (LinearLayout) findViewById(R.id.appointment_nodata_ll);
+        recyclerView = findViewById(R.id.appointment_recylerview);
+        progressBar = findViewById(R.id.appointment_progressbar);
+        textView = findViewById(R.id.appointment_textview);
+        nodata = findViewById(R.id.appointment_nodata_ll);
 
         LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(manager);

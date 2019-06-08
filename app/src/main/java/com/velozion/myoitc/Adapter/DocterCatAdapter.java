@@ -36,7 +36,7 @@ public class DocterCatAdapter extends RecyclerView.Adapter<DocterCatAdapter.Doct
 
     Context context;
     ArrayList<HashMap<String, String>> data;
-    int images[];
+    int[] images;
     int pos = 0;
 
     DisplayImageOptions options;
@@ -131,8 +131,8 @@ public class DocterCatAdapter extends RecyclerView.Adapter<DocterCatAdapter.Doct
         public DoctorsCatViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            name = (TextView) itemView.findViewById(R.id.cat_name);
-            pic = (ImageView) itemView.findViewById(R.id.cat_pic);
+            name = itemView.findViewById(R.id.cat_name);
+            pic = itemView.findViewById(R.id.cat_pic);
         }
     }
 

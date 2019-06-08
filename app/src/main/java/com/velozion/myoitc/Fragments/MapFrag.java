@@ -143,10 +143,10 @@ public class MapFrag extends Fragment {
             view = inflater.inflate(R.layout.fragment_map_, container, false);
 
             supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-            chekin = (TextView) view.findViewById(R.id.checkin);
-            checkout = (TextView) view.findViewById(R.id.checkout);
-            info_ll = (LinearLayout) view.findViewById(R.id.info_ll);
-            info_text = (TextView) view.findViewById(R.id.info_text);
+            chekin = view.findViewById(R.id.checkin);
+            checkout = view.findViewById(R.id.checkout);
+            info_ll = view.findViewById(R.id.info_ll);
+            info_text = view.findViewById(R.id.info_text);
 
             supportMapFragment.getMapAsync(new OnMapReadyCallback() {
                 @Override

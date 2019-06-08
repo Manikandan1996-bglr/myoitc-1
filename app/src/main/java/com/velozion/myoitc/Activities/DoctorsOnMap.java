@@ -60,7 +60,7 @@ public class DoctorsOnMap extends BaseActivity {
         myViewModel = ViewModelProviders.of(this).get(MyViewModel.class);
 
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        progressBar = (ProgressBar) findViewById(R.id.maps_progressbar);
+        progressBar = findViewById(R.id.maps_progressbar);
 
         supportMapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
@@ -181,12 +181,12 @@ public class DoctorsOnMap extends BaseActivity {
             //ItemInfowindowBinding binding=DataBindingUtil.inflate(layoutInflater,R.layout.item_infowindow,null,false);
 
 
-            ImageView image = (ImageView) view.findViewById(R.id.docter_image);
+            ImageView image = view.findViewById(R.id.docter_image);
 
-            TextView name = (TextView) view.findViewById(R.id.docter_name);
-            TextView qualification = (TextView) view.findViewById(R.id.docter_education);
-            TextView specalist = (TextView) view.findViewById(R.id.docter_specilist);
-            RatingBar ratingBar = (RatingBar) view.findViewById(R.id.docter_rating);
+            TextView name = view.findViewById(R.id.docter_name);
+            TextView qualification = view.findViewById(R.id.docter_education);
+            TextView specalist = view.findViewById(R.id.docter_specilist);
+            RatingBar ratingBar = view.findViewById(R.id.docter_rating);
 
 
             if (marker.getId() != null) {

@@ -100,8 +100,8 @@ public class Utils {
         dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         dialog.show();
 
-        ImageView iv_image_cancle = (ImageView) dialog.findViewById(R.id.iv_dialog_cancle);
-        ImageView iv_image = (ImageView) dialog.findViewById(R.id.iv_dialog_img);
+        ImageView iv_image_cancle = dialog.findViewById(R.id.iv_dialog_cancle);
+        ImageView iv_image = dialog.findViewById(R.id.iv_dialog_img);
 
         ImageLoader.getInstance().displayImage(image, iv_image);
 

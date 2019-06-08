@@ -81,10 +81,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
 
         public HistoryViewHolder(@NonNull View itemView) {
             super(itemView);
-            checkinLoc = (TextView) itemView.findViewById(R.id.checkinloc);
-            checkinTime = (TextView) itemView.findViewById(R.id.checkintime);
-            checkoutLoc = (TextView) itemView.findViewById(R.id.checkoutloc);
-            checkoutTime = (TextView) itemView.findViewById(R.id.checkouttime);
+            checkinLoc = itemView.findViewById(R.id.checkinloc);
+            checkinTime = itemView.findViewById(R.id.checkintime);
+            checkoutLoc = itemView.findViewById(R.id.checkoutloc);
+            checkoutTime = itemView.findViewById(R.id.checkouttime);
         }
     }
 }

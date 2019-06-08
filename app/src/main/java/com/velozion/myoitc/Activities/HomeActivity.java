@@ -66,7 +66,7 @@ public class HomeActivity extends AppCompatActivity
 
         LoadProfile();
 
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomnavigationview);
+        bottomNavigationView = findViewById(R.id.bottomnavigationview);
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.my_nav_host_fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, navHostFragment.getNavController());
