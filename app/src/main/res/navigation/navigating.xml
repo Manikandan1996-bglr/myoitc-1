@@ -7,14 +7,14 @@
 
     <fragment
         android:id="@+id/bnv_map"
-        android:name="com.velozion.myoitc.Fragments.MapFrag"
+        android:name="com.velozion.myoitc.fragments.MapFrag"
         android:label="fragment_map_"
         tools:layout="@layout/fragment_map_" >
 
     </fragment>
     <fragment
         android:id="@+id/bnv_history"
-        android:name="com.velozion.myoitc.Fragments.HistoryFrag"
+        android:name="com.velozion.myoitc.fragments.HistoryFrag"
         android:label="fragment_history_"
         tools:layout="@layout/fragment_history_" />
 </navigation>

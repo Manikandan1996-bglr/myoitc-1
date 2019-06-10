@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -11,7 +10,6 @@
             type="com.velozion.myoitc.db.HistoryData" />
 
 
-
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -20,187 +18,168 @@
         android:fitsSystemWindows="true"
         tools:context="com.education.EnquiryActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar" />
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginTop="?actionBarSize"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
+            android:orientation="vertical">
 
-            <ScrollView
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:background="@color/white"
                 android:layout_height="match_parent"
-                >
+                android:background="@color/white"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="@dimen/_2sdp"
-                        app:cardElevation="@dimen/_4sdp"
-                        app:cardUseCompatPadding="true"
+                        android:layout_height="@dimen/_250sdp"
                         android:layout_margin="@dimen/_5sdp"
                         android:orientation="vertical"
                         android:padding="@dimen/_5sdp"
-                        android:layout_height="@dimen/_250sdp">
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_2sdp"
+                        app:cardElevation="@dimen/_4sdp"
+                        app:cardUseCompatPadding="true">
 
                         <fragment
-                            xmlns:map="http://schemas.android.com/apk/res-auto"
                             android:id="@+id/map"
                             android:name="com.google.android.gms.maps.SupportMapFragment"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            />
+                            android:layout_height="match_parent" />
                     </androidx.cardview.widget.CardView>
 
 
-
-
-
                     <View
                         android:layout_width="match_parent"
-                        android:background="@color/background2"
+                        android:layout_height="@dimen/_1sdp"
                         android:layout_marginTop="@dimen/_2sdp"
                         android:layout_marginBottom="@dimen/_2sdp"
-                        android:layout_height="@dimen/_1sdp"/>
+                        android:background="@color/background2" />
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:orientation="vertical"
-                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_marginRight="@dimen/_10sdp"
-                        android:layout_height="wrap_content">
+                        android:weightSum="7"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:weightSum="7"
-                            android:layout_height="wrap_content">
+                        <com.chootdev.typefaced.TypeFacedTextView
+                            android:id="@+id/detail_checkintime"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:gravity="center_vertical"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@{History.checkintime}"
+                            android:textColor="?attr/themeColorPrimary"
+                            android:textSize="@dimen/_12sdp"
+                            app:textView_font="@string/font_exo_regular" />
 
-                            <com.chootdev.typefaced.TypeFacedTextView
-                                android:id="@+id/detail_checkintime"
-                                android:layout_width="0dp"
-                                android:padding="@dimen/_2sdp"
-                                android:textSize="@dimen/_12sdp"
-                                app:textView_font="@string/font_exo_regular"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:text="@{History.checkintime}"
-                                android:gravity="center_vertical"
-                                android:textColor="?attr/themeColorPrimary" />
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:layout_gravity="top|center"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:src="@drawable/icon_red_circle"
+                            tools:ignore="ContentDescription" />
 
-                            <ImageView
-                                android:layout_width="@dimen/_15sdp"
-                                android:layout_height="@dimen/_15sdp"
-                                android:layout_gravity="top|center"
-                                android:layout_marginTop="@dimen/_3sdp"
-                                android:src="@drawable/icon_red_circle" />
-
-                            <com.chootdev.typefaced.TypeFacedTextView
-                                android:layout_width="0dp"
-                                android:layout_weight="5"
-                                android:paddingLeft="@dimen/_5sdp"
-                                android:paddingTop="@dimen/_2sdp"
-                                android:text="@{History.checkinloc}"
-                                android:paddingBottom="@dimen/_2sdp"
-                                android:textColor="@color/nontitle_color"
-                                app:textView_font="@string/font_exo_regular"
-                                android:gravity="center_vertical"
-                                android:id="@+id/detail_checkinplace"
-                                android:textSize="@dimen/_10sdp"
-                                android:layout_height="wrap_content" />
-
-
-
-                        </LinearLayout>
+                        <com.chootdev.typefaced.TypeFacedTextView
+                            android:id="@+id/detail_checkinplace"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="@dimen/_5sdp"
+                            android:paddingTop="@dimen/_2sdp"
+                            android:paddingBottom="@dimen/_2sdp"
+                            android:text="@{History.checkinloc}"
+                            android:textColor="@color/nontitle_color"
+                            android:textSize="@dimen/_10sdp"
+                            app:textView_font="@string/font_exo_regular" />
 
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:orientation="vertical"
-                        android:layout_marginBottom="@dimen/_10sdp"
-
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_10sdp"
+
                         android:layout_marginRight="@dimen/_10sdp"
-                        android:layout_height="wrap_content">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:weightSum="7"
-                            android:layout_height="wrap_content">
-
-                            <com.chootdev.typefaced.TypeFacedTextView
-                                android:id="@+id/detail_checkouttime"
-                                android:layout_width="0dp"
-                                app:textView_font="@string/font_exo_regular"
-                                android:padding="@dimen/_2sdp"
-                                android:layout_height="wrap_content"
-                                android:text="@{History.checkouttime}"
-                                android:textSize="@dimen/_12sdp"
-                                android:layout_weight="2"
-                                android:gravity="center_vertical"
-                                android:textColor="?attr/themeColorPrimary" />
-
-                            <ImageView
-                                android:layout_width="@dimen/_15sdp"
-                                android:layout_height="@dimen/_15sdp"
-                                android:layout_gravity="top|center"
-                                android:layout_marginTop="@dimen/_3sdp"
-                                android:src="@drawable/icon_green_circle" />
-
-                            <com.chootdev.typefaced.TypeFacedTextView
-                                android:id="@+id/detail_checkoutplace"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="5"
-                                android:gravity="center_vertical"
-                                android:paddingLeft="@dimen/_5sdp"
-                                android:paddingTop="@dimen/_2sdp"
-                                android:textSize="@dimen/_10sdp"
-                                android:paddingBottom="@dimen/_2sdp"
-                                android:text="@{History.checkoutloc}"
-                                android:textColor="@color/nontitle_color"
-                                app:textView_font="@string/font_exo_regular" />
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:weightSum="7"
+                        android:orientation="horizontal">
 
 
+                        <com.chootdev.typefaced.TypeFacedTextView
+                            android:id="@+id/detail_checkouttime"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:gravity="center_vertical"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@{History.checkouttime}"
+                            android:textColor="?attr/themeColorPrimary"
+                            android:textSize="@dimen/_12sdp"
+                            app:textView_font="@string/font_exo_regular" />
 
-                        </LinearLayout>
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:layout_gravity="top|center"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:src="@drawable/icon_green_circle"
+                            tools:ignore="ContentDescription" />
+
+                        <com.chootdev.typefaced.TypeFacedTextView
+                            android:id="@+id/detail_checkoutplace"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="@dimen/_5sdp"
+                            android:paddingTop="@dimen/_2sdp"
+                            android:paddingBottom="@dimen/_2sdp"
+                            android:text="@{History.checkoutloc}"
+                            android:textColor="@color/nontitle_color"
+                            android:textSize="@dimen/_10sdp"
+                            app:textView_font="@string/font_exo_regular" />
 
 
                     </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
-                        android:background="@color/view_bg2"
+                        android:layout_height="@dimen/_1sdp"
                         android:layout_marginTop="@dimen/_2sdp"
 
                         android:layout_marginBottom="@dimen/_2sdp"
-                        android:layout_height="@dimen/_1sdp"/>
+                        android:background="@color/view_bg2" />
 
                 </LinearLayout>
 
 
-            </ScrollView>
+            </androidx.core.widget.NestedScrollView>
         </LinearLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

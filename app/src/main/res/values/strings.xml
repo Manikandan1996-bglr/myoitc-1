@@ -82,6 +82,19 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
     <string name="allrights">© Velozion Technologies Pvt. Ltd. | All Rights Reserved</string>
+    <string name="gpsonnectionnotfound">Gps Connection Not Found</string>
+    <string name="enablegps">Do You Want To Enable Gps ? </string>
+    <string name="cancel">Cancel</string>
+    <string name="enable">Enable</string>
+    <string name="internetconnectionnotfound">Internet Connection Not Found \n Do You Want To Turn On ?</string>
+    <string name="intenert">Internet Connection</string>
+    <string name="turnon">Turn On / Retry</string>
+    <string name="gpsconection">GPS Connection</string>
+    <string name="imagedesc">Image</string>
+    <string name="communicate">Communicate</string>
+    <string name="profile">Profile</string>
+    <string name="logout">Logout</string>
+    <string name="maps">Maps</string>
 
 
 </resources>

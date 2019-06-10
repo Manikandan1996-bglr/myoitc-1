@@ -10,12 +10,11 @@ import android.content.SharedPreferences;
 
 public class PreferenceUtil {
 
-    public static String saveData(String key, String value , Context context){
+    public static void saveData(String key, String value , Context context){
         SharedPreferences.Editor editor = context.getSharedPreferences(Utils.appName, Activity.MODE_PRIVATE).edit();
         editor.putString(key, value);
         editor.apply();
 
-        return key;
     }
 
     public static String getData(String key, Context context){

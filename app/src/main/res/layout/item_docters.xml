@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -11,249 +9,243 @@
             type="com.velozion.myoitc.db.DoctorProfileData" />
 
     </data>
-<androidx.cardview.widget.CardView
 
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/_7sdp"
-    android:orientation="vertical"
-    card_view:cardBackgroundColor="#fff"
-    card_view:cardCornerRadius="@dimen/_2sdp"
-    card_view:cardElevation="@dimen/_2sdp"
-    card_view:cardUseCompatPadding="true">
+    <androidx.cardview.widget.CardView
 
-    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_7sdp"
         android:orientation="vertical"
-        android:layout_height="wrap_content">
+        card_view:cardBackgroundColor="#fff"
+        card_view:cardCornerRadius="@dimen/_2sdp"
+        card_view:cardElevation="@dimen/_2sdp"
+        card_view:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="@dimen/_5sdp">
+            android:orientation="vertical">
 
-            <com.velozion.myoitc.utilities.RoundedImageView
-                android:id="@+id/docter_image"
-                android:layout_width="@dimen/_80sdp"
-                android:profileImage="@{DoctorProfile.pic}"
-                android:layout_height="@dimen/_80sdp"
-                android:layout_gravity="center_vertical"
-                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/_5sdp">
+
+                <com.velozion.myoitc.utilities.RoundedImageView
+                    android:id="@+id/docter_image"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_gravity="center_vertical"
+                    android:profileImage="@{DoctorProfile.pic}" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_7sdp"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_3sdp">
+
+                    <com.chootdev.typefaced.TypeFacedTextView
+                        android:id="@+id/docter_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/_2sdp"
+                        android:text="@{DoctorProfile.name}"
+                        android:textColor="@color/title_color"
+                        android:textSize="@dimen/_14sdp"
+                        android:textStyle="bold"
+                        card_view:textView_font="@string/font_exo_regular" />
+
+                    <com.chootdev.typefaced.TypeFacedTextView
+                        android:id="@+id/docter_education"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/_2sdp"
+                        android:text="@{DoctorProfile.qualification}"
+                        android:textColor="@color/nontitle_color"
+                        android:textSize="@dimen/_10sdp"
+                        card_view:textView_font="@string/font_exo_regular" />
+
+
+                    <com.chootdev.typefaced.TypeFacedTextView
+                        android:id="@+id/docter_specilist"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/_1sdp"
+                        android:text="@{String.format(@string/quali, DoctorProfile.specialist,DoctorProfile.experience)}"
+                        android:textColor="@color/nontitle_color"
+                        android:textSize="@dimen/_12sdp"
+                        card_view:textView_font="@string/font_exo_regular" />
+
+                    <RatingBar
+                        android:id="@+id/docter_rating"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/_2sdp"
+                        android:rating="@{DoctorProfile.rating}" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@color/view_bg2" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_7sdp"
                 android:orientation="vertical"
-                android:padding="@dimen/_3sdp">
+                android:padding="@dimen/_2sdp">
 
                 <com.chootdev.typefaced.TypeFacedTextView
-                    android:id="@+id/docter_name"
+                    android:id="@+id/docter_hospital"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{DoctorProfile.name}"
-                    card_view:textView_font="@string/font_exo_regular"
-                    android:textStyle="bold"
-                    android:padding="@dimen/_2sdp"
-                    android:textColor="@color/title_color"
                     android:gravity="center_vertical"
-                    android:textSize="@dimen/_14sdp" />
-
-                <com.chootdev.typefaced.TypeFacedTextView
-                    android:id="@+id/docter_education"
-                    android:layout_width="match_parent"
-                    android:text="@{DoctorProfile.qualification}"
-                    card_view:textView_font="@string/font_exo_regular"
                     android:padding="@dimen/_2sdp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
+                    android:text="@{String.format(@string/hospitaladdress, DoctorProfile.hospital_name,DoctorProfile.area)}"
                     android:textColor="@color/nontitle_color"
-                    android:textSize="@dimen/_10sdp" />
-
-
-
-                <com.chootdev.typefaced.TypeFacedTextView
-                    android:id="@+id/docter_specilist"
-                    android:layout_width="match_parent"
-                    android:gravity="center_vertical"
-                    android:padding="@dimen/_1sdp"
-                    android:layout_height="wrap_content"
-                    card_view:textView_font="@string/font_exo_regular"
-                    android:text="@{String.format(@string/quali, DoctorProfile.specialist,DoctorProfile.experience)}"
-                    android:textColor="@color/nontitle_color"
-                    android:textSize="@dimen/_12sdp" />
-
-                <RatingBar
-                    android:id="@+id/docter_rating"
-                    style="?android:attr/ratingBarStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:rating="@{DoctorProfile.rating}"
-                    android:layout_gravity="center_vertical"
-                    android:padding="@dimen/_2sdp" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:background="@color/view_bg2"
-            android:layout_height="@dimen/_1sdp"/>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:padding="@dimen/_2sdp"
-            android:layout_marginLeft="@dimen/_7sdp"
-            android:layout_height="wrap_content">
-
-            <com.chootdev.typefaced.TypeFacedTextView
-                android:layout_width="match_parent"
-                android:gravity="center_vertical"
-                card_view:textView_font="@string/font_exo_regular"
-                android:padding="@dimen/_2sdp"
-                android:id="@+id/docter_hospital"
-                android:layout_height="wrap_content"
-                android:text="@{String.format(@string/hospitaladdress, DoctorProfile.hospital_name,DoctorProfile.area)}"
-                android:textColor="@color/nontitle_color"
-                android:textSize="@dimen/_12sdp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
-
-
-                <com.chootdev.typefaced.TypeFacedTextView
-                    android:layout_width="wrap_content"
-                    android:gravity="center_vertical"
-                    android:padding="@dimen/_2sdp"
-                    card_view:textView_font="@string/font_exo_regular"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ConsulationFee"
-                    android:textColor="@color/nontitle_color"
-                    android:textSize="@dimen/_12sdp" />
-
-
-                <com.chootdev.typefaced.TypeFacedTextView
-                    android:id="@+id/docter_fees"
-                    card_view:textView_font="@string/font_exo_bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_5sdp"
-                    android:gravity="center_vertical"
-                    android:padding="@dimen/_2sdp"
-                    android:text="@{String.format(@string/fees, DoctorProfile.fees)}"
-                    android:textColor="@color/title_color"
                     android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
+                    card_view:textView_font="@string/font_exo_regular" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
 
+                    <com.chootdev.typefaced.TypeFacedTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/_2sdp"
+                        android:text="@string/ConsulationFee"
+                        android:textColor="@color/nontitle_color"
+                        android:textSize="@dimen/_12sdp"
+                        card_view:textView_font="@string/font_exo_regular" />
 
+
+                    <com.chootdev.typefaced.TypeFacedTextView
+                        android:id="@+id/docter_fees"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/_2sdp"
+                        android:text="@{String.format(@string/fees, DoctorProfile.fees)}"
+                        android:textColor="@color/title_color"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold"
+                        card_view:textView_font="@string/font_exo_bold" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <com.chootdev.typefaced.TypeFacedTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/_2sdp"
+                        android:text="@string/doctornumber"
+                        android:textColor="@color/nontitle_color"
+                        android:textSize="@dimen/_12sdp"
+                        card_view:textView_font="@string/font_exo_regular" />
+
+
+                    <com.chootdev.typefaced.TypeFacedTextView
+                        android:id="@+id/docter_mobile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_2sdp"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/_2sdp"
+                        android:text="@{DoctorProfile.mobile}"
+                        android:textColor="@color/nontitle_color"
+                        android:textSize="@dimen/_12sdp"
+                        card_view:textView_font="@string/font_exo_regular" />
+
+
+                </LinearLayout>
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:orientation="horizontal">
 
 
-                <com.chootdev.typefaced.TypeFacedTextView
-                    android:layout_width="wrap_content"
-                    android:gravity="center_vertical"
-                    android:padding="@dimen/_2sdp"
-                    card_view:textView_font="@string/font_exo_regular"
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/doctornumber"
-                    android:textColor="@color/nontitle_color"
-                    android:textSize="@dimen/_12sdp" />
+                    android:layout_weight="1"
+                    card_view:cardElevation="@dimen/_2sdp">
 
+                    <TextView
+                        android:id="@+id/docter_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:background="@drawable/button4"
+                        android:gravity="center"
+                        android:padding="@dimen/_8sdp"
+                        android:text="@string/viewprofile"
+                        android:textColor="?attr/themeColorPrimary"
+                        android:textSize="@dimen/_12sdp" />
+                </androidx.cardview.widget.CardView>
 
-                <com.chootdev.typefaced.TypeFacedTextView
-                    android:layout_width="wrap_content"
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@{DoctorProfile.mobile}"
-                    card_view:textView_font="@string/font_exo_regular"
-                    android:layout_marginLeft="@dimen/_5sdp"
-                    android:layout_marginBottom="@dimen/_2sdp"
-                    android:padding="@dimen/_2sdp"
-                    android:id="@+id/docter_mobile"
-                    android:textColor="@color/nontitle_color"
-                    android:gravity="center_vertical"
-                    android:textSize="@dimen/_12sdp" />
+                    android:layout_weight="1"
+                    card_view:cardElevation="@dimen/_2sdp">
 
+                    <TextView
+                        android:id="@+id/docter_bookappointment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:background="@drawable/bg_full_"
+                        android:gravity="center"
+                        android:padding="@dimen/_8sdp"
+                        android:text="@string/bookappointment"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12sdp" />
+
+                </androidx.cardview.widget.CardView>
 
 
             </LinearLayout>
-        </LinearLayout>
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/_2sdp"
-            android:layout_marginLeft="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_2sdp"
-            android:layout_height="wrap_content">
-
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                card_view:cardElevation="@dimen/_2sdp"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/docter_profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/_5sdp"
-                    android:background="@drawable/button4"
-                    android:gravity="center"
-                    android:padding="@dimen/_8sdp"
-                    android:text="@string/viewprofile"
-                    android:textColor="?attr/themeColorPrimary"
-                    android:textSize="@dimen/_12sdp" />
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                card_view:cardElevation="@dimen/_2sdp"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/docter_bookappointment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/_5sdp"
-                    android:background="@drawable/bg_full_"
-                    android:gravity="center"
-                    android:padding="@dimen/_8sdp"
-                    android:text="@string/bookappointment"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp" />
-
-            </androidx.cardview.widget.CardView>
-
 
 
         </LinearLayout>
 
 
-
-
-    </LinearLayout>
-
-
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </layout>

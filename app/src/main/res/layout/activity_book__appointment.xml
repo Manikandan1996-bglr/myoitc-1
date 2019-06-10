@@ -37,7 +37,7 @@
             android:padding="@dimen/_5sdp"
             android:layout_marginTop="?actionBarSize"
             android:background="@color/white"
-            tools:context=".Activities.BookAppointment">
+            tools:context=".activities.BookAppointment">
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
@@ -64,58 +64,51 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:padding="@dimen/_2sdp"
+                        android:baselineAligned="false"
                         android:layout_margin="@dimen/_3sdp"
-                        android:layout_height="wrap_content">
+                        android:layout_weight="5"
+                        android:layout_height="0dp">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_weight="5"
+                            android:layout_width="0dp"
+                            android:layout_weight="3.5"
+                            android:orientation="vertical"
                             android:layout_height="wrap_content">
 
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_weight="3.5"
-                                android:orientation="vertical"
-                                android:layout_height="wrap_content">
-
-                                <com.velozion.myoitc.utilities.RoundedImageView
-                                    android:layout_width="@dimen/_80sdp"
-                                    android:id="@+id/bn_pic"
-                                    android:profileImage="@{DoctorProfile.pic}"
-                                    android:scaleType="centerCrop"
-                                    android:layout_height="@dimen/_80sdp" />
-
-                                <com.chootdev.typefaced.TypeFacedTextView
-                                    android:layout_width="wrap_content"
-                                    android:text="@{DoctorProfile.name}"
-                                    android:textSize="@dimen/_13sdp"
-                                    app:textView_font="@string/font_exo_regular"
-                                    android:textStyle="bold"
-                                    android:id="@+id/bn_doctname"
-                                    android:padding="@dimen/_2sdp"
-                                    android:layout_marginTop="@dimen/_3sdp"
-                                    android:textColor="@color/title_color"
-                                    android:layout_height="wrap_content" />
-
-                            </LinearLayout>
+                            <com.velozion.myoitc.utilities.RoundedImageView
+                                android:layout_width="@dimen/_80sdp"
+                                android:id="@+id/bn_pic"
+                                android:profileImage="@{DoctorProfile.pic}"
+                                android:scaleType="centerCrop"
+                                android:layout_height="@dimen/_80sdp" />
 
                             <com.chootdev.typefaced.TypeFacedTextView
-                                android:id="@+id/bn_fees"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="1.5"
+                                android:layout_width="wrap_content"
+                                android:text="@{DoctorProfile.name}"
+                                android:textSize="@dimen/_13sdp"
+                                app:textView_font="@string/font_exo_regular"
+                                android:textStyle="bold"
+                                android:id="@+id/bn_doctname"
                                 android:padding="@dimen/_2sdp"
-                                android:gravity="center"
-                                android:text="@{String.format(@string/fees, DoctorProfile.fees)}"
-                                android:textColor="?attr/themeColorPrimary"
-                                android:textSize="@dimen/_18sdp"
-                                app:textView_font="@string/font_exo_bold"
-                                android:textStyle="bold" />
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:textColor="@color/title_color"
+                                android:layout_height="wrap_content" />
 
                         </LinearLayout>
+
+                        <com.chootdev.typefaced.TypeFacedTextView
+                            android:id="@+id/bn_fees"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.5"
+                            android:padding="@dimen/_2sdp"
+                            android:gravity="center"
+                            android:text="@{String.format(@string/fees, DoctorProfile.fees)}"
+                            android:textColor="?attr/themeColorPrimary"
+                            android:textSize="@dimen/_18sdp"
+                            app:textView_font="@string/font_exo_bold"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
 
@@ -247,7 +240,7 @@
                             <androidx.recyclerview.widget.RecyclerView
                                 android:layout_width="match_parent"
                                 android:id="@+id/bn_timingrecyclerview"
-                                android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+                                android:layout_height="wrap_content"/>
 
 
 

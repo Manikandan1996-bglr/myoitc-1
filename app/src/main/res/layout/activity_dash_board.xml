@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
     android:layout_height="match_parent"
-    tools:context=".Activities.DashBoard">
+    tools:context=".activities.DashBoard">
 
 
 

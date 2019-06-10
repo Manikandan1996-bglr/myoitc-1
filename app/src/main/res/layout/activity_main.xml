@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white"
     android:layout_height="match_parent"
-    tools:context=".Activities.SplashScreen">
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".activities.SplashScreen">
 
     <ImageView
         android:layout_width="@dimen/_100sdp"
-        android:src="@drawable/myoticlogo"
+        android:layout_height="@dimen/_100sdp"
         android:layout_centerInParent="true"
-        android:layout_height="@dimen/_100sdp" />
+        android:src="@drawable/myoticlogo"
+        tools:ignore="ContentDescription" />
 
 </RelativeLayout>

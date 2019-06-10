@@ -16,7 +16,7 @@ public class AnimUtils {
         AnimatorSet animatorSet=new AnimatorSet();
 
 
-        ObjectAnimator objectAnimator=ObjectAnimator.ofFloat(viewToAnimate,"translationY",goesdown==true?200:-200,0);
+        ObjectAnimator objectAnimator=ObjectAnimator.ofFloat(viewToAnimate,"translationY", goesdown ?200:-200,0);
 
         objectAnimator.setDuration(1000);
 

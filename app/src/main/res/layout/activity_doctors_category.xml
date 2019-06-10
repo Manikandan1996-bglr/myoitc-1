@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusableInTouchMode="true"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:focusableInTouchMode="true">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -22,8 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?actionBarSize"
-        android:background="@color/white"
-       >
+        android:background="@color/white">
 
 
         <LinearLayout
@@ -47,6 +45,7 @@
                     android:drawableLeft="@drawable/icon_search"
                     android:drawablePadding="@dimen/_2sdp"
                     android:hint="@string/hint"
+                    android:inputType="text"
                     android:padding="@dimen/_10sdp"
                     android:textSize="@dimen/_14sdp" />
 

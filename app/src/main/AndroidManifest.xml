@@ -18,32 +18,34 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.DisplayFullImage"
-            android:theme="@android:style/Theme.Translucent"
-          ></activity>
+
+        <activity android:name=".activities.GpsActivity"/>
+        <activity android:name=".activities.InternetActivity" />
         <activity
-            android:name=".Activities.HomeActivity"
+            android:name=".activities.DisplayFullImage"
+            android:theme="@android:style/Theme.Translucent" />
+        <activity
+            android:name=".activities.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.DoctorsOnMap" />
-        <activity android:name=".Activities.BookAppointment"
-            />
-        <activity android:name=".Activities.BookingStatus" />
-        <activity android:name=".Activities.DoctorsCategory" />
-        <activity android:name=".Activities.DocterDetails" />
-        <activity android:name=".Activities.DoctorsList_Activity" />
+        <activity android:name=".activities.DoctorsOnMap" />
+        <activity android:name=".activities.BookAppointment" />
+        <activity android:name=".activities.BookingStatus" />
+        <activity android:name=".activities.DoctorsCategory" />
+        <activity android:name=".activities.DocterDetails" />
+        <activity android:name=".activities.DoctorsList_Activity" />
         <activity
-            android:name=".Activities.Profile_Activity"
+            android:name=".activities.Profile_Activity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".Activities.HistoryDetails" />
+        <activity android:name=".activities.HistoryDetails" />
         <activity
-            android:name=".Activities.DashBoard"
+            android:name=".activities.DashBoard"
             android:theme="@style/AppTheme2" />
         <activity
-            android:name=".Activities.LoginActivity"
+            android:name=".activities.LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".Activities.SplashScreen"
+            android:name=".activities.SplashScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

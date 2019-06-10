@@ -6,7 +6,7 @@
     android:focusableInTouchMode="true"
     android:background="@color/white"
     android:layout_height="match_parent"
-    tools:context=".Activities.LoginActivity">
+    tools:context=".activities.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,6 +19,7 @@
         <ImageView
             android:layout_width="@dimen/_120sdp"
             android:src="@drawable/myoticlogo"
+            tools:ignore="ContentDescription"
             android:layout_gravity="center"
             android:layout_height="@dimen/_50sdp" />
 
@@ -31,29 +32,47 @@
             android:text="@string/logintoaccount"
             android:layout_height="wrap_content" />
 
-
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:textColorHint="@color/lightblack"
-            android:hint="@string/Username"
-            android:textSize="@dimen/_12sdp"
-            android:id="@+id/login_emailid"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:layout_height="wrap_content" />
 
-        <EditText
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:textSize="@dimen/_12sdp"
+                android:id="@+id/login_emailid"
+                android:inputType="text"
+                android:hint="@string/Username"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:layout_height="wrap_content" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:textColorHint="@color/lightblack"
-            android:hint="@string/Password"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:inputType="textPassword"
-            android:id="@+id/login_password"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textSize="@dimen/_12sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:layout_height="wrap_content" />
+            app:passwordToggleEnabled="true"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:hint="@string/Password"
+                android:inputType="textPassword"
+                android:id="@+id/login_password"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
 
         <Button
             android:layout_width="match_parent"
