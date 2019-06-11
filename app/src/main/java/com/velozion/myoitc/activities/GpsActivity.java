@@ -50,6 +50,8 @@ public class GpsActivity extends AppCompatActivity {
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
 
+        enable=findViewById(R.id.gps_enable);
+
         enable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

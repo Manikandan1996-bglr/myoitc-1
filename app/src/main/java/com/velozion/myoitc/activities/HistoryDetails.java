@@ -191,13 +191,13 @@ public class HistoryDetails extends BaseActivity {
                     switch (status) {
                         case "REQUEST_DENIED":
 
-                            Toast.makeText(HistoryDetails.this, "" + status, Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(HistoryDetails.this, "" + status, Toast.LENGTH_SHORT).show();
                             break;
                         case "ZERO_RESULTS":
-                            Toast.makeText(HistoryDetails.this, "Results Not Found", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(HistoryDetails.this, "Results Not Found", Toast.LENGTH_SHORT).show();
                             break;
                         case "OVER_QUERY_LIMIT":
-                            Toast.makeText(HistoryDetails.this, "" + status, Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(HistoryDetails.this, "" + status, Toast.LENGTH_SHORT).show();
 
                             break;
                         default:
