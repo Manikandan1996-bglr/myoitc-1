@@ -10,6 +10,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.velozion.myoitc.BaseActivity;
 import com.velozion.myoitc.R;
 import com.velozion.myoitc.databinding.DoctorProfileLayoutBinding;
@@ -37,6 +38,7 @@ public class DocterDetails extends BaseActivity {
                 intent.putExtra("data", doctorProfileData);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -62,7 +64,10 @@ public class DocterDetails extends BaseActivity {
                 googleMap.getUiSettings().setAllGesturesEnabled(false);*/
 
 
+
+
                 LatLng curentloc = new LatLng(Double.parseDouble(doctorProfileData.getLat()), Double.parseDouble(doctorProfileData.getLang()));
+                googleMap.addMarker(new MarkerOptions().position(curentloc));
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(curentloc, 15));
                /* googleMap.addMarker(new MarkerOptions().position(curentloc));
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(curentloc, 15));
@@ -76,5 +81,31 @@ public class DocterDetails extends BaseActivity {
        /* String data = "https://maps.googleapis.com/maps/api/staticmap?&zoom=14&size=330x130&maptype=roadmap&markers=color:green%7Clabel:G%7C" + doctorProfileData.getLat() + "," + doctorProfileData.getLang() + "-38.401606&key=AIzaSyAWSNJ2-Kdk2aNtM1aqJpaLGhtL3ZZpCMk";
         Utils.ImageLoaderInitialization(getApplicationContext());
         Utils.LoadImage(data, staticmap);*/
+    }
+
+
+    @Override
+    public void onResume() {
+        profileLayoutBinding.pdHospotalLocPic.onResume();
+        super.onResume();
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        profileLayoutBinding.pdHospotalLocPic.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        profileLayoutBinding.pdHospotalLocPic.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        profileLayoutBinding.pdHospotalLocPic.onLowMemory();
     }
 }

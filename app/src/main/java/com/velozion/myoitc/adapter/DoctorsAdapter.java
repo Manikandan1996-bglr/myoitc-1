@@ -5,17 +5,16 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RatingBar;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.velozion.myoitc.AnimUtils;
+import com.velozion.myoitc.R;
 import com.velozion.myoitc.activities.BookAppointment;
 import com.velozion.myoitc.activities.DisplayFullImage;
 import com.velozion.myoitc.activities.DocterDetails;
-import com.velozion.myoitc.AnimUtils;
-import com.velozion.myoitc.R;
 import com.velozion.myoitc.databinding.ItemDoctersBinding;
 import com.velozion.myoitc.db.DoctorProfileData;
 
@@ -156,14 +155,12 @@ public class DoctorsAdapter extends RecyclerView.Adapter<DoctorsAdapter.DoctorsV
     class DoctorsViewHolder extends RecyclerView.ViewHolder {
 
 
-        RatingBar ratingBar;
         ItemDoctersBinding itemDoctersBinding;
 
         public DoctorsViewHolder(ItemDoctersBinding doctersBinding) {
             super(doctersBinding.getRoot());
             itemDoctersBinding = doctersBinding;
 
-            // ratingBar = (RatingBar) itemView.findViewById(R.id.docter_rating);
 
         }
     }

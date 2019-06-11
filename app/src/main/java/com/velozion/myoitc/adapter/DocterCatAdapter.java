@@ -37,28 +37,14 @@ public class DocterCatAdapter extends RecyclerView.Adapter<DocterCatAdapter.Doct
     int[] images;
     int pos = 0;
 
-    DisplayImageOptions options;
-    ImageLoaderConfiguration imgconfig;
+
 
     public DocterCatAdapter(Context context, ArrayList<HashMap<String, String>> data, int[] imgs) {
         this.context = context;
         this.data = data;
         images = imgs;
 
-        options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.icon_user)
-                .showImageForEmptyUri(R.drawable.icon_user)
-                .showImageOnFail(R.drawable.icon_user)
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .considerExifParams(true)
-                .displayer(new SimpleBitmapDisplayer())
-                .imageScaleType(ImageScaleType.NONE)
-                .build();
 
-        imgconfig = new ImageLoaderConfiguration.Builder(context)
-                .build();
-        ImageLoader.getInstance().init(imgconfig);
 
     }
 

@@ -3,6 +3,7 @@ package com.velozion.myoitc;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.location.LocationManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -30,11 +31,11 @@ public class Utils {
     public static String HistoryApi = "http://www.myoitc.com/beta/?option=com_ajax&group=cmajax&plugin=cmmap&type=getmylocation&format=json&ignoreMessages=0";
     public static String ProfileApi = "http://www.myoitc.com/beta/?option=com_ajax&group=cmajax&plugin=cmmap&type=getProfile&format=json";
     public static String DocterListApi = "https://script.google.com/macros/s/AKfycbxOLElujQcy1-ZUer1KgEvK16gkTLUqYftApjNCM_IRTL3HSuDk/exec?id=1s8a9XLIMB-jChvQIGhli5579HGme_WMKR_enz08rce0&sheet=Sheet1";
-    //"https://api.myjson.com/bins/pdbsb";
-    //"https://api.myjson.com/bins/fmufb";
+
     Context context;
     static DisplayImageOptions options;
     static ImageLoaderConfiguration imgconfig;
+    static LocationManager locationManager;
 
     public static void displayProgressDailog(Context context) {
 
@@ -90,5 +91,19 @@ public class Utils {
         ImageLoader.getInstance().displayImage(url, imageView);
     }
 
+    public static boolean checkLocationEnabled(Context context)
+    {
+        locationManager=(LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
+
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+
+           return true;
+        } else {//not enabled
+
+          return false;
+
+        }
+
+    }
 
 }

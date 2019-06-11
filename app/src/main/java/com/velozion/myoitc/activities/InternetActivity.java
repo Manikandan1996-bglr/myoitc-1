@@ -20,7 +20,6 @@ import java.util.Calendar;
 
 public class InternetActivity extends AppCompatActivity {
 
-    ImageView cancel;
     Button enable;
     BroadcastReceiver receiver;
 
@@ -31,18 +30,7 @@ public class InternetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_internet);
 
 
-        cancel = findViewById(R.id.ic_cancelimg);
         enable = findViewById(R.id.ic_enable);
-
-
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                setResult(RESULT_CANCELED);
-                finish();
-            }
-        });
 
 
         enable.setOnClickListener(new View.OnClickListener() {

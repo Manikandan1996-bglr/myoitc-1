@@ -9,17 +9,7 @@
     android:layout_height="match_parent">
 
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        tools:ignore="ContentDescription"
-        android:layout_margin="@dimen/_3sdp"
-        android:padding="@dimen/_2sdp"
-        android:id="@+id/gps_cancel"
-        android:src="@drawable/icon_cancel"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -58,7 +48,7 @@
         <com.chootdev.typefaced.TypeFacedTextView
             android:layout_width="match_parent"
             android:textSize="@dimen/_14sdp"
-            app:textView_font="@string/enablegps"
+            app:textView_font="@string/font_exo_regular"
             android:layout_gravity="center"
             android:gravity="center"
             android:padding="@dimen/_5sdp"

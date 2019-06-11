@@ -2,6 +2,7 @@ package com.velozion.myoitc.activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +33,7 @@ import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.velozion.myoitc.BaseActivity;
 import com.velozion.myoitc.R;
+import com.velozion.myoitc.Utils;
 import com.velozion.myoitc.viewModel.MyViewModel;
 import com.velozion.myoitc.db.DoctorProfileData;
 
@@ -68,6 +70,9 @@ public class DoctorsOnMap extends BaseActivity {
                 mMap.getUiSettings().setZoomControlsEnabled(true);
                 mMap.getUiSettings().setZoomGesturesEnabled(true);
 
+
+                checkConnection();
+
                 LoadDoctors();
 
 
@@ -76,6 +81,18 @@ public class DoctorsOnMap extends BaseActivity {
 
         setToolbarRequired(true);
         setToolbarTitle(getResources().getString(R.string.activity_doctors_list));
+
+    }
+
+    private void checkConnection() {
+
+
+        if (!Utils.checkLocationEnabled(this))
+        {
+
+            startActivity(new Intent(getApplicationContext(),GpsActivity.class));
+        }
+
 
     }
 

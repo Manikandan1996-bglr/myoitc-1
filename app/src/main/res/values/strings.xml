@@ -32,7 +32,7 @@
     <string name="doctornumber">Mobile :</string>
     <string name="hint">Ex: Doctors</string>
     <string name="appointmentconfirm">Appointment Confirmed</string>
-    <string name="goback">Go Back</string>
+    <string name="goback">Go Home</string>
     <string name="doctordetails">Doctor Details</string>
     <string name="morning">Morning</string>
     <string name="afternoon">Afternoon</string>

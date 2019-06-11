@@ -1,5 +1,6 @@
 package com.velozion.myoitc.activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,7 +47,6 @@ public class HistoryDetails extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //setTheme(R.style.CustomeTheme5);
         super.onCreate(savedInstanceState);
         setToolbarRequired(true);
         setToolbarTitle(getResources().getString(R.string.activity_historydetails));
@@ -68,6 +68,8 @@ public class HistoryDetails extends BaseActivity {
                 mMap.getUiSettings().setMapToolbarEnabled(false);
                 mMap.getUiSettings().setZoomControlsEnabled(true);
                 mMap.getUiSettings().setZoomGesturesEnabled(true);
+
+                checkGpsConnection();
 
 
                 if (!historyData.getCheckinLat().equals("null") && !historyData.getCheckinLang().equals("null")) {
@@ -153,6 +155,15 @@ public class HistoryDetails extends BaseActivity {
 
         historyDetailsBinding.setHistory(historyData);
 
+
+    }
+
+    private void checkGpsConnection() {
+
+        if (!Utils.checkLocationEnabled(this))
+        {
+            startActivity(new Intent(getApplicationContext(),GpsActivity.class));
+        }
 
     }
 

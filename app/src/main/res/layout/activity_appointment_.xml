@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:fitsSystemWindows="true">
 
@@ -49,11 +50,13 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-                <ImageView
+                <com.airbnb.lottie.LottieAnimationView
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="@dimen/_100sdp"
                     android:layout_gravity="center"
-                    android:contentDescription="@string/imagedesc"
+                    app:lottie_loop="true"
+                    app:lottie_autoPlay="true"
+                    app:lottie_fileName="waterlemon.json"
                     android:src="@drawable/icon_nodata" />
 
                 <TextView

@@ -32,7 +32,7 @@ import java.util.Calendar;
 
 public class GpsActivity extends AppCompatActivity {
 
-    ImageView cancel;
+
     Button enable;
     LocationManager locationManager;
 
@@ -48,20 +48,6 @@ public class GpsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gps);
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-
-        cancel = findViewById(R.id.gps_cancel);
-        enable = findViewById(R.id.gps_enable);
-
-
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                finish();
-            }
-        });
 
 
         enable.setOnClickListener(new View.OnClickListener() {

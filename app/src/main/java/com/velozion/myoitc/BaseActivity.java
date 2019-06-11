@@ -50,6 +50,8 @@ public class BaseActivity extends AppCompatActivity {
         ThemeBasedOnTime();
         super.onCreate(savedInstanceState);
 
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
         overridePendingTransition(R.anim.right_in, R.anim.left_out);
 
 
@@ -81,7 +83,7 @@ public class BaseActivity extends AppCompatActivity {
 
         registerReceiver(receiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
 
-        HandleGPSConnection();
+      //  HandleGPSConnection();
 
 
     }
@@ -95,7 +97,7 @@ public class BaseActivity extends AppCompatActivity {
 
     private void HandleGPSConnection() {
 
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    Activity#requestPermissions
@@ -126,6 +128,7 @@ public class BaseActivity extends AppCompatActivity {
             @Override
             public void onProviderDisabled(String provider) {
 
+                Log.d("Response","gps trigger : "+provider);
                 showGpsDialog();
             }
         });
