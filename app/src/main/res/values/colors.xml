@@ -1,50 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#009FAF</color>
-    <color name="colorPrimaryDark">#247F88</color>
-    <color name="colorAccent">#D81B60</color>
-    <color name="transparent">#80FFFFFF</color>
+    <color name="colorPrimary">#3BBCB1</color>
+    <color name="colorPrimaryDark">#012638</color>
+    <color name="colorAccent">#3BBCB1</color>
+
     <color name="transparent2">#80000000</color>
-    <color name="background">#E9E3E3</color>
-    <color name="background2">#c5c5c5</color>
+    <color name="txt_color">#141823</color>
+    <color name="nontitle_color">#333333</color>
 
-    <color name="statusbar_light">#60C3CE</color>
-
-    <color name="white">#fff</color>
-    <color name="black">#000</color>
-    <color name="lightblack">#3D3A3A</color>
-    <color name="greyblack">#747171</color>
-    <color name="title_color">#131212</color>
-    <color name="nontitle_color">#6F6F71</color>
-    <color name="layout_bg2">#4F8FC4</color>
-
-    <color name="view_bg">#F1EDED</color>
-    <color name="view_bg2">#E4DDDD</color>
-
-    <color name="bacground">#c5c5c5</color>
-
-    <color name="colorPurple">#6133B1</color>
-    <color name="colorPurpleT">#648753C2</color>
-
-    <color name="colorBlue">#2FB4FF</color>
-    <color name="colorBlueT">#6475B7DF</color>
-
-    <color name="colorPink">#B257C2</color>
-    <color name="colorPinkT">#B87AC2</color>
-
+    <color name="placeholder_bg">#F3F1F1</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
     <color name="colorGreen">#40B845</color>
-    <color name="colorGreenT">#77CA7A</color>
+    <color name="grey">#726F70</color>
+    <color name="red">#F10909</color>
 
-    <color name="colorOrange">#FF5722</color>
-    <color name="colorOrangeT">#DB8469</color>
+    <color name="employeeColorPrimaryDark">#24324B</color>
+    <color name="managerColorPrimaryDark">#0E5B73</color>
+    <color name="supervisorColorPrimaryDark">#045283</color>
+    <color name="providerColorPrimaryDark">#00416E</color>
+    <color name="clientColorPrimaryDark">#294E89</color>
 
-    <color name="colorYellow">#8B9622</color>
-    <color name="colorYellowT">#BFC486</color>
 
-    <color name="colorNevyBlue">#243FA3</color>
-    <color name="colorNevyBlueT">#4961B8</color>
 
-    <color name="colorNightMode">#2E2E30</color>
-    <color name="colorNightModeT">#555555</color>
+    <color name="mtrl_textinput_default_box_stroke_color">#fff</color>
 
 </resources>

@@ -1,7 +1,6 @@
 package com.velozion.myoitc.viewModel;
 
 import android.content.Context;
-import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -15,10 +14,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.velozion.myoitc.CustomRequest;
-import com.velozion.myoitc.PreferenceUtil;
 import com.velozion.myoitc.Utils;
-import com.velozion.myoitc.db.DoctorProfileData;
-import com.velozion.myoitc.db.HistoryData;
+import com.velozion.myoitc.bean.CheckInFormClientData;
+import com.velozion.myoitc.bean.CheckInFormServiceData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,297 +28,102 @@ import java.util.Map;
 
 public class MyViewModel extends ViewModel {
 
-    public MutableLiveData<String> Succesmessage = new MutableLiveData<>();
-    public MutableLiveData<String> Failuremessage = new MutableLiveData<>();
-    public MutableLiveData<String> jsonError = new MutableLiveData<>();
-    public MutableLiveData<String> volleyError = new MutableLiveData<>();
+    private MutableLiveData<String> Failuremessage = new MutableLiveData<>();
+    private MutableLiveData<String> jsonError = new MutableLiveData<>();
+    private MutableLiveData<String> volleyError = new MutableLiveData<>();
 
-    public MutableLiveData<ArrayList<HistoryData>> HistoryList;
-    public MutableLiveData<ArrayList<DoctorProfileData>> DoctersData;
-    public MutableLiveData<HashMap<String, String>> Profile;
+    private MutableLiveData<ArrayList<CheckInFormClientData>> ClientList;
+    private MutableLiveData<ArrayList<CheckInFormServiceData>> ServicesList;
 
 
-    public LiveData<ArrayList<HistoryData>> getHistoryList(final Context context) {
+    //CLIENT LISTING FOR CHECK-IN FORM
+    public LiveData<ArrayList<CheckInFormClientData>> getClientsList(final Context context) {
 
-        if (HistoryList == null) {
-            HistoryList = new MutableLiveData<>();
-
-            final ArrayList<HistoryData> Data = new ArrayList<>();
-
-
-            Map<String, String> headers = new HashMap<>();
-            String credentials = PreferenceUtil.getData("username", context) + ":" + PreferenceUtil.getData("password", context);
-            String auth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
-            headers.put("Authorization", auth);
-
+        if (ClientList == null) {
+            ClientList = new MutableLiveData<>();
+            final ArrayList<CheckInFormClientData> Data = new ArrayList<>();
             Map<String, String> jsonParams = new HashMap<>();
+            RequestQueue requestQueue = Volley.newRequestQueue( context );
 
-
-            RequestQueue requestQueue = Volley.newRequestQueue(context);
-
-            CustomRequest customRequest = new CustomRequest(Request.Method.POST, Utils.HistoryApi, jsonParams, headers,
+            CustomRequest customRequest = new CustomRequest( Request.Method.GET, Utils.ClientListAPI
+                    , jsonParams,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            Log.d("ResponseS", response.toString());
+                            Log.d( "ResponseS", response.toString() );
                             try {
-                                if (response.getString("success").equalsIgnoreCase("true")) {
-
-
-                                    if (response.getJSONArray("data") != null)//sucess
-                                    {
-
-                                    /*
-                                    {
-            "in_location": "bangalore",
-            "out_location": "bangalore",
-            "in_lat": "10.000000",
-            "in_lang": "20.000000",
-            "out_lat": "10.000000",
-            "out_lang": "20.000000",
-            "check_in": "2012-12-01 15:20:00",
-            "check_out": "2012-12-01 16:20:00"
-        }
-                                     */
-
-
-                                        JSONArray jsonArray = response.getJSONArray("data");
-
-                                        for (int i = 0; i < jsonArray.length(); i++) {
-
-
-                                            JSONObject object = jsonArray.getJSONObject(i);
-
-                                            HistoryData historyData = new HistoryData(context);
-                                            historyData.setCheckinloc(object.getString("in_location"));
-                                            historyData.setCheckintime(object.getString("check_in"));
-                                            historyData.setCheckinLat(object.getString("in_lat"));
-                                            historyData.setCheckinLang(object.getString("in_lang"));
-
-                                            historyData.setCheckoutloc(object.getString("out_location"));
-                                            historyData.setCheckouttime(object.getString("check_out"));
-                                            historyData.setCheckoutLan(object.getString("out_lat"));
-                                            historyData.setCheckoutLang(object.getString("out_lang"));
-
-                                            Data.add(historyData);
-
-                                        }
-
-
-                                        HistoryList.setValue(Data);
-
-                                    } else {
-
-                                        String msg = response.getJSONObject("messages").getJSONArray("error").get(0).toString();
-                                        Toast.makeText(context, "" + msg, Toast.LENGTH_SHORT).show();
-                                        Failuremessage.setValue(msg);
-
-                                    }
-
-
-                                } else {
-
-
-                                    Toast.makeText(context, "" + response.getString("message"), Toast.LENGTH_SHORT).show();
-                                    Failuremessage.setValue(response.getString("mesaage"));
-
-                                }
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-
-                                Toast.makeText(context, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                jsonError.postValue(e.getMessage());
-                            }
-
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(context, "" + error.getMessage(), Toast.LENGTH_SHORT).show();
-                            volleyError.postValue(error.getMessage());
-                        }
-                    });
-            requestQueue.add(customRequest);
-
-        }
-
-        return HistoryList;
-    }
-
-    public LiveData<ArrayList<DoctorProfileData>> getDoctersList(final Context context) {
-
-        if (DoctersData == null) {
-            DoctersData = new MutableLiveData<>();
-
-            final ArrayList<DoctorProfileData> Data = new ArrayList<>();
-
-            Map<String, String> jsonParams = new HashMap<>();
-
-            RequestQueue requestQueue = Volley.newRequestQueue(context);
-
-            CustomRequest customRequest = new CustomRequest(Request.Method.GET, Utils.DocterListApi, jsonParams,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            Log.d("ResponseS", response.toString());
-                            try {
-                                //  if (response.getString("success").equalsIgnoreCase("true")){
-
-                                if (response.getJSONArray("Sheet1") != null)//sucess
-                                {
-                                    /*
-                                    "name":"Kumaranlakkur",
-"pic":"https://imagevars.gulfnews.com/2019/05/21/Indian-captain-Virat-Kohli_16ada7d3e5d_large.jpg",
-"qualification":"MBBS MS Mphil",
-"specialist":"Cardiography",
-"experience":"19 years",
-"about":"Iam Kumaranwith an 14 years of expirence in cardiology",
-"hospital_name":"Soukya Hospital",
-"area":"Channasandra",
-"fees":"400",
-"mobile":"9738913885",
-"email":"jagadishlakkur@gmail.com",
-"rating":"4.0",
-"lat":"12.756",
-"lang":"72.756",
-"avaliable_timings":"9:00 AM - 7:00 PM"
-                                     */
-                                    JSONArray jsonArray = response.getJSONArray("Sheet1");
+                                if (response.getJSONArray( "Clients" ) != null) {
+                                    JSONArray jsonArray = response.getJSONArray( "Clients" );
 
                                     for (int i = 0; i < jsonArray.length(); i++) {
+                                        JSONObject object = jsonArray.getJSONObject( i );
 
-                                        JSONObject object = jsonArray.getJSONObject(i);
+                                        CheckInFormClientData checkInFormClientData = new CheckInFormClientData();
+                                        checkInFormClientData.setId( object.optString( "id" ) );
+                                        checkInFormClientData.setName( object.optString( "name" ) );
 
-
-                                        DoctorProfileData doctorProfileData = new DoctorProfileData(context);
-                                        doctorProfileData.setName(object.getString("name"));
-                                        doctorProfileData.setPic(object.getString("pic"));
-                                        doctorProfileData.setQualification(object.getString("qualification"));
-                                        doctorProfileData.setSpecialist(object.getString("specialist"));
-                                        doctorProfileData.setExperience(object.getString("experience"));
-                                        doctorProfileData.setAbout(object.getString("about"));
-                                        doctorProfileData.setHospital_name(object.getString("hospital_name"));
-                                        doctorProfileData.setArea(object.getString("area"));
-                                        doctorProfileData.setFees(object.getString("fees"));
-                                        doctorProfileData.setMobile(object.getString("mobile"));
-                                        doctorProfileData.setEmail(object.getString("email"));
-                                        doctorProfileData.setRating(object.getString("rating"));
-                                        doctorProfileData.setLat(object.getString("lat"));
-                                        doctorProfileData.setLang(object.getString("lang"));
-                                        doctorProfileData.setAvaliable_timings(object.getString("avaliable_timings"));
-                                        Data.add(doctorProfileData);
-
+                                        Data.add( checkInFormClientData );
                                     }
-
-
-                                    DoctersData.setValue(Data);
-
+                                    ClientList.setValue( Data );
                                 } else {
-
-
-                                    String msg = response.getJSONObject("messages").getJSONArray("error").get(0).toString();
-                                    Toast.makeText(context, "" + msg, Toast.LENGTH_SHORT).show();
-                                    Failuremessage.setValue(msg);
-
+                                    String msg = response.getJSONObject( "messages" ).getJSONArray( "error" ).get( 0 ).toString();
+                                    Toast.makeText( context, "" + msg, Toast.LENGTH_SHORT ).show();
+                                    Failuremessage.setValue( msg );
                                 }
-
-
-                                //}
-                               /* else{
-
-
-                                    Toast.makeText(context, ""+response.getString("message"), Toast.LENGTH_SHORT).show();
-                                    Failuremessage.setValue(response.getString("mesaage"));
-
-                                }*/
-
                             } catch (JSONException e) {
                                 e.printStackTrace();
-
-                                Toast.makeText(context, "JsonException" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                jsonError.postValue(e.getMessage());
+                                Toast.makeText( context, "JsonException" + e.getMessage(), Toast.LENGTH_SHORT ).show();
+                                jsonError.postValue( e.getMessage() );
                             }
-
                         }
                     },
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.d("ResponseE", volleyError.toString());
-                            Toast.makeText(context, "VolleyExce" + error.getMessage(), Toast.LENGTH_SHORT).show();
-                            volleyError.postValue(error.getMessage());
+                            Log.d( "ResponseE", volleyError.toString() );
+                            Toast.makeText( context, "VolleyExce" + error.getMessage(), Toast.LENGTH_SHORT ).show();
+                            volleyError.postValue( error.getMessage() );
                         }
-                    });
-            requestQueue.add(customRequest);
-
+                    } );
+            requestQueue.add( customRequest );
         }
-
-        return DoctersData;
+        return ClientList;
     }
-
-    public LiveData<HashMap<String, String>> getProfile(final Context context) {
-
-        if (Profile == null) {
-            Profile = new MutableLiveData<>();
-
-            Map<String, String> headers = new HashMap<>();
-            String credentials = PreferenceUtil.getData("username", context) + ":" + PreferenceUtil.getData("password", context);
-            String auth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
-            headers.put("Authorization", auth);
-
+    //SERVICE LISTING FOR CHECK-IN FORM
+    public LiveData<ArrayList<CheckInFormServiceData>> getServicesList(final Context context) {
+        if (ServicesList == null) {
+            ServicesList = new MutableLiveData<>();
+            final ArrayList<CheckInFormServiceData> Data = new ArrayList<>();
             Map<String, String> jsonParams = new HashMap<>();
-            jsonParams.put("userid", PreferenceUtil.getData("userid", context));
-
-
-            Log.d("RespondedData", jsonParams.toString() + " headers: \n" + headers);
-
-            RequestQueue requestQueue = Volley.newRequestQueue(context);
-
-            CustomRequest customRequest = new CustomRequest(Request.Method.POST, Utils.ProfileApi, jsonParams, headers,
+            RequestQueue requestQueue = Volley.newRequestQueue( context );
+            CustomRequest customRequest = new CustomRequest( Request.Method.GET, Utils.ServicesListAPI
+                    , jsonParams,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            Log.d("ResponseS", response.toString());
+                            Log.d( "ResponseS", response.toString() );
                             try {
-                                if (response.getString("success").equalsIgnoreCase("true")) {
+                                if (response.getJSONArray( "Services" ) != null) {
+                                    JSONArray jsonArray = response.getJSONArray( "Services" );
+                                    for (int i = 0; i < jsonArray.length(); i++) {
+                                        JSONObject object = jsonArray.getJSONObject( i );
+                                        CheckInFormServiceData checkInFormServiceData = new CheckInFormServiceData();
+                                        checkInFormServiceData.setId( object.optString( "id" ) );
+                                        checkInFormServiceData.setName( object.optString( "name" ) );
 
-
-                                    if (response.getJSONObject("data") != null)//sucess
-                                    {
-
-                                        JSONObject object = response.getJSONObject("data");
-
-                                        HashMap<String, String> data = new HashMap<>();
-                                        data.put("id", object.getString("id"));
-                                        data.put("name", object.getString("name"));
-                                        data.put("username", object.getString("username"));
-                                        data.put("email", object.getString("email"));
-
-
-                                        Profile.setValue(data);
-
-                                    } else {
-
-                                        String msg = response.getJSONObject("messages").getJSONArray("error").get(0).toString();
-                                        Toast.makeText(context, "" + msg, Toast.LENGTH_SHORT).show();
-                                        Failuremessage.setValue(msg);
+                                        Data.add( checkInFormServiceData );
                                     }
-
-
+                                    ServicesList.setValue( Data );
                                 } else {
-
-                                    String msg = response.getString("message");
-                                    Failuremessage.setValue(msg);
-                                    Toast.makeText(context, "" + msg, Toast.LENGTH_SHORT).show();
-
+                                    String msg = response.getJSONObject( "messages" ).getJSONArray( "error" ).get( 0 ).toString();
+                                    Toast.makeText( context, "" + msg, Toast.LENGTH_SHORT ).show();
+                                    Failuremessage.setValue( msg );
                                 }
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
-
-                                Toast.makeText(context, "Json Error:\n" + e.getMessage(), Toast.LENGTH_LONG).show();
-                                jsonError.setValue(e.getMessage());
+                                Toast.makeText( context, "JsonException" + e.getMessage(), Toast.LENGTH_SHORT ).show();
+                                jsonError.postValue( e.getMessage() );
                             }
 
                         }
@@ -328,19 +131,15 @@ public class MyViewModel extends ViewModel {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.d("ResponseE", error.toString());
-
-
-                            Toast.makeText(context, "Volley Error:\n" + error.getMessage(), Toast.LENGTH_LONG).show();
-                            volleyError.setValue(error.getMessage());
-
+                            Log.d( "ResponseE", volleyError.toString() );
+                            Toast.makeText( context, "VolleyExce" + error.getMessage(), Toast.LENGTH_SHORT ).show();
+                            volleyError.postValue( error.getMessage() );
                         }
-                    });
-            requestQueue.add(customRequest);
+                    } );
+            requestQueue.add( customRequest );
 
         }
-
-        return Profile;
+        return ServicesList;
     }
 
 

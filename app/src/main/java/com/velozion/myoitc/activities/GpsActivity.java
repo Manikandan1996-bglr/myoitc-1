@@ -10,11 +10,9 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -26,11 +24,10 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.velozion.myoitc.BaseActivity;
 import com.velozion.myoitc.R;
 
-import java.util.Calendar;
-
-public class GpsActivity extends AppCompatActivity {
+public class GpsActivity extends BaseActivity {
 
 
     Button enable;
@@ -40,10 +37,9 @@ public class GpsActivity extends AppCompatActivity {
     public final static int REQUEST_LOCATION = 199;
     public final static int REQUEST_ENABLE_GPS = 300;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ThemeBasedOnTime();
+//        ThemeBasedOnTime();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gps);
 
@@ -55,23 +51,13 @@ public class GpsActivity extends AppCompatActivity {
         enable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-
-
                     finish();
-
                 } else {//not enabled
-
                     enableLoc();
-
                 }
-
-
             }
         });
-
     }
 
 
@@ -170,35 +156,24 @@ public class GpsActivity extends AppCompatActivity {
             case REQUEST_LOCATION:
                 switch (resultCode) {
                     case Activity.RESULT_OK:
-
-
                         finish();
-
                         break;
                     case Activity.RESULT_CANCELED:
-
-
                         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                         startActivityForResult(intent, REQUEST_ENABLE_GPS);
-
                         break;
                     default:
-
                         Log.d("Response", "default activity result");
                         break;
                 }
                 break;
-
             case REQUEST_ENABLE_GPS:
-
-
                 finish();
-
                 break;
         }
     }
 
-    void ThemeBasedOnTime() {
+   /* void ThemeBasedOnTime() {
 
         Calendar c = Calendar.getInstance();
         int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
@@ -215,5 +190,5 @@ public class GpsActivity extends AppCompatActivity {
             setTheme(R.style.DefaultSession);
         }
 
-    }
+    }*/
 }

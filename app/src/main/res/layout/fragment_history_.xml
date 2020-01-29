@@ -3,15 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.HistoryFrag">
-
-
-    <ProgressBar
-        android:id="@+id/history_progressbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -20,32 +12,6 @@
         android:layout_height="match_parent"
         android:visibility="gone" />
 
-    <LinearLayout
-        android:id="@+id/history_nodata_ll"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:layout_width="@dimen/_100sdp"
-            app:lottie_loop="true"
-            app:lottie_autoPlay="true"
-            app:lottie_fileName="waterlemon.json"
-            android:layout_height="@dimen/_100sdp"
-            android:layout_gravity="center"
-            android:src="@drawable/icon_nodata" />
-
-        <TextView
-            android:id="@+id/history_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_10sdp"
-            android:text="@string/nodatafound"
-            android:textSize="@dimen/_14sdp" />
-
-
-    </LinearLayout>
+    <include layout="@layout/no_data_found" />
 
 </RelativeLayout>

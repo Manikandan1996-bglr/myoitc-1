@@ -1,8 +1,109 @@
 <resources>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="themeColorPrimary">@color/colorPrimary</item>
+        <item name="themeColorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:navigationBarColor">?attr/windowBackground</item>
+
+        <item name="colorControlNormal">@color/white</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:windowTranslucentStatus">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="windowBackground">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="employeeTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">?themeColorPrimary</item>
+        <item name="colorPrimaryDark">?themeColorPrimaryDark</item>
+        <item name="colorAccent">?themeColorPrimary</item>
+        <item name="themeColorPrimary">@color/colorPrimary</item>
+        <item name="themeColorPrimaryDark">@color/employeeColorPrimaryDark</item>
+        <item name="android:navigationBarColor">?attr/windowBackground</item>
+
+        <item name="colorControlNormal">@color/white</item>
+        <item name="android:statusBarColor">@color/employeeColorPrimaryDark</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="windowBackground">@color/employeeColorPrimaryDark</item>
+    </style>
+
+
+    <style name="managerTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">?themeColorPrimary</item>
+        <item name="colorPrimaryDark">?themeColorPrimaryDark</item>
+        <item name="colorAccent">?themeColorPrimary</item>
+        <item name="themeColorPrimary">@color/colorPrimary</item>
+        <item name="themeColorPrimaryDark">@color/managerColorPrimaryDark</item>
+        <item name="themeColorAccent">@color/colorPrimary</item>
+        <item name="android:navigationBarColor">?attr/windowBackground</item>
+
+        <item name="colorControlNormal">@color/white</item>
+        <item name="android:statusBarColor">@color/managerColorPrimaryDark</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="windowBackground">@color/managerColorPrimaryDark</item>
+    </style>
+
+    <style name="supervisorTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">?themeColorPrimary</item>
+        <item name="colorPrimaryDark">?themeColorPrimaryDark</item>
+        <item name="colorAccent">?themeColorPrimary</item>
+        <item name="themeColorPrimary">@color/colorPrimary</item>
+        <item name="themeColorPrimaryDark">@color/supervisorColorPrimaryDark</item>
+        <item name="themeColorAccent">@color/colorPrimary</item>
+        <item name="android:navigationBarColor">?attr/windowBackground</item>
+
+        <item name="colorControlNormal">@color/white</item>
+        <item name="android:statusBarColor">@color/supervisorColorPrimaryDark</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowBackground">@color/supervisorColorPrimaryDark</item>
+
+    </style>
+
+    <style name="clientTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">?themeColorPrimary</item>
+        <item name="colorPrimaryDark">?themeColorPrimaryDark</item>
+        <item name="colorAccent">?themeColorPrimary</item>
+        <item name="themeColorPrimary">@color/colorPrimary</item>
+        <item name="themeColorPrimaryDark">@color/clientColorPrimaryDark</item>
+        <item name="themeColorAccent">@color/colorPrimary</item>
+        <item name="android:navigationBarColor">?attr/windowBackground</item>
+
+        <item name="colorControlNormal">@color/white</item>
+        <item name="android:statusBarColor">@color/clientColorPrimaryDark</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="windowBackground">@color/clientColorPrimaryDark</item>
+    </style>
+
+    <style name="providerTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">?themeColorPrimary</item>
+        <item name="colorPrimaryDark">?themeColorPrimaryDark</item>
+        <item name="colorAccent">?themeColorPrimary</item>
+        <item name="themeColorPrimary">@color/colorPrimary</item>
+        <item name="themeColorPrimaryDark">@color/providerColorPrimaryDark</item>
+        <item name="themeColorAccent">@color/colorPrimary</item>
+        <item name="android:navigationBarColor">?attr/windowBackground</item>
+
+        <item name="colorControlNormal">@color/white</item>
+        <item name="android:statusBarColor">@color/providerColorPrimaryDark</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="windowBackground">@color/providerColorPrimaryDark</item>
     </style>
 </resources>

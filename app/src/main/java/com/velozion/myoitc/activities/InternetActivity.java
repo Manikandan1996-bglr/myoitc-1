@@ -7,7 +7,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -16,8 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.velozion.myoitc.InternetConnection;
 import com.velozion.myoitc.R;
 
-import java.util.Calendar;
-
 public class InternetActivity extends AppCompatActivity {
 
     Button enable;
@@ -25,19 +22,15 @@ public class InternetActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ThemeBasedOnTime();
+//        ThemeBasedOnTime();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_internet);
 
-
         enable = findViewById(R.id.ic_enable);
-
 
         enable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 if (InternetConnection.checkConnection(getApplicationContext())) {
                     setResult(RESULT_OK);
                     finish();
@@ -52,28 +45,18 @@ public class InternetActivity extends AppCompatActivity {
 
             }
         });
-
         EventListner();
-
     }
 
     private void EventListner() {
-
-
         receiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-
                 if (InternetConnection.checkConnection(getApplicationContext())) {
-
                     finishActivity();
-
                 }
-
-
             }
         };
-
         registerReceiver(receiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
     }
 
@@ -81,7 +64,6 @@ public class InternetActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
         setResult(RESULT_CANCELED);
         overridePendingTransition(R.anim.left_in, R.anim.right_out);
     }
@@ -91,42 +73,18 @@ public class InternetActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100) {
             if (resultCode == RESULT_OK) {
-
                 if (InternetConnection.checkConnection(getApplicationContext())) {
                     setResult(RESULT_OK);
                     finish();
                 }
-
             } else if (resultCode == RESULT_CANCELED) {
-
                 Toast.makeText(this, "You Didn't Turned Internet", Toast.LENGTH_SHORT).show();
-
             }
-
         }
     }
 
     void finishActivity() {
         setResult(RESULT_OK);
         finish();
-    }
-
-    void ThemeBasedOnTime() {
-
-        Calendar c = Calendar.getInstance();
-        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
-
-        if (timeOfDay >= 0 && timeOfDay < 12) {
-            setTheme(R.style.MorningSession);
-        } else if (timeOfDay >= 12 && timeOfDay < 16) {
-            setTheme(R.style.AfternoonSession);
-        } else if (timeOfDay >= 16 && timeOfDay < 21) {
-            setTheme(R.style.EveningSession);
-        } else if (timeOfDay >= 21 && timeOfDay < 24) {
-            setTheme(R.style.NightSession);
-        } else {
-            setTheme(R.style.DefaultSession);
-        }
-
     }
 }

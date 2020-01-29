@@ -2,90 +2,26 @@
     <string name="app_name">Myoitc</string>
     <string name="Username">Email Id</string>
     <string name="Password">Password</string>
-    <string name="login">Login</string>
+    <string name="login">LOG IN</string>
 
-    <string name="google_key">AIzaSyAWSNJ2-Kdk2aNtM1aqJpaLGhtL3ZZpCMk</string>
-
+    <string name="google_key">AIzaSyBc6FMGtSXejHgXxGnoAxxFhw_RexZRg1E</string>
+    <!--JAGADISHA   AIzaSyAWSNJ2-Kdk2aNtM1aqJpaLGhtL3ZZpCMk-->
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="us">\u0024</string>
-    <string name="Rs">\u20B9</string>
-    <string name="checkin">CHECKIN</string>
-    <string name="checkout">CHECKOUT</string>
+    <string name="checkin">CHECK IN</string>
+    <string name="checkout">CHECK OUT</string>
     <string name="map">Map</string>
     <string name="history">History</string>
     <string name="nodatafound">No Data Found</string>
-    <string name="CheckinLoc">Checkin Location</string>
-    <string name="CheckOutLoc">Checkout Location</string>
-    <string name="Checkintime">Checkin Time</string>
-    <string name="Checkouttime">Checkout Time</string>
-    <string name="logintoaccount">Login to your account</string>
-    <string name="nav_home">Home</string>
-    <string name="nav_book">Book appointment</string>
-    <string name="viewprofile">View Profile</string>
-    <string name="bookappointment">Book Appointment</string>
-    <string name="selectdate">Date</string>
-    <string name="selecttime">Time</string>
-    <string name="booknow">Book Now</string>
-    <string name="searchconcern">Search by Health Concern</string>
-    <string name="ConsulationFee">Consulting Fee :</string>
-    <string name="doctornumber">Mobile :</string>
-    <string name="hint">Ex: Doctors</string>
-    <string name="appointmentconfirm">Appointment Confirmed</string>
-    <string name="goback">Go Home</string>
-    <string name="doctordetails">Doctor Details</string>
-    <string name="morning">Morning</string>
-    <string name="afternoon">Afternoon</string>
-    <string name="evening">Evening</string>
-    <string name="night">Night</string>
-    <string name="fees">\u0024 %s /-</string>
-    <string name="quali">%s \u2022 %s</string>
-    <string name="bookingid">Booking Id: %s</string>
-    <string name="hospitaladdress">%s , %s</string>
 
-
-    <string name="font_bold">JosefinSans-Bold.ttf</string>
-    <string name="font_semibold">JosefinSans-SemiBold.ttf</string>
-    <string name="font_regular">JosefinSans-Regular.ttf</string>
-    <string name="font_light">JosefinSans-Light.ttf</string>
-    <string name="font_thin">JosefinSans-Thin.ttf</string>
-
-    <string name="font_exo_bold">Exo-Bold.ttf</string>
-    <string name="font_exo_semibold">Exo-SemiBold.ttf</string>
-    <string name="font_exo_medium">Exo-Medium.ttf</string>
-    <string name="font_exo_regular">JosefinSans-Regular.ttf</string>
-    <string name="rating">Rating</string>
-    <string name="fes_title">Fees</string>
-    <string name="about">About</string>
-    <string name="availabletoday">Available Today</string>
-    <string name="availabletimgs">Available Timings</string>
-    <string name="date">Select Date</string>
-    <string name="time">Select Time</string>
-    <string name="Name">Name</string>
-
-    <string name="activity_book_app">Book Appointment</string>
-    <string name="activity_doctors_list">Doctors List</string>
-    <string name="activity_historydetails">History Details</string>
-    <string name="activity_doctor_cat">Doctors Category</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
-    <string name="allrights">© Velozion Technologies Pvt. Ltd. | All Rights Reserved</string>
     <string name="gpsonnectionnotfound">Gps Connection Not Found</string>
-    <string name="enablegps">Do You Want To Enable Gps ? </string>
     <string name="cancel">Cancel</string>
-    <string name="enable">Enable</string>
     <string name="internetconnectionnotfound">Internet Connection Not Found \n Do You Want To Turn On ?</string>
     <string name="intenert">Internet Connection</string>
     <string name="turnon">Turn On / Retry</string>
@@ -94,7 +30,57 @@
     <string name="communicate">Communicate</string>
     <string name="profile">Profile</string>
     <string name="logout">Logout</string>
-    <string name="maps">Maps</string>
+    <string name="nav_taskmanagemnt">Task Management</string>
+    <string name="img_transaction">Image Transaction</string>
+    <string name="route">Route</string>
+    <string name="task_date">In Time</string>
+    <string name="task_time">Out Time</string>
+    <string name="client_initial">Client Initial</string>
+    <string name="submit">Submit</string>
+    <string name="lunch_time">Lunch Time</string>
+    <string name="client">Client</string>
+    <string name="service">Service</string>
+    <string name="paycode">Paycode</string>
+    <string name="initial">Initial</string>
+    <string name="time_sheet">Time Sheet</string>
+    <string name="search_bar_hint">Search names </string>
+    <string name="search">Search Names</string>
 
+    <string name="refer_physician">Referring Physician</string>
+    <string name="giving_referral">Name of Person Giving Referral</string>
+    <string name="fax">Fax</string>
+    <string name="phone">Phone</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email">Email</string>
+    <string name="address">Address</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="zip_code">Zip Code</string>
+    <string name="dob">Select Date of Birth</string>
+
+    <string name="medicare">Medicare</string>
+    <string name="other_insurance">Other Insurance</string>
+    <string name="policy">Policy</string>
+    <string name="private_pay">Private Pay</string>
+
+    <string name="start_of_care_date">Start of Care Date Ordered</string>
+    <string name="duration">Duration(Weeks)</string>
+    <string name="frequency">Frequency</string>
+    <string name="hourspervisit">Hrs Per Visit</string>
+    <string name="select_days">Enter Days</string>
+    <string name="select_time">Click for Select Time between</string>
+    <string name="choose_file">Choose File</string>
+    <string name="startDate">Start Time</string>
+    <string name="endDate">End Time</string>
+    <string name="comments">Comments</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

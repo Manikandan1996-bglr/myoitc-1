@@ -7,26 +7,34 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Address;
+import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
 import android.provider.Settings;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -56,20 +64,24 @@ import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
 import com.velozion.myoitc.CustomRequest;
 import com.velozion.myoitc.PreferenceUtil;
 import com.velozion.myoitc.R;
 import com.velozion.myoitc.Utils;
+import com.velozion.myoitc.bean.CheckInFormClientData;
+import com.velozion.myoitc.bean.CheckInFormServiceData;
+import com.velozion.myoitc.viewModel.MyViewModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 
 
 public class MapFrag extends Fragment {
@@ -78,26 +90,38 @@ public class MapFrag extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    View view;
-    SupportMapFragment supportMapFragment;
+    private View view;
     private GoogleMap mMap;
 
     private GoogleApiClient googleApiClient;
-    public final static int REQUEST_LOCATION = 199;
-    public final static int REQUEST_ENABLE_GPS = 300;
+    private final static int REQUEST_LOCATION = 199;
+    private final static int REQUEST_ENABLE_GPS = 300;
 
-    LocationManager manager;
+    private LocationManager manager;
 
-    double latitude, longitude;
-    String locationAddres;
-    TextView chekin, checkout;
+    private double latitude, longitude;
+    private String locationAddres;
+    private TextView chekin, checkout;
 
-    boolean frag_alive = true;
 
-    Context context;
-    LinearLayout info_ll;
-    TextView info_text;
+    private Context context;
+    private LinearLayout info_ll;
+    private TextView c_date, c_time, c_client, c_paycode, c_initial, c_service, c_lunch;
 
+    private ArrayList<CheckInFormClientData> checkInFormClientDataArrayList = new ArrayList<>();
+    private ArrayList<CheckInFormServiceData> servicesDataArrayList = new ArrayList<>();
+
+    private MyViewModel viewModel;
+
+    private ArrayList<String> clients = new ArrayList<>();
+    private ArrayList<String> services = new ArrayList<>();
+    private ArrayList<String> payloads = new ArrayList<>();
+    private ArrayList<String> lunch_timings = new ArrayList<>();
+
+    private TextInputEditText client_initial;
+
+    private int selected_client_id = -1, selected_service_id = -1, selected_payload_id = -1;
+    private String selected_client_name, selected_service_name, selected_payload_name, selected_lunch_time = null;
 
     public MapFrag() {
         // Required empty public constructor
@@ -131,16 +155,27 @@ public class MapFrag extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_map_, container, false);
 
-            supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+
+            viewModel = ViewModelProviders.of(this).get(MyViewModel.class);
+
+            SupportMapFragment supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
             chekin = view.findViewById(R.id.checkin);
             checkout = view.findViewById(R.id.checkout);
             info_ll = view.findViewById(R.id.info_ll);
-            info_text = view.findViewById(R.id.info_text);
+
+
+            c_date = view.findViewById(R.id.c_date);
+            c_time = view.findViewById(R.id.c_time);
+            c_lunch = view.findViewById(R.id.c_lunch_time);
+            c_client = view.findViewById(R.id.c_client);
+            c_initial = view.findViewById(R.id.c_initial);
+            c_paycode = view.findViewById(R.id.c_payocde);
+            c_service = view.findViewById(R.id.c_service);
+
 
             supportMapFragment.getMapAsync(new OnMapReadyCallback() {
                 @Override
@@ -154,23 +189,34 @@ public class MapFrag extends Fragment {
                     mMap.getUiSettings().setScrollGesturesEnabled(false);
                     mMap.getUiSettings().setAllGesturesEnabled(false);
 
+                    CheckGpsConnection();
+
 
                 }
             });
 
-            CheckGpsConnection();
+
+            LoadData();
+
 
             chekin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    CheckIn(locationAddres, Double.toString(latitude), Double.toString(longitude), "1");
+                    if (checkInFormClientDataArrayList.size() > 0) {
+
+                        showChekinDialog();
+
+                    } else {
+
+                        Toast.makeText(context, "Client Not Found", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 
             checkout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    CheckOut(locationAddres, Double.toString(latitude), Double.toString(longitude), "2", PreferenceUtil.getData("checkin_id", context));
+                    CheckOut(Utils.getCurrentTiming(getActivity()), locationAddres, Double.toString(latitude), Double.toString(longitude), "2", PreferenceUtil.getData("checkin_id", context));
                 }
             });
         }
@@ -179,7 +225,215 @@ public class MapFrag extends Fragment {
         return view;
     }
 
-    private void CheckIn(final String name, String latitude, String longitude, String type) {
+
+    private void LoadData() {
+
+        viewModel.getClientsList(getActivity()).observe(getActivity(), new Observer<ArrayList<CheckInFormClientData>>() {
+            @Override
+            public void onChanged(ArrayList<CheckInFormClientData> checkInFormClientData) {
+
+                if (checkInFormClientData.size() > 0) {
+
+                    checkInFormClientDataArrayList.addAll(checkInFormClientData);
+
+                    clients.add("Select Client");
+                    for (CheckInFormClientData client : checkInFormClientData) {
+                        clients.add(client.getName());
+                    }
+                }
+
+            }
+        });
+
+        viewModel.getServicesList(getContext()).observe(getActivity(), new Observer<ArrayList<CheckInFormServiceData>>() {
+            @Override
+            public void onChanged(ArrayList<CheckInFormServiceData> checkInFormServiceData) {
+
+                if (checkInFormServiceData.size() > 0) {
+                    servicesDataArrayList.addAll(checkInFormServiceData);
+
+                    services.add("Select Service");
+
+                    for (CheckInFormServiceData checkInFormServiceData1 : checkInFormServiceData) {
+
+                        services.add(checkInFormServiceData1.getName());
+
+                    }
+
+
+                }
+            }
+        });
+
+        payloads.add("Select Payload");
+        payloads.add("Regular");
+        payloads.add("Non-Regular");
+
+        lunch_timings.add("Select Lunch Time");
+        lunch_timings.add("30 mins");
+        lunch_timings.add("1 hr");
+        lunch_timings.add("1 30 mins");
+        lunch_timings.add("2 hrs");
+
+    }
+
+
+    private void showChekinDialog() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setCancelable(true);
+
+        LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.dailog_checkin, null);
+
+
+        Spinner client_spinner = view.findViewById(R.id.client_spinner);
+        Spinner lunch_spinner = view.findViewById(R.id.lunch_spinner);
+        Spinner paycode_spinner = view.findViewById(R.id.paycode_spinner);
+        Spinner services_spinner = view.findViewById(R.id.services_spinner);
+        client_initial = view.findViewById(R.id.client_initial);
+
+
+        ArrayAdapter<String> client_adapter = new ArrayAdapter<>(getActivity(), R.layout.textview_for_spinner, clients);
+        client_spinner.setAdapter(client_adapter);
+
+        ArrayAdapter<String> payload_adapter = new ArrayAdapter<>(getActivity(), R.layout.textview_for_spinner, payloads);
+        paycode_spinner.setAdapter(payload_adapter);
+
+        ArrayAdapter<String> service_adapter = new ArrayAdapter<>(getActivity(), R.layout.textview_for_spinner, services);
+        services_spinner.setAdapter(service_adapter);
+
+        ArrayAdapter<String> lunch_adapter = new ArrayAdapter<>(getActivity(), R.layout.textview_for_spinner, lunch_timings);
+        lunch_spinner.setAdapter(lunch_adapter);
+
+        TextView cancel = view.findViewById(R.id.cancel);
+        TextView submit = view.findViewById(R.id.submit);
+
+
+        builder.setView(view);
+
+        final AlertDialog alertDialog = builder.create();
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (selected_client_id == -1) {
+                    Toast.makeText(getActivity(), "Select Client", Toast.LENGTH_SHORT).show();
+                } else if (selected_payload_id == -1) {
+                    Toast.makeText(getActivity(), "Select Payload", Toast.LENGTH_SHORT).show();
+                } else if (selected_service_id == -1) {
+                    Toast.makeText(getActivity(), "Select Services", Toast.LENGTH_SHORT).show();
+                } else if (client_initial.getText().toString().isEmpty()) {
+                    Toast.makeText(getActivity(), "Enter Client Initial", Toast.LENGTH_SHORT).show();
+                } else if (selected_lunch_time == null) {
+                    Toast.makeText(getActivity(), "Enter Lunch Time", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    alertDialog.dismiss();
+
+                    CheckIn(Utils.getTodayDate(getActivity()), Utils.getCurrentTiming(getActivity()), String.valueOf(selected_client_id), selected_lunch_time, String.valueOf(selected_payload_id), String.valueOf(selected_service_id), client_initial.getText().toString(), locationAddres, Double.toString(latitude), Double.toString(longitude), "1");
+                }
+
+            }
+        });
+
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                alertDialog.dismiss();
+
+            }
+        });
+        client_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position != 0) {
+                    int temp = position - 1;
+                    selected_client_id = Integer.parseInt(checkInFormClientDataArrayList.get(temp).getId());
+                    selected_client_name = checkInFormClientDataArrayList.get(temp).getName();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        services_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if (position != 0) {
+
+                    int temp = position - 1;
+
+                    selected_service_id = Integer.parseInt(servicesDataArrayList.get(temp).getId());
+
+                    selected_service_name = servicesDataArrayList.get(temp).getName();
+
+                }
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        paycode_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if (position != 0) {
+
+
+                    selected_payload_id = position;
+
+                    selected_payload_name = payloads.get(position);
+
+                }
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        lunch_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if (position != 0) {
+
+                    selected_lunch_time = lunch_timings.get(position);
+
+
+                }
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        alertDialog.show();
+
+    }
+
+    private void CheckIn(String date, String time_in, String clientid, String lunch_time, String payload_id, String service_id, String client_initial, final String name, String latitude, String longitude, String type) {
 
         Utils.displayCustomDailog(getActivity());
 
@@ -193,13 +447,20 @@ public class MapFrag extends Fragment {
         jsonParams.put("lat", latitude);
         jsonParams.put("long", longitude);
         jsonParams.put("log_type", type);
+        jsonParams.put("date", date);
+        jsonParams.put("time_in", time_in);
+        jsonParams.put("client_id", clientid);
+        jsonParams.put("payload_id", payload_id);
+        jsonParams.put("service_id", service_id);
+        jsonParams.put("client_initial", client_initial);
+        jsonParams.put("lunch_time", lunch_time);
 
         Log.d("RespondedData", jsonParams.toString() + " headers: \n" + headers);
 
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
-        CustomRequest customRequest = new CustomRequest(Request.Method.POST, Utils.CheckinApi, jsonParams, headers,
+        CustomRequest customRequest = new CustomRequest(Request.Method.POST, Utils.CheckinAPI, jsonParams, headers,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -221,7 +482,14 @@ public class MapFrag extends Fragment {
                                     chekin.setVisibility(View.GONE);
                                     checkout.setVisibility(View.VISIBLE);
 
-                                    info_text.setText("" + name);
+                                    c_date.setText("" + date);
+                                    c_time.setText("" + time_in);
+                                    c_lunch.setText("" + lunch_time);
+                                    c_client.setText("" + selected_client_name);
+                                    c_paycode.setText("" + selected_payload_name);
+                                    c_service.setText("" + selected_service_name);
+                                    c_initial.setText("" + client_initial);
+
                                     info_ll.setVisibility(View.VISIBLE);
 
                                 } else {
@@ -229,7 +497,6 @@ public class MapFrag extends Fragment {
                                     String msg = response.getJSONObject("messages").getJSONArray("error").get(0).toString();
                                     Toast.makeText(getActivity(), "" + msg, Toast.LENGTH_SHORT).show();
                                 }
-
 
                             } else {
 
@@ -260,7 +527,7 @@ public class MapFrag extends Fragment {
 
     }
 
-    private void CheckOut(String name, String latitude, String longitude, String type, String link) {
+    private void CheckOut(String checkout_time, String name, String latitude, String longitude, String type, String link) {
 
         Utils.displayCustomDailog(getActivity());
 
@@ -276,13 +543,14 @@ public class MapFrag extends Fragment {
         jsonParams.put("long", longitude);
         jsonParams.put("log_type", type);
         jsonParams.put("in_link", link);
+        jsonParams.put("check_out", checkout_time);
 
         Log.d("RespondedData", jsonParams.toString());
 
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
-        CustomRequest customRequest = new CustomRequest(Request.Method.POST, Utils.CheckOutApi, jsonParams, headers,
+        CustomRequest customRequest = new CustomRequest(Request.Method.POST, Utils.CheckOutAPI, jsonParams, headers,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -295,7 +563,6 @@ public class MapFrag extends Fragment {
                                 if (!response.getString("data").equals("null"))//sucess
                                 {
 
-
                                     String msg = response.getJSONObject("messages").getJSONArray("success").get(0).toString();
                                     Toast.makeText(getActivity(), "" + msg, Toast.LENGTH_SHORT).show();
 
@@ -303,6 +570,13 @@ public class MapFrag extends Fragment {
                                     checkout.setVisibility(View.GONE);
 
                                     info_ll.setVisibility(View.GONE);
+                                    c_date.setText("");
+                                    c_time.setText("");
+                                    c_client.setText("");
+                                    c_paycode.setText("");
+                                    c_service.setText("");
+                                    c_initial.setText("");
+
 
                                 } else {
 
@@ -509,47 +783,120 @@ public class MapFrag extends Fragment {
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    void getLatandLon() {
-
-        LocationListener locationListener = new LocationListener() {
-            public void onLocationChanged(Location location) {
-                // Called when a new location is found by the network location provider.
+    private void getLatandLon() {
 
 
-                latitude = location.getLatitude();
-                longitude = location.getLongitude();
-
-                Log.d("ResponseLoc", latitude + " " + longitude);
-
-                if (frag_alive) {
-                    getLocationDetails(location);
-                }
-
-
-            }
-
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-            }
-
-            public void onProviderEnabled(String provider) {
-            }
-
-            public void onProviderDisabled(String provider) {
-            }
-        };
-
-// Register the listener with the Location Manager to receive location updates
-        if (ActivityCompat.checkSelfPermission(Objects.requireNonNull(getActivity()), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
+            //    Activity#requestPermissions
             // here to request the missing permissions, and then overriding
             //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+            // for Activity#requestPermissions for more details.
             return;
         }
-        manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+        Location location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+
+        if (location != null) {
+
+            Log.d("LocationResponse", "LastKnown:" + location.getLatitude() + "," + location.getLongitude());
+
+            getLocationDetails(location);
+
+
+        } else {
+
+            final Looper looper = null;
+
+            final LocationListener locationListener = new LocationListener() {
+                @Override
+                public void onLocationChanged(Location location) {
+
+                    Log.d("LocationResponse", "NewResponse:" + location.getLatitude() + "," + location.getLongitude());
+
+                    getLocationDetails(location);
+
+                }
+
+                @Override
+                public void onStatusChanged(String provider, int status, Bundle extras) {
+                    Log.d("Status Changed", String.valueOf(status));
+                }
+
+                @Override
+                public void onProviderEnabled(String provider) {
+                    Log.d("Provider Enabled", provider);
+                }
+
+                @Override
+                public void onProviderDisabled(String provider) {
+                    Log.d("Provider Disabled", provider);
+                }
+            };
+
+
+            Criteria criteria = new Criteria();
+            criteria.setAccuracy(Criteria.ACCURACY_COARSE);
+            criteria.setPowerRequirement(Criteria.POWER_LOW);
+            criteria.setAltitudeRequired(false);
+            criteria.setBearingRequired(false);
+            criteria.setSpeedRequired(false);
+            criteria.setCostAllowed(true);
+            criteria.setHorizontalAccuracy(Criteria.ACCURACY_HIGH);
+            criteria.setVerticalAccuracy(Criteria.ACCURACY_HIGH);
+
+            manager.requestSingleUpdate(criteria, locationListener, looper);
+
+
+          /*  LocationListener locationListener = new LocationListener() {
+                public void onLocationChanged(Location location) {
+                    // Called when a new location is found by the network location provider.
+
+
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
+
+                    Log.d("LocationResponse","Event:"+location.getLatitude()+","+location.getLongitude());
+
+
+                    if (locationfound == 0) {
+
+
+                        getLocationDetails(location);
+
+                        locationfound = 1;
+
+                    }
+
+
+                }
+
+                public void onStatusChanged(String provider, int status, Bundle extras) {
+                }
+
+                public void onProviderEnabled(String provider) {
+                }
+
+                public void onProviderDisabled(String provider) {
+                }
+            };
+
+// Register the listener with the Location Manager to receive location updates
+            if (ActivityCompat.checkSelfPermission(Objects.requireNonNull(getActivity()), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);*/
+
+        }
 
 
     }
@@ -645,7 +992,7 @@ public class MapFrag extends Fragment {
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        frag_alive = hidden;
+//        frag_alive = hidden;
     }
 
     @Override

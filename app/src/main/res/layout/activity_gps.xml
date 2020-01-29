@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@color/white"
     android:layout_width="match_parent"
@@ -18,13 +17,13 @@
         android:layout_height="match_parent">
 
 
-        <com.chootdev.typefaced.TypeFacedTextView
+        <TextView
             android:layout_width="wrap_content"
             android:textSize="@dimen/_18sdp"
             android:textColor="@color/black"
             android:gravity="center"
             android:layout_gravity="center"
-            app:textView_font="@string/font_exo_regular"
+
             android:padding="@dimen/_2sdp"
             android:text="@string/gpsconection"
             android:layout_margin="@dimen/_5sdp"
@@ -32,7 +31,6 @@
 
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/animation_view"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_100sdp"
             app:lottie_autoPlay="true"
@@ -45,10 +43,10 @@
 
 
 
-        <com.chootdev.typefaced.TypeFacedTextView
+        <TextView
             android:layout_width="match_parent"
             android:textSize="@dimen/_14sdp"
-            app:textView_font="@string/font_exo_regular"
+
             android:layout_gravity="center"
             android:gravity="center"
             android:padding="@dimen/_5sdp"

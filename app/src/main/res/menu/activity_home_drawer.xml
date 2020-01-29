@@ -5,11 +5,11 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_appointment"
+       <!-- <item
+            android:id="@+id/nav_task_management"
             android:icon="@drawable/icon_add"
             app:itemTextAppearance="@style/ToolBarText"
-            android:title="@string/bookappointment" />
+            android:title="@string/nav_taskmanagemnt" />-->
 
     </group>
 

@@ -4,12 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
     <fragment
         android:id="@+id/my_nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/bottomnavigationview"
+        android:layout_below="@+id/toolbar"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -23,6 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:itemTextAppearance="@style/ToolBarText"
+        app:itemTextAppearanceActive="@style/Widget.BottomNavigationView"
+        app:itemTextAppearanceInactive="@style/Widget.BottomNavigationView"
         app:menu="@menu/navigation_menus" />
 </RelativeLayout>

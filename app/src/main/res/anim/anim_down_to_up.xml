@@ -4,7 +4,6 @@
 
     <translate
 
-        android:fromYDelta="100%p"
         android:fromXDelta="0%p"
-        />
+        android:fromYDelta="100%p" />
 </set>

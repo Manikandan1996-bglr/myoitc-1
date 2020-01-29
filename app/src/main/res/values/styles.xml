@@ -6,92 +6,107 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="themeColorPrimary">@color/colorPrimary</item>
-        <item name="themeColorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowBackground">@color/colorPrimaryDark</item>
     </style>
 
-    <style name="AppTheme2" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="themeColorPrimary">@color/colorPrimary</item>
-        <item name="themeColorPrimaryDark">@color/colorPrimaryDark</item>
-    </style>
 
-    <style name="BottomNavigation">
-        <item name="android:background">@color/colorPrimary</item>
+    <style name="BottomNavigation" parent="Widget.Design.BottomNavigationView">
+        <item name="android:background">?attr/windowBackground</item>
         <item name="itemBackground">@drawable/navigation_bar_item_bg</item>
-        <item name="itemIconTint">@color/bnv_tab_item_foreground</item>
-        <item name="itemTextColor">@color/bnv_tab_item_foreground</item>
+        <item name="itemIconTint">@color/white</item>
+        <item name="itemTextColor">@color/white</item>
         <item name="paddingStart">@dimen/_1sdp</item>
         <item name="paddingEnd">@dimen/_1sdp</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
-        <item name="colorControlNormal">@color/white</item>
-    </style>
-
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <item name="fontFamily">@font/poppinsmedium</item>
     </style>
 
     <style name="ToolBarText">
-        <item name="android:fontFamily">@font/josefinsansregular</item>
+        <item name="android:fontFamily">@font/poppinsmedium</item>
     </style>
 
-    <style name="MorningSession" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+    <style name="ProgressHUD" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="textView" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/_12sdp</item>
+    </style>
+
+    <style name="Spinner" parent="Widget.AppCompat.Light.DropDownItem.Spinner">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="employeeTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
         <item name="colorPrimary">?themeColorPrimary</item>
         <item name="colorPrimaryDark">?themeColorPrimaryDark</item>
         <item name="colorAccent">?themeColorPrimary</item>
-        <item name="themeColorPrimary">@color/colorOrange</item>
-        <item name="themeColorPrimaryDark">@color/colorOrangeT</item>
+
+        <item name="themeColorPrimary">@color/colorPrimary</item>
+        <item name="themeColorPrimaryDark">@color/employeeColorPrimaryDark</item>
+        <item name="themeColorAccent">@color/colorPrimary</item>
+        <item name="windowBackground">@color/employeeColorPrimaryDark</item>
     </style>
 
-
-    <style name="AfternoonSession" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+    <style name="managerTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">?themeColorPrimary</item>
         <item name="colorPrimaryDark">?themeColorPrimaryDark</item>
         <item name="colorAccent">?themeColorPrimary</item>
-        <item name="themeColorPrimary">@color/colorPink</item>
-        <item name="themeColorPrimaryDark">@color/colorPinkT</item>
+
+        <item name="themeColorPrimary">@color/colorPrimary</item>
+        <item name="themeColorPrimaryDark">@color/managerColorPrimaryDark</item>
+        <item name="themeColorAccent">@color/colorPrimary</item>
+        <item name="windowBackground">@color/managerColorPrimaryDark</item>
     </style>
 
-    <style name="EveningSession" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+    <style name="supervisorTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">?themeColorPrimary</item>
         <item name="colorPrimaryDark">?themeColorPrimaryDark</item>
         <item name="colorAccent">?themeColorPrimary</item>
-        <item name="themeColorPrimary">@color/colorGreen</item>
-        <item name="themeColorPrimaryDark">@color/colorGreenT</item>
+        <item name="themeColorPrimary">@color/colorPrimary</item>
+        <item name="themeColorPrimaryDark">@color/supervisorColorPrimaryDark</item>
+        <item name="themeColorAccent">@color/colorPrimary</item>
+        <item name="windowBackground">@color/supervisorColorPrimaryDark</item>
     </style>
 
-    <style name="NightSession" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+    <style name="providerTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">?themeColorPrimary</item>
         <item name="colorPrimaryDark">?themeColorPrimaryDark</item>
         <item name="colorAccent">?themeColorPrimary</item>
-        <item name="themeColorPrimary">@color/colorNightMode</item>
-        <item name="themeColorPrimaryDark">@color/colorNightModeT</item>
+        <item name="themeColorPrimary">@color/colorPrimary</item>
+        <item name="themeColorPrimaryDark">@color/providerColorPrimaryDark</item>
+        <item name="themeColorAccent">@color/colorPrimary</item>
+        <item name="windowBackground">@color/providerColorPrimaryDark</item>
     </style>
 
-
-    <style name="DefaultSession" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+    <style name="clientTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">?themeColorPrimary</item>
         <item name="colorPrimaryDark">?themeColorPrimaryDark</item>
         <item name="colorAccent">?themeColorPrimary</item>
-        <item name="themeColorPrimary">@color/colorNevyBlue</item>
-        <item name="themeColorPrimaryDark">@color/colorNevyBlueT</item>
+
+        <item name="themeColorPrimary">@color/colorPrimary</item>
+        <item name="themeColorPrimaryDark">@color/clientColorPrimaryDark</item>
+        <item name="themeColorAccent">@color/colorPrimary</item>
+        <item name="windowBackground">@color/clientColorPrimaryDark</item>
     </style>
 
+    <style name="MyTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/supervisorColorPrimaryDark</item>
+    </style>
 
 </resources>
