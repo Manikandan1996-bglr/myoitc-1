@@ -81,7 +81,6 @@ public class ClientChartActivity extends BaseActivity implements Response.ErrorL
 
     @Override
     public void onErrorResponse(VolleyError error) {
-
     }
 
     @Override
